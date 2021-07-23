@@ -1,1 +1,2 @@
-print("Hi Lai")
+print("Hi")
+print('Walao eh')
