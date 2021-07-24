@@ -1,6 +1,6 @@
 DROP TABLE Customer;
 CREATE TABLE Customer
-(CustomerID     VARCHAR(4)   NOT NULL,
+(CustomerID     VARCHAR(5)   NOT NULL,
  CustomerName   VARCHAR(50)  NOT NULL,
  Gender         VARCHAR(1)   NOT NULL,
  ContactNo      VARCHAR(15)  NOT NULL,
