@@ -129,7 +129,7 @@ FOREIGN KEY EmployeeID references Employee(EmployeeID),
 CONSTRAINT chk_duration CHECK (Duration > 0 AND Duration <= 2)
 );
 
-CREATE TABLE TransactionsDetails
+CREATE TABLE Transactions
 (TransactionsID  NUMBER(6) NOT NULL,       
  EmployeeID      NUMBER(6) NOT NULL,
  CustomerID      NUMBER(6) NOT NULL,
@@ -162,7 +162,7 @@ CONSTRAINT CHK_pt_price CHECK (Total_Price > 0)
 );
 
 CREATE TABLE PurchaseTransDetails
-(PurchaseTransID   NUMBER(6) NOT NULL,       
+(PurchaseTransID  NUMBER(6) NOT NULL,       
  ProductCode      NUMBER(6) NOT NULL,
  Quantity         NUMBER(6) NOT NULL,
 PRIMARY KEY(PurchaseTransID, ProductCode),
