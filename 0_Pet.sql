@@ -1,0 +1,16 @@
+DROP TABLE Pet;
+CREATE TABLE Pet
+(PetID    VARCHAR(4)  NOT NULL,
+ PetName  VARCHAR(50) NOT NULL,
+ PetType  VARCHAR(15) NOT NULL,
+ Sex      VARCHAR(1)  NOT NULL,
+ Color    VARCHAR(15) NOT NULL,
+PRIMARY KEY(PetID),
+CONSTRAINT chk_pet_id CHECK (SUBSTR(PetID, 1, 1) = 'P'),
+CONSTRAINT chk_pet_sex CHECK (UPPER(Sex) IN ('M','F')),
+);
+
+
+
+-- 100 records
+SELECT COUNT(*) FROM Pet;
