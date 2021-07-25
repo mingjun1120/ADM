@@ -11,7 +11,8 @@ CREATE TABLE Employee
  Email          VARCHAR2(50)  NOT NULL,
  Address        VARCHAR2(100) NOT NULL,
  Position       VARCHAR2(30)  NOT NULL,
- PRIMARY KEY(EmployeeID),
+ CONSTRAINT Employee_PK PRIMARY KEY(EmployeeID),
+ CONSTRAINT Employee_FK FOREIGN KEY(JobID) REFERENCES Job(JobID),
  CONSTRAINT chk_EmployeeID CHECK (SUBSTR(EmployeeID, 0, 1) = 'E'),
  CONSTRAINT chk_JobID CHECK (SUBSTR(JobID, 0, 1) = 'J'),
  CONSTRAINT chk_ContactNo_Unique UNIQUE (ContactNo),
@@ -23,3 +24,10 @@ CREATE TABLE Employee
 
 -- 5 records
 SELECT COUNT(*) FROM Employee;
+
+-- References
+-- https://www.techonthenet.com/oracle/check.php
+-- https://www.techonthenet.com/oracle/foreign_keys/foreign_keys.
+-- https://www.oracletutorial.com/oracle-basics/oracle-primary-key/
+-- https://www.oracletutorial.com/oracle-basics/oracle-foreign-key/
+-- https://www.w3schools.com/sql/sql_foreignkey.asp

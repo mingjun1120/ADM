@@ -4,7 +4,7 @@ CREATE TABLE Customer
  CustomerName   VARCHAR2(50)  NOT NULL,
  Gender         VARCHAR2(1)   NOT NULL,
  ContactNo      VARCHAR2(15)  NOT NULL,
- DOB            DATE, 
+ DOB            DATE,
  Email          VARCHAR2(50)  NOT NULL,
  StreetName     VARCHAR2(100) NOT NULL,
  PostCode       NUMBER(7)    NOT NULL,
