@@ -7,6 +7,7 @@ CREATE TABLE Employee
  ContactNo      VARCHAR2(15)  NOT NULL,
  DOB            DATE,
  HiredDate      DATE          NOT NULL,
+ YearExp        NUMBER(2)     NOT NULL,
  Salary         NUMBER(7, 2)  NOT NULL,
  Email          VARCHAR2(50)  NOT NULL,
  Address        VARCHAR2(100) NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE Employee
  CONSTRAINT chk_ContactNo_Unique UNIQUE (ContactNo),
  CONSTRAINT chk_ContactNo_Num CHECK (REGEXP_LIKE(ContactNo,'^[0-9]+-[0-9]{7,8}$')),
  CONSTRAINT chk_Gender CHECK (UPPER(Gender) IN ('M','F')),
+ CONSTRAINT chk_YearExp CHECK (YearExp < 40 AND YearExp >= 0)
  CONSTRAINT chk_Salary CHECK (Salary > 1200),
  CONSTRAINT chk_Email CHECK (REGEXP_LIKE(Email, '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'))
 );
