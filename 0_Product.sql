@@ -16,5 +16,8 @@ CONSTRAINT CHK_buyPrice CHECK (buyPrice > 0),
 CONSTRAINT CHK_MSRP CHECK (MSRP > 0)
 );
 
+INSERT INTO Product (ProductCode, ProductName, ProductVendor, ProductDescription, QuantityInStock, ExpiredDate, BuyPrice, City, MSRP) values ('C1001', 'Milly', 'F', '013-8780611', 'milly@gmail.com', 'G-3A RESIDENSI UNGGUL KEPONG, Jalan Vista Mutiara 1', 52000, 'Kepong Baru', 'Kuala Lumpur');
+
+
 -- 50 records
 SELECT COUNT(*) FROM Product;
