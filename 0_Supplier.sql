@@ -19,7 +19,7 @@ INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode,
 INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode, City, State) VALUES ('SUP006', 'Diamond Pet Foods', '013-1796927', 'No. 2 & 4, Jalan MJ/3 & Jalan Klang Lama, Medan Maju Jaya', 46000, 'Petaling Jaya', 'Selangor');
 INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode, City, State) VALUES ('SUP007', 'Harringtons', '016-3244005', '1-11, Jalan Layang - Layang 5A, Bandar Puchong Jaya', 47100 , 'Puchong', 'Selangor');
 INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode, City, State) VALUES ('SUP008', 'The J.M. Smucker ', '011-6286210', 'No 30-32, Jalan OP 1/5 One Puchong Business park', 47160 , 'Puchongi', 'Selangor');
-INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode, City, State) VALUES ('SUP009', 'Nestle Purina', '012-8405167', 'Level 5, Menara UAC, No. 12, Jalan PJU7/5', 47800 , 'Petaling Jaya', 'Selangor');
+INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode, City, State) VALUES ('SUP009', 'Ty Toyz', '012-8405167', 'Level 5, Menara UAC, No. 12, Jalan PJU7/5', 47800 , 'Petaling Jaya', 'Selangor');
 INSERT INTO Supplier (SupplierID, SupplierName, ContactNo, StreetName, PostCode, City, State) VALUES ('SUP010', 'Hill’s Pet Nutrition', '014-4275793', 'No343, Jalan Tuanku Abdul Rahman', 50100, 'Chow Kit', 'Kuala Lumpur');
 
 

@@ -2,12 +2,12 @@ DROP TABLE Pet;
 CREATE TABLE Pet
 (PetID    VARCHAR(6)  NOT NULL,
  PetName  VARCHAR(50) NOT NULL,
- PetType  VARCHAR(15) NOT NULL,
+ PetType  VARCHAR(30) NOT NULL,
  Sex      VARCHAR(1)  NOT NULL,
  Color    VARCHAR(15) NOT NULL,
 PRIMARY KEY(PetID),
 CONSTRAINT chk_pet_id CHECK (SUBSTR(PetID, 1, 3) = 'PET'),
-CONSTRAINT chk_pet_sex CHECK (UPPER(Sex) IN ('M','F')),
+CONSTRAINT chk_pet_sex CHECK (UPPER(Sex) IN ('M','F'))
 );
 
 INSERT INTO Pet (PetID, PetName, PetType, Sex, Color) VALUES ('PET001', 'Wong Choi', 'Rottweiler', 'M', 'Black');
