@@ -8,6 +8,12 @@ CREATE TABLE Job
  CONSTRAINT chk_Salary CHECK (Salary > 1200)
 );
 
+INSERT INTO jobs VALUES ('J001','Process payment and register sales on cash register', 1500.00);
+INSERT INTO jobs VALUES ('J002','Determine inventory items and examine received inventory', 1700.00);
+INSERT INTO jobs VALUES ('J003','Perform operational duties in ordering, receiving, storing, issuing stocks', 2000.00);
+INSERT INTO jobs VALUES ('J004','Provide professional service to the pet', 2500.00);
+INSERT INTO jobs VALUES ('J005','Manage and Supervise the employees and audit daily reports', 3000.00);
+
 -- 5 records
 SELECT COUNT(*) FROM Job;
 

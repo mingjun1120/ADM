@@ -10,13 +10,13 @@ CREATE TABLE Product
  BuyPrice            NUMBER(7,2)  NOT NULL,
  MSRP                NUMBER(7,2)  NOT NULL,
 PRIMARY KEY(ProductCode),
-CONSTRAINT chk_prod_code CHECK (SUBSTR(ProductCode, 1, 2) = 'PR'),
+CONSTRAINT chk_prod_code CHECK (SUBSTR(ProductCode, 1, 1) = 'P'),
 CONSTRAINT CHK_Quantity CHECK (quantityInStock > 0),
 CONSTRAINT CHK_buyPrice CHECK (buyPrice > 0),
 CONSTRAINT CHK_MSRP CHECK (MSRP > 0)
 );
 
-INSERT INTO Product (ProductCode, ProductName, ProductVendor, ProductDescription, QuantityInStock, ExpiredDate, BuyPrice, City, MSRP) values ('C1001', 'Milly', 'F', '013-8780611', 'milly@gmail.com', 'G-3A RESIDENSI UNGGUL KEPONG, Jalan Vista Mutiara 1', 52000, 'Kepong Baru', 'Kuala Lumpur');
+-- INSERT INTO Product (ProductCode, ProductName, ProductVendor, ProductDescription, QuantityInStock, ExpiredDate, BuyPrice, City, MSRP) values ('C1001', 'Milly', 'F', '013-8780611', 'milly@gmail.com', 'G-3A RESIDENSI UNGGUL KEPONG, Jalan Vista Mutiara 1', 52000, 'Kepong Baru', 'Kuala Lumpur');
 
 
 -- 50 records
