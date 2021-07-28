@@ -1,7 +1,7 @@
 DROP TABLE Job;
 CREATE TABLE Job
 (JobID          VARCHAR2(5)   NOT NULL,
- JobScope       VARCHAR2(50)  NOT NULL,
+ JobScope       VARCHAR2(100)  NOT NULL,
  BasicSalary    NUMBER(7, 2)  NOT NULL,
  CONSTRAINT Job_PK PRIMARY KEY(JobID),
  CONSTRAINT chk_JobID CHECK (SUBSTR(JobID, 0, 1) = 'J'),
