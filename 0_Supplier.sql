@@ -7,7 +7,7 @@ CREATE TABLE Supplier
  PostCode      NUMBER(7)     NOT NULL,
  City          VARCHAR2(30)  NOT NULL,
  State         VARCHAR2(30)  NOT NULL,
-PRIMARY KEY(SupplierID),
+PRIMARY KEY (SupplierID),
 CONSTRAINT chk_supplier_id CHECK (SUBSTR(SupplierID, 1, 3) = 'SUP'),
 CONSTRAINT ContactNo UNIQUE (ContactNo)
 );
