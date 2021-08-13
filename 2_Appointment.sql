@@ -1,10 +1,10 @@
 DROP TABLE Appointment;
 CREATE TABLE Appointment
-(AppointmentID    NUMBER(6) NOT NULL,       
- CustomerID       NUMBER(6) NOT NULL,
- ServiceID        NUMBER(6) NOT NULL,
- PetID            NUMBER(6) NOT NULL,
- EmployeeID       NUMBER(6) NOT NULL,
+(AppointmentID    VARCHAR2(6) NOT NULL,       
+ CustomerID       VARCHAR2(5) NOT NULL,
+ ServiceID        VARCHAR2(6) NOT NULL,
+ PetID            VARCHAR2(6) NOT NULL,
+ EmployeeID       VARCHAR2(5) NOT NULL,
  AppointmentDate  DATE
  StartTime        TIMESTAMP,
  EndTime          TIMESTAMP,

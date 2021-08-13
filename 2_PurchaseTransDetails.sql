@@ -1,7 +1,7 @@
 DROP TABLE PurchaseTransDetails;
 CREATE TABLE PurchaseTransDetails
-(PurchaseTransID  NUMBER(6) NOT NULL,       
- ProductCode      NUMBER(6) NOT NULL,
+(PurchaseTransID  VARCHAR2(5) NOT NULL,       
+ ProductCode      VARCHAR2(5) NOT NULL,
  Quantity         NUMBER(6) NOT NULL,
 PRIMARY KEY(PurchaseTransID, ProductCode),
 FOREIGN KEY PurchaseTransID references PurchaseTrans(PurchaseTransID),
