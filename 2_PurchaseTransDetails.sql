@@ -509,3 +509,7 @@ INSERT INTO PurchaseTransDetails (PurchaseTransDetailsID, ProductCode, Quantity)
 INSERT INTO PurchaseTransDetails (PurchaseTransDetailsID, ProductCode, Quantity) VALUES ('PD10498', 'P1005', 304);
 INSERT INTO PurchaseTransDetails (PurchaseTransDetailsID, ProductCode, Quantity) VALUES ('PD10499', 'P1019', 657);
 INSERT INTO PurchaseTransDetails (PurchaseTransDetailsID, ProductCode, Quantity) VALUES ('PD10500', 'P1004', 897);
+
+
+-- 500 records
+SELECT COUNT(*) FROM PurchaseTransDetails;
