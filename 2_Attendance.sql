@@ -8,7 +8,7 @@ CREATE TABLE Attendance
  CONSTRAINT Attendance_PK PRIMARY KEY(AttendanceDate, EmployeeID),
  CONSTRAINT Attendance_FK FOREIGN KEY(EmployeeID) REFERENCES Employee(EmployeeID),
  CONSTRAINT chk_EmployeeID CHECK (SUBSTR(EmployeeID, 0, 1) = 'E'),
- CONSTRAINT chk_Remarks CHECK (UPPER(Remarks) IN ('PRESENT','ABSENT', 'LEAVE')),
+ CONSTRAINT chk_Remarks CHECK (UPPER(Remarks) IN ('PRESENT','ABSENT', 'PRESENT LATE', 'LEAVE')),
 );
 
 -- 5 records
