@@ -26,7 +26,7 @@ INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES
 INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES ('PT008', 'P1015', 80);
 INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES ('PT008', 'P1016', 60);
 INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES ('PT009', 'P1001', 30);
-INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES ('PT0010', 'P1010', 80);
+INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES ('PT010', 'P1010', 80);
 
 --NOV 2020
 INSERT INTO PurchaseTransDetails (PurchaseTransID, ProductCode, Quantity) VALUES ('PT011', 'P1008', 50);
