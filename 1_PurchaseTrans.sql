@@ -13,16 +13,16 @@ CONSTRAINT chk_total_price CHECK (Total_Price > 0)
 ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 
 --OCT 2020
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT001', 'SUP001', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT002', 'SUP002', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT003', 'SUP003', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT004', 'SUP004', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT005', 'SUP005', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT006', 'SUP006', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT007', 'SUP007', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT008', 'SUP008', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT009', 'SUP009', '01-10-2020', 1.00);
-INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT010', 'SUP010', '01-10-2020', 1.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT001', 'SUP001', '01-10-2020', 875.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT002', 'SUP002', '01-10-2020', 800.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT003', 'SUP003', '06-10-2020', 732.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT004', 'SUP004', '13-10-2020', 420.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT005', 'SUP005', '17-10-2020', 400.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT006', 'SUP006', '20-10-2020', 230.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT007', 'SUP007', '24-10-2020', 390.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT008', 'SUP008', '27-10-2020', 2874.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT009', 'SUP009', '30-10-2020', 2100.00);
+INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT010', 'SUP010', '30-10-2020', 720.00);
 
 --NOV 2020
 INSERT INTO PurchaseTrans (PurchaseTransID, SupplierID, Date_Paid, Total_Price) VALUES ('PT011', 'SUP001', '01-11-2020', 1.00);
