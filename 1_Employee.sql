@@ -14,7 +14,6 @@ CREATE TABLE Employee
  CONSTRAINT Employee_PK PRIMARY KEY(EmployeeID),
  CONSTRAINT Employee_FK FOREIGN KEY(JobID) REFERENCES Job(JobID),
  CONSTRAINT chk_EmployeeID CHECK (SUBSTR(EmployeeID, 0, 1) = 'E'),
- CONSTRAINT chk_JobID CHECK (SUBSTR(JobID, 0, 1) = 'J'),
  CONSTRAINT chk_ContactNo_Unique UNIQUE (ContactNo),
  CONSTRAINT chk_ContactNo_Num CHECK (REGEXP_LIKE(ContactNo,'^[0-9]+-[0-9]{7,8}$')),
  CONSTRAINT chk_Gender CHECK (UPPER(Gender) IN ('M','F')),
