@@ -10,9 +10,12 @@ CREATE TABLE Job
  CONSTRAINT chk_Salary CHECK (BasicSalary > 1200)
 );
 
+
 INSERT INTO Job VALUES ('J001', 'Pet Groomer', 'To ensure that pets are neat, clean, and look their best. The responsibilities of pet groomers include bathing animals of various sizes and temperaments, trimming, clipping, or shaving hair or fur, and removing matted hair.', 2900.00);
 INSERT INTO Job VALUES ('J002', 'Stock-keeper', 'Maintains receipts, records, and withdrawals. Checks materials and supplies and reports when stock is low. Receives and unpacks materials and supplies. Additionally, report damages and discrepancies for accounting, reimbursement and record-keeping purposes.', 1800.00);
 INSERT INTO Job VALUES ('J003', 'Retailer', 'Assisting customers as they shop within a store. Duties include greeting customers, answering questions related to the merchandise and store policies and locating items for customers.', 2300.00);
+
+
 
 -- 3 records
 SELECT COUNT(*) FROM Job;
