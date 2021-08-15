@@ -6,7 +6,7 @@ CREATE TABLE Job
  BasicSalary    NUMBER(7, 2)  NOT NULL,
  CONSTRAINT Job_PK PRIMARY KEY(JobID),
  CONSTRAINT chk_JobID CHECK (SUBSTR(JobID, 0, 1) = 'J'),
- CONSTRAINT chk_JobPosition CHECK (REGEXP_LIKE(JobPosition,'^[A-Za-z\- ]+$')),
+ CONSTRAINT chk_JobPosition CHECK (REGEXP_LIKE(JobPosition,'^[A-Za-z -]+$')),
  CONSTRAINT chk_Salary CHECK (BasicSalary > 1200)
 );
 
