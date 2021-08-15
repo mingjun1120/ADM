@@ -1,20 +1,23 @@
 DROP TABLE Job;
 CREATE TABLE Job
 (JobID          VARCHAR2(5)   NOT NULL,
- JobScope       VARCHAR2(100)  NOT NULL,
+ JobPosition    VARCHAR2(25)  NOT NULL,
+ JobScope       VARCHAR2(100) NOT NULL,
  BasicSalary    NUMBER(7, 2)  NOT NULL,
  CONSTRAINT Job_PK PRIMARY KEY(JobID),
  CONSTRAINT chk_JobID CHECK (SUBSTR(JobID, 0, 1) = 'J'),
+ CONSTRAINT chk_JobPosition CHECK (REGEXP_LIKE(JobPosition,'^[A-Za-z]+$'))
  CONSTRAINT chk_Salary CHECK (BasicSalary > 1200)
 );
 
-INSERT INTO Job (JobID, JobScope, BasicSalary) VALUES ('J001','Process payment and register sales on cash register', 1500.00);
-INSERT INTO Job (JobID, JobScope, BasicSalary) VALUES ('J002','Determine inventory items and examine received inventory', 1700.00);
-INSERT INTO Job (JobID, JobScope, BasicSalary) VALUES ('J003','Perform operational duties in ordering, receiving, storing, issuing stocks', 2000.00);
-INSERT INTO Job (JobID, JobScope, BasicSalary) VALUES ('J004','Provide professional service to the pet', 2500.00);
-INSERT INTO Job (JobID, JobScope, BasicSalary) VALUES ('J005','Manage and Supervise the employees and audit daily reports', 3000.00);
 
--- 5 records
+INSERT INTO Job VALUES ('J001', 'Pet Groomer', 'To ensure that pets are neat, clean, and look their best. The pet groomer’s responsibilities include bathing animals of various sizes and temperaments, trimming, clipping, or shaving hair/fur, and removing matted hair.', 2900.00);
+INSERT INTO Job VALUES ('J002', 'Stock-keeper', 'Maintains receipts, records, and withdrawals. Checks materials and supplies and reports when stock is low. Receives and unpacks materials and supplies. Additionally, report damages and discrepancies for accounting, reimbursement and record-keeping purposes.', 1800.00);
+INSERT INTO Job VALUES ('J003', 'Retailer', 'Assisting customers as they shop within a store. Duties include greeting customers, answering questions related to the merchandise and store policies and locating items for customers.', 2300.00);
+
+
+
+-- 3 records
 SELECT COUNT(*) FROM Job;
 
 -- References
