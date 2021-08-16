@@ -1,13 +1,13 @@
 DROP TABLE Attendance;
 CREATE TABLE Attendance
-(AttendanceDate    DATE         NOT NULL,
- EmployeeID       vARCHAR2(5)  NOT NULL,
- Check_In_Time     TIMESTAMP,
- Check_Out_Time    TIMESTAMP,
- Remarks          vARCHAR2(20)
+(AttendanceDate   DATE         NOT NULL,
+ EmployeeID       VARCHAR2(5)  NOT NULL,
+ Check_In_Time    TIMESTAMP,
+ Check_Out_Time   TIMESTAMP,
+ Remarks          VARCHAR2(29)
  CONSTRAINT Attendance_PK PRIMARY KEY(AttendanceDate, EmployeeID),
  CONSTRAINT Attendance_FK FOREIGN KEY(EmployeeID) REFERENCES Employee(EmployeeID),
- CONSTRAINT chk_Remarks CHECK (UPPER(Remarks) IN ('PRESENT','ABSENT', 'PRESENT LATE', 'PRESENT & WORK OVERTIME'))
+ CONSTRAINT chk_Remarks CHECK (UPPER(Remarks) IN ('PRESENT', 'ABSENT', 'PRESENT LATE', 'PRESENT & WORK OVERTIME'))
 );
 
 -- ALTER SESSION SET NLS_DATE_FORMAT='DD-MON-YYYY';
@@ -277,7 +277,7 @@ INSERT INTO Attendance VALUES (TO_DATE('16-03-2018', 'DD-MM-YYYY'), 'E004', '9:4
 INSERT INTO Attendance VALUES (TO_DATE('16-03-2018', 'DD-MM-YYYY'), 'E005', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('16-03-2018', 'DD-MM-YYYY'), 'E006', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('16-03-2018', 'DD-MM-YYYY'), 'E007', '9:59', '19:00', 'Present');
-INSERT INTO Attendance VALUES (TO_DATE('17-03-2018', 'DD-MM-YYYY'), 'E001', '', '', 'ABSENT');
+INSERT INTO Attendance VALUES (TO_DATE('17-03-2018', 'DD-MM-YYYY'), 'E001', '', '', 'Absent');
 INSERT INTO Attendance VALUES (TO_DATE('17-03-2018', 'DD-MM-YYYY'), 'E002', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('17-03-2018', 'DD-MM-YYYY'), 'E004', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('17-03-2018', 'DD-MM-YYYY'), 'E005', '10:00', '19:00', 'Present');
@@ -963,7 +963,7 @@ INSERT INTO Attendance values (TO_DATE('30-06-2018', 'DD-MM-YYYY'), 'E007', '10:
 INSERT INTO Attendance values (TO_DATE('30-06-2018', 'DD-MM-YYYY'), 'E008', '9:49', '19:00', 'Present');
 
 
-- 5 records
+-- Total records
 SELECT COUNT(*) FROM Attendance;
 
 
