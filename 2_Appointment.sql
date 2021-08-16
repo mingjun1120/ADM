@@ -10,9 +10,64 @@ CREATE TABLE Appointment
  EndTime          TIMESTAMP,
  Duration         NUMBER(2) NOT NULL,
 PRIMARY KEY(AppointmentID),
-FOREIGN KEY CustomerID references Customer(CustomerID),
-FOREIGN KEY ServiceID references Services(ServiceID),
-FOREIGN KEY PetID references Pet(PetID),
-FOREIGN KEY EmployeeID references Employee(EmployeeID),
+FOREIGN KEY CustomerID REFERENCES Customer(CustomerID),
+FOREIGN KEY ServiceID REFERENCES Services(ServiceID),
+FOREIGN KEY PetID REFERENCES Pet(PetID),
+FOREIGN KEY EmployeeID REFERENCES Employee(EmployeeID),
+CONSTRAINT chk_appID CHECK (SUBSTR(AppointmentID, 0, 1) = 'A'),
 CONSTRAINT chk_duration CHECK (Duration > 0 AND Duration <= 2)
 );
+
+INSERT INTO Appointment VALUES ('A10001', )
+INSERT INTO Appointment VALUES ('A10002', )
+INSERT INTO Appointment VALUES ('A10003', )
+INSERT INTO Appointment VALUES ('A10004', )
+INSERT INTO Appointment VALUES ('A10005', )
+INSERT INTO Appointment VALUES ('A10006', )
+INSERT INTO Appointment VALUES ('A10007', )
+INSERT INTO Appointment VALUES ('A10008', )
+INSERT INTO Appointment VALUES ('A10009', )
+INSERT INTO Appointment VALUES ('A10010', )
+INSERT INTO Appointment VALUES ('A10011', )
+INSERT INTO Appointment VALUES ('A10012', )
+INSERT INTO Appointment VALUES ('A10013', )
+INSERT INTO Appointment VALUES ('A10014', )
+INSERT INTO Appointment VALUES ('A10015', )
+INSERT INTO Appointment VALUES ('A10016', )
+INSERT INTO Appointment VALUES ('A10017', )
+INSERT INTO Appointment VALUES ('A10018', )
+INSERT INTO Appointment VALUES ('A10019', )
+INSERT INTO Appointment VALUES ('A10020', )
+INSERT INTO Appointment VALUES ('A10021', )
+INSERT INTO Appointment VALUES ('A10022', )
+INSERT INTO Appointment VALUES ('A10023', )
+INSERT INTO Appointment VALUES ('A10024', )
+INSERT INTO Appointment VALUES ('A10025', )
+INSERT INTO Appointment VALUES ('A10026', )
+INSERT INTO Appointment VALUES ('A10027', )
+INSERT INTO Appointment VALUES ('A10028', )
+INSERT INTO Appointment VALUES ('A10029', )
+INSERT INTO Appointment VALUES ('A10030', )
+INSERT INTO Appointment VALUES ('A10031', )
+INSERT INTO Appointment VALUES ('A10032', )
+INSERT INTO Appointment VALUES ('A10033', )
+INSERT INTO Appointment VALUES ('A10034', )
+INSERT INTO Appointment VALUES ('A10035', )
+INSERT INTO Appointment VALUES ('A10036', )
+INSERT INTO Appointment VALUES ('A10037', )
+INSERT INTO Appointment VALUES ('A10038', )
+INSERT INTO Appointment VALUES ('A10039', )
+INSERT INTO Appointment VALUES ('A10040', )
+INSERT INTO Appointment VALUES ('A10041', )
+INSERT INTO Appointment VALUES ('A10042', )
+INSERT INTO Appointment VALUES ('A10043', )
+INSERT INTO Appointment VALUES ('A10044', )
+INSERT INTO Appointment VALUES ('A10045', )
+INSERT INTO Appointment VALUES ('A10046', )
+INSERT INTO Appointment VALUES ('A10047', )
+INSERT INTO Appointment VALUES ('A10048', )
+INSERT INTO Appointment VALUES ('A10049', )
+INSERT INTO Appointment VALUES ('A10050', )
+
+--  records
+SELECT COUNT(*) FROM Employee;
