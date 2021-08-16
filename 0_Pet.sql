@@ -17,7 +17,7 @@ INSERT INTO Pet VALUES ('PET004', 'Kingsley', 'Yorkshire Terrier', 'M', 'White')
 INSERT INTO Pet VALUES ('PET005', 'Honey', 'Poodle', 'F', 'Black');
 INSERT INTO Pet VALUES ('PET006', 'Darby', 'Corgi', 'M', 'Brown');
 INSERT INTO Pet VALUES ('PET007', 'Daisy', 'Poodle', 'F', 'Brown');
-INSERT INTO Pet VALUES ('PET008', 'Harper', 'Dachshunds', 'M', 'Gold');
+INSERT INTO Pet VALUES ('PET008', 'Harper', 'Dachshunds', 'M', 'Golded');
 INSERT INTO Pet VALUES ('PET009', 'Jack', 'Rottweiler', 'F', 'Black');
 INSERT INTO Pet VALUES ('PET010', 'Pearl', 'Bulldog', 'M', 'White');
 INSERT INTO Pet VALUES ('PET011', 'Yvette', 'Persian Cat', 'M', 'White');
@@ -25,6 +25,11 @@ INSERT INTO Pet VALUES ('PET012', 'Quinn', 'Ragdoll', 'F', 'Black');
 INSERT INTO Pet VALUES ('PET013', 'Bexley', 'Siberian Cat', 'M', 'Gold');
 INSERT INTO Pet VALUES ('PET014', 'Mochi', 'Ragdoll', 'M', 'Grey');
 INSERT INTO Pet VALUES ('PET015', 'Angie', 'British Shorthair', 'F', 'Black');
+INSERT INTO Pet VALUES ('PET016', 'Mac', 'Corgi', 'F', 'Brown');
+INSERT INTO Pet VALUES ('PET017', 'Rodney', 'Bulldog', 'M', 'White');
+INSERT INTO Pet VALUES ('PET018', 'Kitty', 'Persian Cat', 'F', 'Golded');
+INSERT INTO Pet VALUES ('PET019', 'Dude', 'Dachshunds', 'M', 'Black');
+INSERT INTO Pet VALUES ('PET020', 'Luna', 'Ragdoll', 'M', 'White');
 
--- 15 records
+-- 20 records
 SELECT COUNT(*) FROM Pet;
