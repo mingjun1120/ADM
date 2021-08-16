@@ -5,7 +5,7 @@ CREATE TABLE Appointment
  ServiceID        VARCHAR2(6) NOT NULL,
  PetID            VARCHAR2(6) NOT NULL,
  EmployeeID       VARCHAR2(5) NOT NULL,
- AppointmentDate  DATE
+ AppointmentDate  DATE,
  StartTime        TIMESTAMP,
  EndTime          TIMESTAMP,
  Duration         NUMBER(2) NOT NULL,
