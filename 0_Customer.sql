@@ -119,5 +119,5 @@ INSERT INTO Customer (CustomerID, CustomerName, Gender, ContactNo, Email, Street
 INSERT INTO Customer (CustomerID, CustomerName, Gender, ContactNo, Email, StreetName, PostCode, City, State) VALUES ('C1100', 'Thurstan', 'M', '019-9305622', 'thurstan@gmail.com', 'A-10/12 Amara Residensi, Jalan Raintree Utama', 68100, 'Batu Caves', 'Selangor');
 INSERT INTO Customer (CustomerID, CustomerName, Gender, ContactNo, Email, StreetName, PostCode, City, State) VALUES ('C1101', 'Lorrayne', 'F', '011-5900172', 'lorrayne@gmail.com', 'C-2-8, Jalan Vista Mutiara 1, Tsi Business Park', 52000, 'Kepong Baru', 'Kuala Lumpur');
 
--- 290 records
+-- 100 records
 SELECT COUNT(*) FROM Customer;
