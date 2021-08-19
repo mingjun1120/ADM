@@ -164,5 +164,5 @@ INSERT INTO PurchaseTransDetails VALUES ('PT076', 'P1021', 50);
 INSERT INTO PurchaseTransDetails VALUES ('PT076', 'P1022', 60);
 INSERT INTO PurchaseTransDetails VALUES ('PT076', 'P1023', 50);
 
--- 137 rows
+-- 137 records
 SELECT COUNT(*) FROM PurchaseTransDetails;
