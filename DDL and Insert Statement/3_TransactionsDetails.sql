@@ -5,9 +5,8 @@ CREATE TABLE TransactionsDetails
  Quantity        NUMBER(3) NOT NULL,
  priceEach		number(7,2) NOT NULL,
 PRIMARY KEY(TransactionsID, ProductCode),
-FOREIGN KEY TransactionsID references Transactions(TransactionsID),
-FOREIGN KEY ProductCode references Product(ProductCode),
-CONSTRAINT CHK_td_qty CHECK (Quantity > 0)
+FOREIGN KEY (TransactionsID) references Transactions(TransactionsID),
+FOREIGN KEY (ProductCode) references Product(ProductCode)
 );
 
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10001', 'P1002', 2, 3.00);
@@ -29,7 +28,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10009', 'P1004', 1, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10009', 'P1022', 5, 16.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10009', 'P1007', 1, 30.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10009', 'P1007', 4, 30.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10009', 'P1014', 4, 20.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10010', 'P1014', 5, 20.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10010', 'P1029', 3, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10010', 'P1031', 4, 86.00);
@@ -78,7 +77,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10034', 'P1034', 1, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10034', 'P1033', 4, 75.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10035', 'P1017', 1, 38.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10035', 'P1017', 2, 38.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10035', 'P1033', 2, 75.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10035', 'P1031', 4, 86.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10036', 'P1001', 2, 160.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10037', 'P1001', 2, 160.00);
@@ -98,10 +97,10 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10041', 'P1004', 1, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10042', 'P1022', 5, 16.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10042', 'P1007', 1, 30.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10042', 'P1007', 4, 30.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10042', 'P1033', 4, 75.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10043', 'P1033', 4, 75.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10043', 'P1017', 1, 38.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10043', 'P1017', 2, 38.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10043', 'P1022', 2, 16.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10043', 'P1035', 3, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10044', 'P1023', 3, 20.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10045', 'P1038', 4, 21.80);
@@ -141,7 +140,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10060', 'P1045', 1, 55.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10060', 'P1031', 4, 86.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10060', 'P1001', 2, 160.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10060', 'P1001', 2, 160.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10060', 'P1004', 2, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10061', 'P1004', 3, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10061', 'P1034', 1, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10061', 'P1033', 4, 75.00);
@@ -158,7 +157,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10064', 'P1002', 2, 3.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10064', 'P1029', 4, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10064', 'P1032', 1, 22.90);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10004', 'P1045', 5, 55.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10064', 'P1045', 5, 55.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10065', 'P1035', 4, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10065', 'P1030', 1, 11.90);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10065', 'P1021', 7, 6.00);
@@ -172,7 +171,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10067', 'P1032', 1, 22.90);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10067', 'P1045', 5, 55.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10067', 'P1035', 4, 38.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10067', 'P1035', 4, 38.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10067', 'P1049', 4, 290.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10068', 'P1049', 3, 290.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10069', 'P1026', 1, 58.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10070', 'P1031', 4, 86.00);
@@ -186,12 +185,12 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10078', 'P1037', 5, 23.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10079', 'P1004', 1, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10080', 'P1022', 5, 16.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10081', 'P1007', 1, 30.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10081', 'P1022', 1, 16.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10081', 'P1007', 4, 30.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10081', 'P1004', 3, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10081', 'P1034', 1, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10082', 'P1033', 4, 75.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10082', 'P1017', 1, 38.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10082', 'P1034', 1, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10082', 'P1017', 2, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10083', 'P1035', 3, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10083', 'P1023', 3, 20.00);
@@ -281,7 +280,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10130', 'P1014', 5, 20.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10130', 'P1029', 3, 38.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10130', 'P1031', 4, 86.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10131', 'P1001', 2, 160.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10131', 'P1031', 2, 86.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10131', 'P1001', 2, 160.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10131', 'P1023', 3, 20.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10132', 'P1038', 4, 21.80);
@@ -325,7 +324,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10157', 'P1034', 2, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10157', 'P1049', 3, 290.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10157', 'P1002', 4, 3.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10157', 'P1034', 4, 13.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10157', 'P1037', 4, 23.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10158', 'P1037', 5, 23.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10158', 'P1004', 1, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10158', 'P1035', 1, 38.00);
@@ -362,7 +361,7 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10178', 'P1034', 2, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10178', 'P1049', 3, 290.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10178', 'P1002', 4, 3.00);
-insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10178', 'P1034', 4, 13.00);
+insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10178', 'P1004', 4, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10179', 'P1004', 3, 12.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10179', 'P1034', 1, 13.00);
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10179', 'P1024', 3, 58.00);
@@ -435,5 +434,5 @@ insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEac
 insert into TransactionsDetails (TransactionsID, ProductCode, Quantity, priceEach) values ('T10211', 'P1049', 3, 290.00);
 ------------------------------------------ end of record ---------------------------------------------------------
 
---422 record
-SELECT COUNT(*) FROM Transactions;
+--423 record
+SELECT COUNT(*) FROM TransactionsDetails;
