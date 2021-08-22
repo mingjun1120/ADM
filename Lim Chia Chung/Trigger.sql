@@ -13,8 +13,10 @@ DECLARE
    v_startTime Appointment.StartTime%TYPE;
    v_endTime   Appointment.EndTime%TYPE;
 BEGIN
-   IF :NEW.StartTime < 10 OR TO_NUMBER(TO_CHAR(:NEW.EndTime, 'HH24')) > 16 THEN
-      RAISE_APPLICATION_ERROR(-20000, 'Not Operating Hour');
+   IF UPDATING THEN
+      IF :NEW.StartTime < 10 OR TO_NUMBER(TO_CHAR(:NEW.EndTime, 'HH24')) > 16 THEN
+         RAISE_APPLICATION_ERROR(-20000, 'Not Operating Hour');
+      END IF;
    END IF;
 END;
 /
