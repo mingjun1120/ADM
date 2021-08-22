@@ -10,7 +10,7 @@ CREATE OR REPLACE PROCEDURE PRC_UPDATE_APPOINTMENT_TIME(in_appointmentID VARCHAR
                                                         in_startTime TIMESTAMP) IS
    NO_APPOINTMENT EXCEPTION;
    INVALID_OPERATING_TIME EXCEPTION;
-   PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20000);
+   PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
 
    v_duration Appointment.Duration%TYPE;
    v_EndTime Appointment.EndTime%TYPE;
@@ -58,6 +58,10 @@ BEGIN
          DBMS_OUTPUT.PUT_LINE('+NOT OPERATING HOUR+');
          DBMS_OUTPUT.PUT_LINE('++++++++++++++++++++');
          DBMS_OUTPUT.PUT_LINE('Operating hour is from 10am to 7pm');
+      WHEN OTHERS THEN
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+NO CHANGES MADE+');
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++');
 END;
 /
 

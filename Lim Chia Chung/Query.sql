@@ -5,9 +5,13 @@
 -- on month. This query is helpful in operational level which allow staff to monitor the 
 -- appointment by sorting the month.
 
-SET LINESIZE 120
+SET LINESIZE 150
 SET PAGESIZE 140
 CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
 
 ACCEPT year DATE FORMAT 'YYYY'-
 PROMPT 'Enter Year (YYYY): '
@@ -15,18 +19,32 @@ PROMPT 'Enter Year (YYYY): '
 ACCEPT month DATE FORMAT 'MM'-
 PROMPT 'Enter Month (MM): '
 
-COLUMN AppointmentDate FORMAT A16 HEADING 'Appointment Date';
-COLUMN AppointmentID   FORMAT A15 HEADING 'Appointment ID';
-COLUMN CustomerID      FORMAT A15 HEADING 'Customer ID';
-COLUMN CustomerName    FORMAT A15 HEADING 'Customer Name';
-COLUMN ContactNo       FORMAT A11 HEADING 'Contact No.';
+COLUMN AppointmentDate FORMAT A16      HEADING 'Appointment Date';
+COLUMN AppointmentID   FORMAT A15      HEADING 'Appointment ID';
+COLUMN CustomerID      FORMAT A10      HEADING 'Customer ID';
+COLUMN CustomerName    FORMAT A13      HEADING 'Customer Name';
+COLUMN ContactNo       FORMAT A11      HEADING 'Contact No.';
+COLUMN PetID           FORMAT A6       HEADING 'Pet ID';
+COLUMN PetName         FORMAT A10      HEADING 'Pet Name';
+COLUMN ServiceID       FORMAT A10      HEADING 'Service ID';
+COLUMN ServiceName     FORMAT A15      HEADING 'Service Name';
+COLUMN ServiceCharge   FORMAT '990.90' HEADING 'Charge (RM)';
 
-SELECT   A.AppointmentDate, A.AppointmentID, A.CustomerID, C.CustomerName, C.ContactNo
-FROM     Appointment A, Customer C
+TTITLE CENTER '============================================================' SKIP 1 -
+CENTER 'Customer Appointment Details Based On Month' SKIP 1 -
+CENTER '============================================================' SKIP 2 -
+
+SELECT   A.AppointmentDate, A.AppointmentID, A.CustomerID, C.CustomerName, C.ContactNo,
+         A.PetID, P.PetName, A.ServiceID, S.ServiceName, S.ServiceCharge
+FROM     Appointment A, Customer C, Services S, Pet P
 WHERE    A.CustomerID = C.CustomerID AND
+         A.PetID = P.PetID AND
+         A.ServiceID = S.ServiceID AND
          TO_CHAR(AppointmentDate, 'YYYY') = '&year' AND
          TO_CHAR(AppointmentDate, 'MM') = '&month'
 ORDER BY A.AppointmentID;
+
+start D:\Text\ADM\Query1.sql
 
 ----------------------------------------- Query 2 -----------------------------------------------
 
@@ -39,8 +57,16 @@ ORDER BY A.AppointmentID;
 SET LINESIZE 120
 SET PAGESIZE 140
 CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
 
 COLUMN 'Appointment Month' FORMAT A15;
+
+TTITLE LEFT '=====================================' SKIP 1 -
+LEFT 'Analysis Of The Number of Appointment' SKIP 1 -
+LEFT '=====================================' SKIP 2 -
 
 BREAK ON "Appointment Year"
 SELECT   EXTRACT(YEAR FROM AppointmentDate) AS "Appointment Year",
@@ -49,6 +75,8 @@ SELECT   EXTRACT(YEAR FROM AppointmentDate) AS "Appointment Year",
 FROM     Appointment 
 GROUP BY EXTRACT(YEAR FROM AppointmentDate), EXTRACT(MONTH FROM AppointmentDate)
 ORDER BY EXTRACT(MONTH FROM AppointmentDate);
+
+start D:\Text\ADM\Query2.sql
 
 ----------------------------------------- Query 3 -----------------------------------------------
 
@@ -61,10 +89,18 @@ ORDER BY EXTRACT(MONTH FROM AppointmentDate);
 SET LINESIZE 120
 SET PAGESIZE 140
 CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
 
 COLUMN ServiceID     FORMAT A10 HEADING 'Service ID';
 COLUMN ServiceName   FORMAT A15 HEADING 'Service Name';
 COLUMN ServiceCharge FORMAT '990.90' HEADING 'Price Per Time (RM)';
+
+TTITLE LEFT '==========================' SKIP 1 -
+LEFT 'Service Popularity Summary' SKIP 1 -
+LEFT '==========================' SKIP 2 -
 
 SELECT   A.ServiceID, S.ServiceName, S.ServiceCharge, COUNT(A.AppointmentID) AS "Total Appointment"
 FROM     Appointment A
@@ -72,3 +108,5 @@ JOIN     Services S
 ON       A.ServiceID = S.ServiceID
 GROUP BY A.ServiceID, S.ServiceName, S.ServiceCharge
 ORDER BY 1;
+
+start D:\Text\ADM\Query3.sql
