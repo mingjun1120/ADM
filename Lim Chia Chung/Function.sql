@@ -16,3 +16,20 @@ END;
 /
 
 -- TO_CHAR(TO_DATE( EXTRACT(MONTH FROM PURCHASEDATE), 'MM'), 'MONTH') AS "MONTH NAME"
+
+---------------------------------------- Function 1 ---------------------------------------------
+
+-- Convert Month To Name
+CREATE OR REPLACE FUNCTION FUNC_CONVERT_DAY_TO_NAME (in_dayNumber IN NUMBER)
+RETURN VARCHAR2 IS 
+
+dayName VARCHAR2(15); 
+Temp DATE;
+
+BEGIN 
+   Temp := TO_DATE(in_dayNumber, 'DD');
+   dayName := TO_CHAR(Temp, 'DAY');
+   
+   RETURN dayName; 
+END;
+/
