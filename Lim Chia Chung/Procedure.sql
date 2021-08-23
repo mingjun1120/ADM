@@ -4,13 +4,17 @@
 -- Purpose: Purpose: The purpose of this procedure is used to update the appointment time. Once
 -- the start time has been set, the end time will also be updated based on the
 
+ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 
 CREATE OR REPLACE PROCEDURE PRC_UPDATE_APPOINTMENT_TIME(in_appointmentID VARCHAR,
+                                                        in_appointmentDate DATE,
                                                         in_startTime TIMESTAMP) IS
    NO_APPOINTMENT EXCEPTION;
    INVALID_OPERATING_TIME EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
+   INVALID_WEEKDAY EXCEPTION;
+   PRAGMA EXCEPTION_INIT(INVALID_WEEKDAY, -20002);
 
    v_duration Appointment.Duration%TYPE;
    v_EndTime Appointment.EndTime%TYPE;
@@ -34,13 +38,14 @@ BEGIN
       -- IF in_startTime < 10 OR TO_NUMBER(TO_CHAR(v_EndTime, 'HH24')) > 16 THEN
       --    RAISE INVALID_OPERATING_TIME;
       UPDATE Appointment
-      SET    StartTime = in_startTime, EndTime = v_EndTime
+      SET    AppointmentDate = in_appointmentDate, StartTime = in_startTime, EndTime = v_EndTime
       WHERE  AppointmentID = in_appointmentID;
 
       DBMS_OUTPUT.PUT_LINE('=======================================');
       DBMS_OUTPUT.PUT_LINE('Appointment Records Sucessfully Updated');
       DBMS_OUTPUT.PUT_LINE('=======================================');
       DBMS_OUTPUT.PUT_LINE(RPAD('Appointment ID', 15) || ': ' || RPAD(appointment_rec.AppointmentID, 10));
+      DBMS_OUTPUT.PUT_LINE(RPAD('Date', 15) || ': ' || RPAD(in_appointmentDate, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('Start Time', 15) || ': ' || RPAD(in_startTime, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('End Time', 15) || ': ' || RPAD(v_EndTime, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('Duration', 15) || ': ' || appointment_rec.Duration || ' hour');
@@ -58,6 +63,11 @@ BEGIN
          DBMS_OUTPUT.PUT_LINE('+NOT OPERATING HOUR+');
          DBMS_OUTPUT.PUT_LINE('++++++++++++++++++++');
          DBMS_OUTPUT.PUT_LINE('Operating hour is from 10am to 7pm');
+      WHEN INVALID_WEEKDAY THEN
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+NOT OPERATING DAY+');
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('Operating days is from Monday to Friday');
       WHEN OTHERS THEN
          DBMS_OUTPUT.PUT_LINE('+++++++++++++++++');
          DBMS_OUTPUT.PUT_LINE('+NO CHANGES MADE+');
@@ -66,13 +76,17 @@ END;
 /
 
 SET SERVEROUTPUT ON
-EXEC PRC_UPDATE_APPOINTMENT_TIME('A10079', TO_TIMESTAMP('18:00', 'HH24:MI'));
+EXEC PRC_UPDATE_APPOINTMENT_TIME('A10079', TO_DATE('20-08-2021', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'));
 EXEC PRC_UPDATE_APPOINTMENT_TIME('A10080', TO_TIMESTAMP('20:00', 'HH24:MI'));
 EXEC PRC_UPDATE_APPOINTMENT_TIME('A10081', TO_TIMESTAMP('09:00', 'HH24:MI'));
 
 SET LINESIZE 120
 SET PAGESIZE 140
 CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
 
 COLUMN AppointmentDate FORMAT A16;
 COLUMN AppointmentID   FORMAT A15;
