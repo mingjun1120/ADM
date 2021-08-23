@@ -8,8 +8,8 @@ ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 
 CREATE OR REPLACE PROCEDURE PRC_UPDATE_APPOINTMENT_DATE_TIME(in_appointmentID VARCHAR,
-                                                        in_appointmentDate DATE,
-                                                        in_startTime TIMESTAMP) IS
+                                                             in_appointmentDate DATE,
+                                                             in_startTime TIMESTAMP) IS
    NO_APPOINTMENT EXCEPTION;
    INVALID_OPERATING_TIME EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
@@ -97,7 +97,11 @@ WHERE AppointmentID = 'A10080' OR AppointmentID = 'A10079';
 -- Create Appointment
 -- Purpose: Purpose: The purpose of this procedure is to
 
-CREATE OF REPLACE PROCEDURE PRC_CREATE_APPOINTMENT IS
+CREATE OF REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
+                                                    in_appointmentDate IN DATE,
+                                                    in_startTime IN TIMESTAMP,
+                                                    in_serviceName IN VARCHAR2,
+                                                    in_petName IN VARCHAR2) IS
    -- NO_APPOINTMENT EXCEPTION;
    -- INVALID_OPERATING_TIME EXCEPTION;
    -- PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
@@ -107,33 +111,67 @@ CREATE OF REPLACE PROCEDURE PRC_CREATE_APPOINTMENT IS
    v_duration Appointment.Duration%TYPE;
    v_EndTime Appointment.EndTime%TYPE;
    
-   CURSOR APP_CURSOR IS
-      SELECT *
-      FROM   Appointment
-      WHERE  AppointmentID = in_appointmentID;
-   
    CURSOR CUST_CURSOR IS
       SELECT *
       FROM   Customer
-      WHERE  AppointmentID = in_appointmentID;
+      WHERE  CustomerName = in_customerName;
+   
+   CURSOR SER_CURSOR IS
+      SELECT *
+      FROM   Services
+      WHERE  ServiceName = in_serviceName;
 
-   appointment_rec APP_CURSOR%ROWTYPE;  
+   CURSOR PET_CURSOR IS
+      SELECT *
+      FROM   Pet
+      WHERE  PetName = in_petName;
+
+   cust_rec APP_CURSOR%ROWTYPE;
+   ser_rec  APP_CURSOR%ROWTYPE; 
+   pet_rec  APP_CURSOR%ROWTYPE; 
 BEGIN
+   OPEN CUST_CURSOR;
+   FETCH CUST_CURSOR INTO cust_rec;
 
+   OPEN SER_CURSOR;
+   FETCH SER_CURSOR INTO ser_rec;
+
+   OPEN PET_CURSOR;
+   FETCH PET_CURSOR INTO pet_rec;
+
+   IF CUST_CURSOR%NOTFOUND THEN
+      DBMS_OUTPUT.PUT_LINE('HAHAHAA');
+   END IF;
+
+   IF SER_CURSOR%NOTFOUND THEN
+      DBMS_OUTPUT.PUT_LINE('HAHAHAA');
+   END IF;
+
+   IF PET_CURSOR%NOTFOUND THEN
+      DBMS_OUTPUT.PUT_LINE('HAHAHAA');
+   END IF;
 END;
 /
+
+EXEC PRC_CREATE_APPOINTMENT('Kalindi Rogers', 
+                            TO_DATE('01-07-2018', 'DD-MM-YYYY'),
+                            TO_TIMESTAMP('12:00', 'HH24:MI'),
+                            'Grooming',
+                            'Wong Choi');
+
+INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
 
 ACCEPT custName CHAR FORMAT A50-
 PROMPT 'Enter Customer Name: '
 
-ACCEPT appDate DATE FORMAT 'DD-MM-YYYY'
+ACCEPT appDate DATE FORMAT 'DD-MM-YYYY'-
 PROMPT 'Enter Appointment Date (DD-MM-YYYY): '
+
+ACCEPT appStartTime DATE FORMAT 'HH24:MI'-
+PROMPT 'Enter Start Time (HH24:MI): '
 
 ACCEPT serviceName CHAR FORMAT A50-
 PROMPT 'Enter Service Name: '
 
 ACCEPT petName CHAR FORMAT A50-
-PROMPT 'Enter Pet Name: '
-
-EXEC PRC_CREATE_APPOINTMENT();
-INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
+PROMPT 'Enter Pet Name: '  
