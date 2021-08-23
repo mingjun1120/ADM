@@ -15,7 +15,8 @@ BEGIN
    v_day := FUNC_CONVERT_DAY_TO_NAME(EXTRACT(DAY FROM :NEW.AppointmentDate));
 
    IF UPDATING THEN
-      IF :NEW.StartTime = :OLD.StartTime THEN
+      IF :NEW.AppointmentDate = :OLD.AppointmentDate AND
+         :NEW.StartTime = :OLD.StartTime THEN
          RAISE_APPLICATION_ERROR(-20000, 'No Changes Made');
       ELSIF v_day = 'SUNDAY' OR v_day = 'SATURDAY' THEN
          DBMS_OUTPUT.PUT_LINE(v_day);
