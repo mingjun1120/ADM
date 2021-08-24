@@ -115,32 +115,46 @@ CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
    v_custName Customer.CustomerName%TYPE;
 
    -- Pet
-   v_petType Pet.PetType%TYPE;
-   v_petSex  Pet.Sex%TYPE;
-   v_color   Pet.Color%TYPE;
+   v_petName Pet.PetName%TYPE;
    
 BEGIN
    SELECT CustomerName INTO v_custName
    FROM   Customer
    WHERE  CustomerName = in_customerName;
 
-   IF SQL%NOTFOUND THEN
-      RAISE_APPLICATION_ERROR(-20003, in_customerName || 'cannot be found!, Please insert customer details first before making appointment');
-   END IF;
-
-   -- IF SQL%NOTFOUND THEN
-   --    DBMS_OUTPUT.PUT_LINE('222HAHAHAA');
-   -- END IF;
-
-   -- IF SQL%NOTFOUND THEN
-   --    DBMS_OUTPUT.PUT_LINE('333HAHAHAA');
-   -- END IF;
-
+   SELECT PetName INTO v_petName
+   FROM   Pet
+   WHERE  PetName = in_petName;
+   
+   EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+No Records Found+');
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('Please insert this specific details before making appointment');
 END;
 /
 
 SET SERVEROUTPUT ON
-EXEC PRC_CREATE_APPOINTMENT('JC Rogers', TO_DATE('01-07-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'), 'Grooming','Wong Choi');
+EXEC PRC_CREATE_APPOINTMENT('Milly Harrision', TO_DATE('01-07-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'), 'Grooming','Choi');
+
+SET LINESIZE 120
+SET PAGESIZE 140
+CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
+
+COLUMN AppointmentDate FORMAT A16;
+COLUMN AppointmentID   FORMAT A15;
+COLUMN CustomerID      FORMAT A15;
+COLUMN StartTime       FORMAT A15;
+COLUMN EndTime         FORMAT A11;
+COLUMN Duration        FORMAT '9';
+
+SELECT * FROM Appointment
+WHERE AppointmentID = 'A10081';
 
 INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
 
