@@ -1,5 +1,12 @@
-SET linesize 380
-SET pagesize 180
+CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
+CLEAR SCREEN
+
+SET linesize 130
+SET pagesize 100
 
 -- All Workers
 CREATE OR REPLACE VIEW AllWorkers AS
@@ -8,7 +15,6 @@ FROM Attendance A, Employee E, Job J
 WHERE A.EmployeeID = E.EmployeeID AND J.JobID = E.JobID
 GROUP BY J.JobPosition, E.EmployeeID, E.EmployeeName
 ORDER BY J.JobPosition ASC, E.EmployeeID ASC;
-SELECT * FROM AllWorkers;
 
 -- Late Workers
 CREATE OR REPLACE VIEW LateWorkers AS
@@ -17,7 +23,6 @@ FROM Attendance A, Employee E, Job J
 WHERE UPPER(A.Remarks) LIKE 'PRESENT LATE' AND A.EmployeeID = E.EmployeeID AND J.JobID = E.JobID
 GROUP BY J.JobPosition, E.EmployeeID, E.EmployeeName
 ORDER BY J.JobPosition ASC, E.EmployeeID ASC;
-SELECT * FROM LateWorkers;
 
 -- Absent Workers
 CREATE OR REPLACE VIEW AbsentWorkers AS
@@ -26,7 +31,6 @@ FROM Attendance A, Employee E, Job J
 WHERE UPPER(A.Remarks) LIKE 'ABSENT' AND A.EmployeeID = E.EmployeeID AND J.JobID = E.JobID
 GROUP BY J.JobPosition, E.EmployeeID, E.EmployeeName
 ORDER BY J.JobPosition ASC, E.EmployeeID ASC;
-SELECT * FROM AbsentWorkers;
 
 -- ALLLateWorkers (Left Join All Workers and Late Workers)
 CREATE OR REPLACE VIEW ALLLateWorkers AS
@@ -35,7 +39,6 @@ SELECT AllWorkers.JobPosition, AllWorkers.EmployeeID, AllWorkers.EmployeeName, N
 FROM AllWorkers
 LEFT JOIN LateWorkers ON AllWorkers.EmployeeID = LateWorkers.EmployeeID
 ORDER BY AllWorkers.JobPosition ASC, AllWorkers.EmployeeID ASC;
-SELECT * FROM ALLLateWorkers;
 
 -- -- ALLLateAbsentWorkers (Left Join ALLLateWorkers and Absent Workers)
 -- CREATE OR REPLACE VIEW ALLLateAbsentWorkers AS
@@ -47,11 +50,6 @@ SELECT * FROM ALLLateWorkers;
 -- ORDER BY ALLLateWorkers.JobPosition ASC, ALLLateWorkers.EmployeeID ASC;
 -- SELECT * FROM ALLLateAbsentWorkers;
 
-
-TTITLE CENTER "EMPLOYEE ATTENDANCE ANALYSATION" SKIP 1 -
-CENTER 'CUTY PET SHOP' SKIP 1-
-CENTER '-------------------' SKIP 2
-
 COLUMN JobPosition FORMAT A12 HEADING 'JOB TYPE'
 COLUMN EmployeeID FORMAT A11 HEADING 'EMPLOYEE ID'
 COLUMN EmployeeName HEADING 'EMPLOYEE NAME'
@@ -60,6 +58,11 @@ COLUMN ON_TIME_RATE HEADING 'ON-TIME RATE (%)'
 COLUMN ABSENT_TIMES HEADING 'ABSENT TIMES'
 COLUMN PRESENT_RATE HEADING 'PRESENT RATE (%)'
 COLUMN TOTAL_DAYS HEADING 'TOTAL WORKING DAYS'
+
+
+TTITLE CENTER '==========================================================' SKIP 1 -
+CENTER 'EMPLOYEE ATTENDANCE ANALYSATION REPORT' SKIP 1-
+CENTER '==========================================================' SKIP 2
 
 BREAK ON JobPosition SKIP 2
 
@@ -74,7 +77,3 @@ SELECT ALLLateWorkers.JobPosition,
 FROM ALLLateWorkers
 LEFT JOIN AbsentWorkers ON ALLLateWorkers.EmployeeID = AbsentWorkers.EmployeeID
 ORDER BY ALLLateWorkers.JobPosition ASC, PRESENT_RATE DESC;
-
-CLEAR BREAKS
-CLEAR COMPUTES
-TTITLE OFF
