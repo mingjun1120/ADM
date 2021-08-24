@@ -241,7 +241,7 @@ INSERT INTO Attendance VALUES (TO_DATE('07-03-2018', 'DD-MM-YYYY'), 'E007', '10:
 INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E001', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E002', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E004', '9:49', '19:00', 'Present');
-INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E005', '10:00', '19:00', 'Present');
+INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E005', '10:00', '19:00', 'Present and Work Overtime');
 INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E006', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('08-03-2018', 'DD-MM-YYYY'), 'E007', '9:59', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('09-03-2018', 'DD-MM-YYYY'), 'E001', '10:00', '19:00', 'Present');
@@ -575,7 +575,7 @@ INSERT INTO Attendance VALUES (TO_DATE('04-05-2018', 'DD-MM-YYYY'), 'E008', '9:5
 INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E001', '9:58', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E002', '9:56', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E003', '10:00', '19:00', 'Present');
-INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E004', '10:00', '20:00', 'Present and Work Overtime');
+INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E004', '10:00', '20:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E005', '9:53', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E006', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('05-05-2018', 'DD-MM-YYYY'), 'E007', '10:00', '19:00', 'Present');
