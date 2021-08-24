@@ -35,20 +35,25 @@ ORDER BY J.JobPosition ASC, E.EmployeeID ASC;
 -- ALLLateWorkers (Left Join All Workers and Late Workers)
 CREATE OR REPLACE VIEW ALLLateWorkers AS
 SELECT AllWorkers.JobPosition, AllWorkers.EmployeeID, AllWorkers.EmployeeName, NVL(LateWorkers.LATE_TIMES, 0) AS LATE_TIMES, 
-       ROUND(((AllWorkers.TOTAL_DAYS - NVL(LateWorkers.LATE_TIMES, 0))/AllWorkers.TOTAL_DAYS)*100, 2) AS ON_TIME_RATE, AllWorkers.TOTAL_DAYS AS TOTAL_DAYS
+       ROUND(((AllWorkers.TOTAL_DAYS - NVL(LateWorkers.LATE_TIMES, 0))/AllWorkers.TOTAL_DAYS)*100, 2) AS ON_TIME_RATE, 
+       AllWorkers.TOTAL_DAYS AS TOTAL_DAYS
 FROM AllWorkers
 LEFT JOIN LateWorkers ON AllWorkers.EmployeeID = LateWorkers.EmployeeID
 ORDER BY AllWorkers.JobPosition ASC, AllWorkers.EmployeeID ASC;
 
 -- -- ALLLateAbsentWorkers (Left Join ALLLateWorkers and Absent Workers)
 -- CREATE OR REPLACE VIEW ALLLateAbsentWorkers AS
--- SELECT ALLLateWorkers.JobPosition, ALLLateWorkers.EmployeeID, ALLLateWorkers.EmployeeName, ALLLateWorkers.LATE_TIMES, ALLLateWorkers.ON_TIME_RATE,
+-- SELECT ALLLateWorkers.JobPosition,
+--        ALLLateWorkers.EmployeeID,
+--        ALLLateWorkers.EmployeeName,
+--        ALLLateWorkers.TOTAL_DAYS,
+--        ALLLateWorkers.LATE_TIMES,
+--        ALLLateWorkers.ON_TIME_RATE,
 --        NVL(AbsentWorkers.ABSENT_TIMES, 0) AS ABSENT_TIMES, 
---        ROUND(((ALLLateWorkers.TOTAL_DAYS - NVL(AbsentWorkers.ABSENT_TIMES, 0))/ALLLateWorkers.TOTAL_DAYS)*100, 2) AS PRESENT_RATE, ALLLateWorkers.TOTAL_DAYS
+--        ROUND(((ALLLateWorkers.TOTAL_DAYS - NVL(AbsentWorkers.ABSENT_TIMES, 0))/ALLLateWorkers.TOTAL_DAYS)*100, 2) AS PRESENT_RATE
 -- FROM ALLLateWorkers
 -- LEFT JOIN AbsentWorkers ON ALLLateWorkers.EmployeeID = AbsentWorkers.EmployeeID
--- ORDER BY ALLLateWorkers.JobPosition ASC, ALLLateWorkers.EmployeeID ASC;
--- SELECT * FROM ALLLateAbsentWorkers;
+-- ORDER BY ALLLateWorkers.JobPosition ASC, PRESENT_RATE DESC;
 
 COLUMN JobPosition FORMAT A12 HEADING 'JOB TYPE'
 COLUMN EmployeeID FORMAT A11 HEADING 'EMPLOYEE ID'
