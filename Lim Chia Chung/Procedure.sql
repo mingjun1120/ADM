@@ -97,7 +97,7 @@ WHERE AppointmentID = 'A10080' OR AppointmentID = 'A10079';
 -- Create Appointment
 -- Purpose: Purpose: The purpose of this procedure is to
 
-CREATE OF REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
+CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
                                                     in_appointmentDate IN DATE,
                                                     in_startTime IN TIMESTAMP,
                                                     in_serviceName IN VARCHAR2,
@@ -108,56 +108,39 @@ CREATE OF REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
    -- INVALID_WEEKDAY EXCEPTION;
    -- PRAGMA EXCEPTION_INIT(INVALID_WEEKDAY, -20002);
  
-   v_duration Appointment.Duration%TYPE;
-   v_EndTime Appointment.EndTime%TYPE;
-   
-   CURSOR CUST_CURSOR IS
-      SELECT *
-      FROM   Customer
-      WHERE  CustomerName = in_customerName;
-   
-   CURSOR SER_CURSOR IS
-      SELECT *
-      FROM   Services
-      WHERE  ServiceName = in_serviceName;
+   -- v_duration Appointment.Duration%TYPE;
+   -- v_EndTime Appointment.EndTime%TYPE;
 
-   CURSOR PET_CURSOR IS
-      SELECT *
-      FROM   Pet
-      WHERE  PetName = in_petName;
+   -- Customer
+   v_custName Customer.CustomerName%TYPE;
 
-   cust_rec APP_CURSOR%ROWTYPE;
-   ser_rec  APP_CURSOR%ROWTYPE; 
-   pet_rec  APP_CURSOR%ROWTYPE; 
+   -- Pet
+   v_petType Pet.PetType%TYPE;
+   v_petSex  Pet.Sex%TYPE;
+   v_color   Pet.Color%TYPE;
+   
 BEGIN
-   OPEN CUST_CURSOR;
-   FETCH CUST_CURSOR INTO cust_rec;
+   SELECT CustomerName INTO v_custName
+   FROM   Customer
+   WHERE  CustomerName = in_customerName;
 
-   OPEN SER_CURSOR;
-   FETCH SER_CURSOR INTO ser_rec;
-
-   OPEN PET_CURSOR;
-   FETCH PET_CURSOR INTO pet_rec;
-
-   IF CUST_CURSOR%NOTFOUND THEN
-      DBMS_OUTPUT.PUT_LINE('HAHAHAA');
+   IF SQL%NOTFOUND THEN
+      RAISE_APPLICATION_ERROR(-20003, in_customerName || 'cannot be found!, Please insert customer details first before making appointment');
    END IF;
 
-   IF SER_CURSOR%NOTFOUND THEN
-      DBMS_OUTPUT.PUT_LINE('HAHAHAA');
-   END IF;
+   -- IF SQL%NOTFOUND THEN
+   --    DBMS_OUTPUT.PUT_LINE('222HAHAHAA');
+   -- END IF;
 
-   IF PET_CURSOR%NOTFOUND THEN
-      DBMS_OUTPUT.PUT_LINE('HAHAHAA');
-   END IF;
+   -- IF SQL%NOTFOUND THEN
+   --    DBMS_OUTPUT.PUT_LINE('333HAHAHAA');
+   -- END IF;
+
 END;
 /
 
-EXEC PRC_CREATE_APPOINTMENT('Kalindi Rogers', 
-                            TO_DATE('01-07-2018', 'DD-MM-YYYY'),
-                            TO_TIMESTAMP('12:00', 'HH24:MI'),
-                            'Grooming',
-                            'Wong Choi');
+SET SERVEROUTPUT ON
+EXEC PRC_CREATE_APPOINTMENT('JC Rogers', TO_DATE('01-07-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'), 'Grooming','Wong Choi');
 
 INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
 
