@@ -22,9 +22,9 @@ PROMPT 'Enter Month (MM): '
 COLUMN AppointmentDate FORMAT A16      HEADING 'Appointment Date';
 COLUMN AppointmentID   FORMAT A15      HEADING 'Appointment ID';
 COLUMN CustomerID      FORMAT A10      HEADING 'Customer ID';
-COLUMN CustomerName    FORMAT A13      HEADING 'Customer Name';
+COLUMN CustomerName    FORMAT A18      HEADING 'Customer Name';
 COLUMN ContactNo       FORMAT A11      HEADING 'Contact No.';
-COLUMN PetID           FORMAT A6       HEADING 'Pet ID';
+COLUMN PetID           FORMAT A7       HEADING 'Pet ID';
 COLUMN PetName         FORMAT A10      HEADING 'Pet Name';
 COLUMN ServiceID       FORMAT A10      HEADING 'Service ID';
 COLUMN ServiceName     FORMAT A15      HEADING 'Service Name';
