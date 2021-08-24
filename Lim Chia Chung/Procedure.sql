@@ -8,8 +8,8 @@ ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 
 CREATE OR REPLACE PROCEDURE PRC_UPDATE_APPOINTMENT_DATE_TIME(in_appointmentID VARCHAR,
-                                                        in_appointmentDate DATE,
-                                                        in_startTime TIMESTAMP) IS
+                                                             in_appointmentDate DATE,
+                                                             in_startTime TIMESTAMP) IS
    NO_APPOINTMENT EXCEPTION;
    INVALID_OPERATING_TIME EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
@@ -97,43 +97,64 @@ WHERE AppointmentID = 'A10080' OR AppointmentID = 'A10079';
 -- Create Appointment
 -- Purpose: Purpose: The purpose of this procedure is to
 
-CREATE OF REPLACE PROCEDURE PRC_CREATE_APPOINTMENT IS
+CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
+                                                    in_appointmentDate IN DATE,
+                                                    in_startTime IN TIMESTAMP,
+                                                    in_serviceName IN VARCHAR2,
+                                                    in_petName IN VARCHAR2) IS
    -- NO_APPOINTMENT EXCEPTION;
    -- INVALID_OPERATING_TIME EXCEPTION;
    -- PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
    -- INVALID_WEEKDAY EXCEPTION;
    -- PRAGMA EXCEPTION_INIT(INVALID_WEEKDAY, -20002);
  
-   v_duration Appointment.Duration%TYPE;
-   v_EndTime Appointment.EndTime%TYPE;
-   
-   CURSOR APP_CURSOR IS
-      SELECT *
-      FROM   Appointment
-      WHERE  AppointmentID = in_appointmentID;
-   
-   CURSOR CUST_CURSOR IS
-      SELECT *
-      FROM   Customer
-      WHERE  AppointmentID = in_appointmentID;
+   -- v_duration Appointment.Duration%TYPE;
+   -- v_EndTime Appointment.EndTime%TYPE;
 
-   appointment_rec APP_CURSOR%ROWTYPE;  
+   -- Customer
+   v_custName Customer.CustomerName%TYPE;
+
+   -- Pet
+   v_petType Pet.PetType%TYPE;
+   v_petSex  Pet.Sex%TYPE;
+   v_color   Pet.Color%TYPE;
+   
 BEGIN
+   SELECT CustomerName INTO v_custName
+   FROM   Customer
+   WHERE  CustomerName = in_customerName;
+
+   IF SQL%NOTFOUND THEN
+      RAISE_APPLICATION_ERROR(-20003, in_customerName || 'cannot be found!, Please insert customer details first before making appointment');
+   END IF;
+
+   -- IF SQL%NOTFOUND THEN
+   --    DBMS_OUTPUT.PUT_LINE('222HAHAHAA');
+   -- END IF;
+
+   -- IF SQL%NOTFOUND THEN
+   --    DBMS_OUTPUT.PUT_LINE('333HAHAHAA');
+   -- END IF;
 
 END;
 /
 
+SET SERVEROUTPUT ON
+EXEC PRC_CREATE_APPOINTMENT('JC Rogers', TO_DATE('01-07-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'), 'Grooming','Wong Choi');
+
+INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
+
 ACCEPT custName CHAR FORMAT A50-
 PROMPT 'Enter Customer Name: '
 
-ACCEPT appDate DATE FORMAT 'DD-MM-YYYY'
+ACCEPT appDate DATE FORMAT 'DD-MM-YYYY'-
 PROMPT 'Enter Appointment Date (DD-MM-YYYY): '
+
+ACCEPT appStartTime DATE FORMAT 'HH24:MI'-
+PROMPT 'Enter Start Time (HH24:MI): '
 
 ACCEPT serviceName CHAR FORMAT A50-
 PROMPT 'Enter Service Name: '
 
 ACCEPT petName CHAR FORMAT A50-
-PROMPT 'Enter Pet Name: '
-
-EXEC PRC_CREATE_APPOINTMENT();
-INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
+PROMPT 'Enter Pet Name: '  

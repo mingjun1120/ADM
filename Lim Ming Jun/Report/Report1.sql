@@ -50,7 +50,7 @@ SELECT * FROM ALLLateWorkers;
 
 TTITLE CENTER "EMPLOYEE ATTENDANCE ANALYSATION" SKIP 1 -
 CENTER 'CUTY PET SHOP' SKIP 1-
-CENTER '-------------------' SKIP 3
+CENTER '-------------------' SKIP 2
 
 COLUMN JobPosition FORMAT A12 HEADING 'JOB TYPE'
 COLUMN EmployeeID FORMAT A11 HEADING 'EMPLOYEE ID'
@@ -73,7 +73,7 @@ SELECT ALLLateWorkers.JobPosition,
        ROUND(((ALLLateWorkers.TOTAL_DAYS - NVL(AbsentWorkers.ABSENT_TIMES, 0))/ALLLateWorkers.TOTAL_DAYS)*100, 2) AS PRESENT_RATE
 FROM ALLLateWorkers
 LEFT JOIN AbsentWorkers ON ALLLateWorkers.EmployeeID = AbsentWorkers.EmployeeID
-ORDER BY ALLLateWorkers.JobPosition ASC, ALLLateWorkers.EmployeeID ASC;
+ORDER BY ALLLateWorkers.JobPosition ASC, PRESENT_RATE DESC;
 
 CLEAR BREAKS
 CLEAR COMPUTES
