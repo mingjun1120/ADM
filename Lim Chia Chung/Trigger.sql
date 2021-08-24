@@ -10,7 +10,7 @@ CREATE OR REPLACE TRIGGER TRG_VALIDATE_OPERATING_HR
 BEFORE INSERT OR UPDATE OF AppointmentDate, StartTime, EndTime ON Appointment
 FOR EACH ROW
 DECLARE
-   v_day       CHAR(9);
+   v_day CHAR(9);
 BEGIN
    v_day := FUNC_CONVERT_DAY_TO_NAME(EXTRACT(DAY FROM :NEW.AppointmentDate));
 
