@@ -232,5 +232,5 @@ INSERT INTO Transactions VALUES ('T10209', 'E007', 'C1083', TO_DATE('27-06-2018'
 INSERT INTO Transactions VALUES ('T10210', 'E007', 'C1053', TO_DATE('28-06-2018', 'DD-MM-YYYY'));
 INSERT INTO Transactions VALUES ('T10211', 'E008', 'C1032', TO_DATE('29-06-2018', 'DD-MM-YYYY'));
 
--- 211 records
+-- 212 records
 SELECT COUNT(*) FROM Transactions;
