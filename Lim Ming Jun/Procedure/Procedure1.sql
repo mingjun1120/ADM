@@ -87,7 +87,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE ('The year value must start from 2018!');
 END;
 /
-EXEC prc_deduct_salary(3, 2018)
+EXEC prc_deduct_salary(2, 2018)
 
 
 -- -- Testing
