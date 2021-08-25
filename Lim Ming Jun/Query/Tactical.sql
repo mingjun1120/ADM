@@ -31,9 +31,9 @@ COLUMN ATTEND_DATE HEADING 'ATTENDANCE DATE'
 COLUMN CHECKINTIME FORMAT A13 HEADING 'CHECK IN TIME'
 -- BREAK ON JOB_TYPE ON EMPLOYEE_NAME ON MONTH
 
-TTITLE CENTER '==========================================================' SKIP 1 -
+TTITLE CENTER '=========================================================' SKIP 1 -
 CENTER 'EMPLOYEE LATE RECORDS' SKIP 1-
-CENTER '==========================================================' SKIP 2
+CENTER '=========================================================' SKIP 2
 
 BREAK ON MONTH NODUP ON JOB_TYPE NODUP ON EMPLOYEE_ID NODUP ON EMPLOYEE_NAME NODUP
 
