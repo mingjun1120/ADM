@@ -19,11 +19,15 @@ CREATE OR REPLACE PROCEDURE prc_add_overtime_salary(input_month IN NUMBER, input
     otHour NUMBER;
     otMinute NUMBER;
     is_found_rec boolean := FALSE;
+    chkSameID Employee.EmployeeID%TYPE := 'test';
+    latestSal Employee.Salary%TYPE;
 
     CURSOR employee_cursor IS
         SELECT E.EmployeeID, E.EmployeeName, E.Salary AS Salary, J.BasicSalary, A.Remarks, A.Check_Out_Time, A.AttendanceDate 
         FROM Employee E, Attendance A, Job J
-        WHERE E.EmployeeID = A.EmployeeID AND E.JobID = J.JobID AND EXTRACT(MONTH FROM A.AttendanceDate) = input_month AND EXTRACT(YEAR FROM A.AttendanceDate) = input_year;
+        WHERE E.EmployeeID = A.EmployeeID AND E.JobID = J.JobID AND EXTRACT(MONTH FROM A.AttendanceDate) = input_month 
+              AND EXTRACT(YEAR FROM A.AttendanceDate) = input_year
+        ORDER BY E.EmployeeID;
 BEGIN
     IF input_month NOT BETWEEN 1 AND 12 THEN
       RAISE e_invalid_input_month;
@@ -35,32 +39,40 @@ BEGIN
 
     FOR employee_rec IN employee_cursor LOOP
         is_found_rec := TRUE;
+        
+        IF employee_rec.EmployeeID LIKE chkSameID THEN
+            latestSal := v_newSalary;
+        ELSE
+            latestSal := employee_rec.Salary;
+        END IF;
+        
         IF UPPER(employee_rec.Remarks) = 'PRESENT AND WORK OVERTIME' THEN
             DBMS_OUTPUT.PUT_LINE('=============================================');
             DBMS_OUTPUT.PUT_LINE('Employee Name       : ' || employee_rec.EmployeeName || ' (' || employee_rec.EmployeeID || ')');
-            DBMS_OUTPUT.PUT_LINE('Initial Salary (RM) : ' || employee_rec.Salary);
+            DBMS_OUTPUT.PUT_LINE('Initial Salary (RM) : ' || latestSal);
     
             IF employee_rec.Check_Out_Time > '19:00' THEN
-
+    
                 otHour := EXTRACT(HOUR FROM (employee_rec.Check_Out_Time - '19:00'));
                 otMinute := EXTRACT(MINUTE FROM (employee_rec.Check_Out_Time - '19:00'));
-                
+                    
                 IF otHour >= 1 THEN
                     increment := (employee_rec.BasicSalary / 6 / 8) * 1.5 * otHour;
                     DBMS_OUTPUT.PUT_LINE(chr(10) || 'Add RM' || increment || ' due to overtime for ' || otHour || ' hour.' || chr(10));
-
+    
                 ELSIF otMinute >= 30 AND otHour = 0 THEN
-                    increment := (employee_rec.BasicSalary / 6 / 8) * otHour;
-                    DBMS_OUTPUT.PUT_LINE(chr(10) || 'Add RM' || increment || ' due to overtime for ' || otHour || ' minutes.' || chr(10));
+                    increment := (employee_rec.BasicSalary / 6 / 8);
+                    DBMS_OUTPUT.PUT_LINE(chr(10) || 'Add RM' || increment || ' due to overtime for ' || otMinute || ' minutes.' || chr(10));
                 END IF;
-
+    
                 UPDATE Employee
-                SET Salary = employee_rec.Salary + increment
+                SET Salary = latestSal + increment
                 WHERE EmployeeID = employee_rec.EmployeeID;
-                v_newSalary := employee_rec.Salary + increment;
+                v_newSalary := latestSal + increment;
                 
                 DBMS_OUTPUT.PUT_LINE('Final Salary (RM)   : ' || v_newSalary);
                 DBMS_OUTPUT.PUT_LINE('=============================================' || chr(10));
+                chkSameID := employee_rec.EmployeeID;
             END IF;
         END IF;
     END LOOP;
@@ -76,4 +88,14 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE ('The year value must start from 2018!');
 END;
 /
-EXEC prc_add_overtime_salary(3, 2018)
+EXEC prc_add_overtime_salary(2, 2018)
+
+
+
+-- COLUMN Check_Out_Time FORMAT A14
+-- SELECT E.EmployeeID, E.EmployeeName, E.Salary, J.BasicSalary, A.Check_Out_Time, COUNT(EmployeeName) AS TOTAL_OT_DAYS
+-- FROM Employee E, Attendance A, Job J
+-- WHERE E.EmployeeID = A.EmployeeID AND E.JobID = J.JobID AND EXTRACT(MONTH FROM A.AttendanceDate) = 4 
+--     AND EXTRACT(YEAR FROM A.AttendanceDate) = 2018 AND UPPER(A.Remarks) = 'PRESENT AND WORK OVERTIME'
+-- GROUP BY E.EmployeeID, E.EmployeeName, E.Salary, J.BasicSalary,  A.Check_Out_Time
+-- ORDER BY E.EmployeeName;
