@@ -46,7 +46,7 @@ BEGIN
       DBMS_OUTPUT.PUT_LINE(RPAD('Date', 15) || ': ' || RPAD(in_appointmentDate, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('Start Time', 15) || ': ' || RPAD(in_startTime, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('End Time', 15) || ': ' || RPAD(v_EndTime, 10));
-      DBMS_OUTPUT.PUT_LINE(RPAD('Duration', 15) || ': ' || appointment_rec.Duration || ' hour');
+      DBMS_OUTPUT.PUT_LINE(RPAD('Duration', 15) || ': ' || appointment_rec.Duration || ' hour(s)');
    END IF;
 
    CLOSE APP_CURSOR;
@@ -92,41 +92,34 @@ COLUMN Duration        FORMAT '9';
 SELECT * FROM Appointment
 WHERE AppointmentID = 'A10080' OR AppointmentID = 'A10079';
 
+start D:\Text\ADM\Procedure1.sql
+
 ---------------------------------------- Procedure 2 ---------------------------------------------
 
 -- Create Appointment
--- Purpose: Purpose: The purpose of this procedure is to
+-- Purpose: Purpose: The purpose of this procedure is to allow user to make appointment requested
+-- by customer. The user is required to pass in the parameter for validation purposes. For
+-- example, when there are an employee are working on the same day and same time the appointment
+-- is not allowed to be made.
 
--- Purpose: Purpose: The purpose of this procedure is used to update the appointment time. Once
--- the start time has been set, the end time will also be updated based on the
+ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
+ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 
-CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
+CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerID IN VARCHAR2,
                                                     in_appointmentDate IN DATE,
                                                     in_startTime IN TIMESTAMP,
-                                                    in_serviceName IN VARCHAR2,
-                                                    in_petName IN VARCHAR2,
+                                                    in_serviceID IN VARCHAR2,
+                                                    in_petID IN VARCHAR2,
                                                     in_empID IN VARCHAR2) IS
-   EMP_ABSENT EXCEPTION;
+   APPOINTMENT_CONFLICT EXCEPTION;
    INVALID_OPERATING_TIME EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
    INVALID_WEEKDAY EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_WEEKDAY, -20002);
  
-   -- Appointment
    v_duration Appointment.Duration%TYPE;
    v_endTime  Appointment.EndTime%TYPE;
-
-   -- Customer
-   v_custID   Customer.CustomerID%TYPE;
-   v_custName Customer.CustomerName%TYPE;
-
-   -- Pet
-   v_petID   Pet.PetID%TYPE;
-   v_petName Pet.PetName%TYPE;
-
-   -- Services
-   v_serID   Services.ServiceID%TYPE;
-   v_sername Services.ServiceName%TYPE;
+   v_serID    Services.ServiceID%TYPE;
 
    CURSOR APP_CURSOR IS
       SELECT *
@@ -137,53 +130,46 @@ CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerName IN VARCHAR2,
 BEGIN
    OPEN APP_CURSOR;
    FETCH APP_CURSOR INTO appointment_rec;
-
-   SELECT CustomerID, CustomerName INTO v_custID, v_custName
-   FROM   Customer
-   WHERE  CustomerName = in_customerName;
-   DBMS_OUTPUT.PUT_LINE('Customer');
-
-   SELECT PetID, PetName INTO v_petID, v_petName
-   FROM   Pet
-   WHERE  PetName = in_petName;
-   DBMS_OUTPUT.PUT_LINE('Pet');
-
-   SELECT ServiceID, ServiceName INTO v_serID, v_sername
-   FROM   Services
-   WHERE  ServiceName = in_serviceName;
-   DBMS_OUTPUT.PUT_LINE('Services');
        
-   IF v_sername = 'Dental Scaling' THEN
+   IF v_serID = 'SER001' THEN
       v_duration := 1;
    ELSE
       v_duration := 2;
    END IF;
    
    v_endTime := in_startTime + v_duration / 24;
-   -- DBMS_OUTPUT.PUT_LINE(in_startTime);
-   -- DBMS_OUTPUT.PUT_LINE(v_duration);
-   -- DBMS_OUTPUT.PUT_LINE(v_endTime);
 
    WHILE APP_CURSOR%FOUND
    LOOP
-      IF appointment_rec.StartTime = in_startTime THEN
-         IF appointment_rec.EmployeeID = in_empID THEN
-            IF appointment_rec.StartTime BETWEEN appointment_rec.StartTime AND v_endTime THEN
-               DBMS_OUTPUT.PUT_LINE('Appointment cannot be made');
-            END IF;
+      IF appointment_rec.EmployeeID = in_empID THEN
+         IF appointment_rec.StartTime = in_startTime THEN
+            -- DBMS_OUTPUT.PUT_LINE('This is same time');
+            RAISE APPOINTMENT_CONFLICT;
+         -- ELSIF TO_TIMESTAMP(in_startTime, 'HH24:MI') > TO_TIMESTAMP(appointment_rec.StartTime, 'HH24:MI') AND
+         --       TO_TIMESTAMP(in_startTime, 'HH24:MI') < TO_TIMESTAMP(appointment_rec.EndTime, 'HH24:MI') THEN
+         ELSIF (in_startTime > appointment_rec.StartTime AND
+               in_startTime < appointment_rec.EndTime) OR 
+               (v_endTime > appointment_rec.StartTime AND
+               v_endTime < appointment_rec.EndTime) THEN
+            -- DBMS_OUTPUT.PUT_LINE('Appointment cannot be made');
+            -- DBMS_OUTPUT.PUT_LINE('??????????????????????????');
+            -- DBMS_OUTPUT.PUT_LINE('This is between time');
+            RAISE APPOINTMENT_CONFLICT;
+         -- ELSE
+         --    DBMS_OUTPUT.PUT_LINE('In Start Time: ' || in_startTime);
+         --    DBMS_OUTPUT.PUT_LINE('Appointment ID: ' || appointment_rec.AppointmentID);
+         --    DBMS_OUTPUT.PUT_LINE('Date: ' || appointment_rec.AppointmentDate);
+         --    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || appointment_rec.EmployeeID);
+         --    DBMS_OUTPUT.PUT_LINE('Start Time: ' || appointment_rec.StartTime);
+         --    DBMS_OUTPUT.PUT_LINE('End Time: ' || appointment_rec.EndTime);
+         --    DBMS_OUTPUT.PUT_LINE('====================================');      
          END IF;
       END IF;
-
-      DBMS_OUTPUT.PUT_LINE('Appointment ID: ' || appointment_rec.AppointmentID);
-      DBMS_OUTPUT.PUT_LINE('Date: ' || appointment_rec.AppointmentDate);
-      DBMS_OUTPUT.PUT_LINE('Employee ID: ' || appointment_rec.EmployeeID);
-      DBMS_OUTPUT.PUT_LINE('Start Time: ' || appointment_rec.StartTime);
-      DBMS_OUTPUT.PUT_LINE('====================================');
       FETCH APP_CURSOR INTO appointment_rec;
    END LOOP;
 
    INSERT INTO Appointment (AppointmentID, CustomerID, ServiceID, PetID, EmployeeID, AppointmentDate, StartTime, EndTime, Duration)
-   VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, v_custID, v_serID, v_petID, in_empID, in_appointmentDate, in_startTime, v_endTime, v_duration);
+   VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, in_customerID, in_serviceID, in_petID, in_empID, in_appointmentDate, in_startTime, v_endTime, v_duration);
    
    DBMS_OUTPUT.PUT_LINE('==================================');
    DBMS_OUTPUT.PUT_LINE('Appointment Is Sucessfully Created');
@@ -192,8 +178,9 @@ BEGIN
    DBMS_OUTPUT.PUT_LINE(RPAD('Date', 15) || ': ' || RPAD(in_appointmentDate, 10));
    DBMS_OUTPUT.PUT_LINE(RPAD('Start Time', 15) || ': ' || RPAD(in_startTime, 10));
    DBMS_OUTPUT.PUT_LINE(RPAD('End Time', 15) || ': ' || RPAD(v_endTime, 10));
-   DBMS_OUTPUT.PUT_LINE(RPAD('Duration', 15) || ': ' || v_duration || ' hour');
+   DBMS_OUTPUT.PUT_LINE(RPAD('Duration', 15) || ': ' || v_duration || ' hour(s)');
    DBMS_OUTPUT.PUT_LINE(RPAD('Employee ID', 15) || ': ' || RPAD(in_empID, 10));
+   DBMS_OUTPUT.PUT_LINE(RPAD('Pet ID', 15) || ': ' || RPAD(in_petID, 10));
 
    CLOSE APP_CURSOR;
 
@@ -213,12 +200,18 @@ BEGIN
          DBMS_OUTPUT.PUT_LINE('+NOT OPERATING DAY+');
          DBMS_OUTPUT.PUT_LINE('+++++++++++++++++++');
          DBMS_OUTPUT.PUT_LINE('Operating days is from Monday to Friday');
+      WHEN APPOINTMENT_CONFLICT THEN
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+APPOINTMENT CONFLICT+');
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('Appointment conflicts with others');
 END;
 /
 
 SET SERVEROUTPUT ON
-EXEC PRC_CREATE_APPOINTMENT('Milly Harrision', TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'Grooming','Wong Choi', 'E001');
-EXEC PRC_CREATE_APPOINTMENT('Archy Krule', TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'Grooming','Boonie', 'E001');
+EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET1001', 'E001');
+EXEC PRC_CREATE_APPOINTMENT('C1004', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER002','PET1002', 'E001');
+EXEC PRC_CREATE_APPOINTMENT('C1006', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER003','PET1003', 'E002');
 
 SET LINESIZE 120
 SET PAGESIZE 140
@@ -237,8 +230,4 @@ COLUMN Duration        FORMAT '9';
 
 SELECT * FROM Appointment;
 
-INSERT INTO Appointment VALUES ('A'||APPOINTMENT_SEQ.NEXTVAL, 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('30-07-2018', 'DD-MM-YYYY'), '12:00', '14:00', 2);
-
-
-
---       J.JOBPOSITION = 'Pet Grommer'
+start D:\Text\ADM\Procedure2.sql

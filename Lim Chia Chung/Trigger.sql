@@ -37,16 +37,43 @@ END;
 
 INSERT INTO Appointment VALUES ('A10081', 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('23-08-2021', 'DD-MM-YYYY'), '09:00', '12:00', 2);
 
+start D:\Text\ADM\Trigger1.sql
+
 ---------------------------------------- Trigger 2 ---------------------------------------------
 
--- Validate Appointment
--- Purpose: The purpose of this trigger is to ensure that the appointment is inserted with 
--- appropriate information.
+-- Validate the Availability of Appointment
+-- Purpose: The purpose of this trigger is to ensure that the appointment inserted has sufficient
+-- information.
 
-CREATE OR REPLACE TRIGGER TRG_VALIDATE_APPOINTMENT
+-- DROP TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY;
+CREATE OR REPLACE TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY
 BEFORE INSERT ON Appointment
 FOR EACH ROW
+DECLARE
+   v_custID   Customer.CustomerID%TYPE;
+   v_petID    Pet.PetID%TYPE;
+   v_serID    Services.ServiceID%TYPE;
 BEGIN
-   
+   SELECT CustomerID INTO v_custID
+   FROM   Customer
+   WHERE  CustomerID = :NEW.CustomerID;
+
+   SELECT PetID INTO v_petID
+   FROM   Pet
+   WHERE  PetID = :NEW.PetID;
+
+   SELECT ServiceID INTO v_serID
+   FROM   Services
+   WHERE  ServiceID = :NEW.ServiceID;
+
+   EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+No Records Found+');
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('Please insert this specific details before making appointment');
 END;
 /
+
+start D:\Text\ADM\Trigger2.sql
