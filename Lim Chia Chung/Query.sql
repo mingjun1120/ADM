@@ -5,7 +5,7 @@
 -- on month. This query is helpful in operational level which allow staff to monitor the 
 -- appointment by sorting the month.
 
-SET LINESIZE 150
+SET LINESIZE 180
 SET PAGESIZE 140
 CLEAR COLUMNS
 CLEAR BREAKS
@@ -22,9 +22,9 @@ PROMPT 'Enter Month (MM): '
 COLUMN AppointmentDate FORMAT A16      HEADING 'Appointment Date';
 COLUMN AppointmentID   FORMAT A15      HEADING 'Appointment ID';
 COLUMN CustomerID      FORMAT A10      HEADING 'Customer ID';
-COLUMN CustomerName    FORMAT A13      HEADING 'Customer Name';
+COLUMN CustomerName    FORMAT A18      HEADING 'Customer Name';
 COLUMN ContactNo       FORMAT A11      HEADING 'Contact No.';
-COLUMN PetID           FORMAT A6       HEADING 'Pet ID';
+COLUMN PetID           FORMAT A7       HEADING 'Pet ID';
 COLUMN PetName         FORMAT A10      HEADING 'Pet Name';
 COLUMN ServiceID       FORMAT A10      HEADING 'Service ID';
 COLUMN ServiceName     FORMAT A15      HEADING 'Service Name';
@@ -48,7 +48,7 @@ start D:\Text\ADM\Query1.sql
 
 ----------------------------------------- Query 2 -----------------------------------------------
 
--- Analysis Of The Number of Appointment(Tactical)
+-- Analysis Of The Number of Appointment (Tactical)
 -- Purpose: The purpose of this query is to discover which month achieves the highest appointment
 -- made by customer. This can be useful for tactical management where this allowed management
 -- level to identify the peak and nadir of the number of appointment, whereby management can
