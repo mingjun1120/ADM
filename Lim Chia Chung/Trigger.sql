@@ -1,12 +1,12 @@
 ---------------------------------------- Trigger 1 ---------------------------------------------
 
--- Validate Operating Hour
+-- Validate Operating Hour and Day
 -- Purpose: The purpose of this trigger is to ensure that the new appointment time is within
 -- operating time which is between 10am to 4pm. The appointment will no be updated if the time
 -- is out of operating hours.
 
 -- DROP TRIGGER TRG_VALIDATE_OPERATING_HR;
-CREATE OR REPLACE TRIGGER TRG_VALIDATE_OPERATING_HR
+CREATE OR REPLACE TRIGGER TRG_VALIDATE_OPERATING_HR_DAY
 BEFORE INSERT OR UPDATE OF AppointmentDate, StartTime, EndTime ON Appointment
 FOR EACH ROW
 DECLARE
@@ -42,37 +42,54 @@ start D:\Text\ADM\Trigger1.sql
 ---------------------------------------- Trigger 2 ---------------------------------------------
 
 -- Validate the Availability of Appointment
--- Purpose: The purpose of this trigger is to ensure that the appointment inserted has sufficient
--- information.
+-- Purpose: The purpose of this trigger is to ensure that the appointment inserted and updated 
+-- has sufficient information or to prevent human error from user.
 
 -- DROP TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY;
 CREATE OR REPLACE TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY
-BEFORE INSERT ON Appointment
+BEFORE INSERT OR UPDATE ON Appointment
 FOR EACH ROW
 DECLARE
+   INVALID_SERVICE EXCEPTION;
+   NO_PET_FOUND EXCEPTION;
    v_custID   Customer.CustomerID%TYPE;
    v_petID    Pet.PetID%TYPE;
    v_serID    Services.ServiceID%TYPE;
+
+   CURSOR PET_CURSOR IS
+      SELECT *
+      FROM   Pet
+      WHERE  PetID = :NEW.PetID;
+
+   CURSOR SER_CURSOR IS
+      SELECT *
+      FROM   Services
+      WHERE  ServiceID = :NEW.ServiceID;
+   
+   pet_rec      PET_CURSOR%ROWTYPE;
+   services_rec SER_CURSOR%ROWTYPE;
 BEGIN
-   SELECT CustomerID INTO v_custID
-   FROM   Customer
-   WHERE  CustomerID = :NEW.CustomerID;
 
-   SELECT PetID INTO v_petID
-   FROM   Pet
-   WHERE  PetID = :NEW.PetID;
+   OPEN SER_CURSOR;
+   FETCH SER_CURSOR INTO services_rec;
 
-   SELECT ServiceID INTO v_serID
-   FROM   Services
-   WHERE  ServiceID = :NEW.ServiceID;
+   OPEN PET_CURSOR;
+   FETCH PET_CURSOR INTO pet_rec;
 
-   EXCEPTION
-      WHEN NO_DATA_FOUND THEN
-         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
-         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
-         DBMS_OUTPUT.PUT_LINE('+No Records Found+');
-         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
-         DBMS_OUTPUT.PUT_LINE('Please insert this specific details before making appointment');
+   IF SER_CURSOR%NOTFOUND THEN
+      RAISE_APPLICATION_ERROR(-20004, 'Invalid Service');
+   ELSE
+      SELECT CustomerID INTO v_custID
+      FROM   Customer
+      WHERE  CustomerID = :NEW.CustomerID;
+
+      IF PET_CURSOR%NOTFOUND THEN
+         RAISE_APPLICATION_ERROR(-20003, 'No Pet Found');
+      END IF;
+   END IF;
+
+   CLOSE SER_CURSOR;
+   CLOSE PET_CURSOR;
 END;
 /
 

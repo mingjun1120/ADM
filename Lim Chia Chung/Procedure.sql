@@ -11,8 +11,10 @@ CREATE OR REPLACE PROCEDURE PRC_UPDATE_APPOINTMENT_DATE_TIME(in_appointmentID VA
                                                              in_appointmentDate DATE,
                                                              in_startTime TIMESTAMP) IS
    NO_APPOINTMENT EXCEPTION;
+   
    INVALID_OPERATING_TIME EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
+
    INVALID_WEEKDAY EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_WEEKDAY, -20002);
 
@@ -112,11 +114,19 @@ CREATE OR REPLACE PROCEDURE PRC_CREATE_APPOINTMENT (in_customerID IN VARCHAR2,
                                                     in_petID IN VARCHAR2,
                                                     in_empID IN VARCHAR2) IS
    APPOINTMENT_CONFLICT EXCEPTION;
+
    INVALID_OPERATING_TIME EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_OPERATING_TIME, -20001);
+   
    INVALID_WEEKDAY EXCEPTION;
    PRAGMA EXCEPTION_INIT(INVALID_WEEKDAY, -20002);
- 
+
+   NO_PET_FOUND EXCEPTION;
+   PRAGMA EXCEPTION_INIT(NO_PET_FOUND, -20003);
+
+   INVALID_SERVICE EXCEPTION;
+   PRAGMA EXCEPTION_INIT(INVALID_SERVICE, -20004);
+
    v_duration Appointment.Duration%TYPE;
    v_endTime  Appointment.EndTime%TYPE;
    v_serID    Services.ServiceID%TYPE;
@@ -186,10 +196,20 @@ BEGIN
 
    EXCEPTION
       WHEN NO_DATA_FOUND THEN
-         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
-         DBMS_OUTPUT.PUT_LINE('+No Records Found+');
-         DBMS_OUTPUT.PUT_LINE('++++++++++++++++++');
-         DBMS_OUTPUT.PUT_LINE('Please insert this specific details before making appointment');
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+No Customer Found+');
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('Please register the as a new customer and pet before making appointment');
+      WHEN NO_PET_FOUND THEN
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+No Pet Found+');
+         DBMS_OUTPUT.PUT_LINE('++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('Please register the pet before making appointment');
+      WHEN INVALID_SERVICE THEN
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('+Invalid Service+');
+         DBMS_OUTPUT.PUT_LINE('+++++++++++++++++');
+         DBMS_OUTPUT.PUT_LINE('This is not a valid service');
       WHEN INVALID_OPERATING_TIME THEN
          DBMS_OUTPUT.PUT_LINE('++++++++++++++++++++');
          DBMS_OUTPUT.PUT_LINE('+NOT OPERATING HOUR+');
@@ -209,9 +229,16 @@ END;
 /
 
 SET SERVEROUTPUT ON
-EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET1001', 'E001');
+-- Existing customer
+EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET1009', 'E001');
 EXEC PRC_CREATE_APPOINTMENT('C1004', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER002','PET1002', 'E001');
 EXEC PRC_CREATE_APPOINTMENT('C1006', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER003','PET1003', 'E002');
+
+-- New customer
+EXEC PRC_CREATE_APPOINTMENT('C'||CUSTOMER_SEQ.NEXTVAL, TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET'||PET_SEQ.NEXTVAL, 'E001');
+
+-- Existing customer with new pet or other pet
+EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET'||PET_SEQ.NEXTVAL, 'E001');
 
 SET LINESIZE 120
 SET PAGESIZE 140
