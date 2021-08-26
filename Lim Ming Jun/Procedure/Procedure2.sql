@@ -49,6 +49,8 @@ BEGIN
         IF UPPER(employee_rec.Remarks) = 'PRESENT AND WORK OVERTIME' THEN
             DBMS_OUTPUT.PUT_LINE('=============================================');
             DBMS_OUTPUT.PUT_LINE('Employee Name       : ' || employee_rec.EmployeeName || ' (' || employee_rec.EmployeeID || ')');
+            DBMS_OUTPUT.PUT_LINE('Check-Out Time      : ' || CONCAT(employee_rec.Check_Out_Time, CASE WHEN EXTRACT(hour FROM employee_rec.Check_Out_Time) BETWEEN 0 AND 12 THEN ' AM' ELSE ' PM' END));
+            DBMS_OUTPUT.PUT_LINE('Attendance Date     : ' || employee_rec.AttendanceDate);
             DBMS_OUTPUT.PUT_LINE('Initial Salary (RM) : ' || latestSal);
     
             IF employee_rec.Check_Out_Time > '19:00' THEN
@@ -59,12 +61,12 @@ BEGIN
                 IF otHour >= 1 THEN
                     increment := (employee_rec.BasicSalary / 6 / 8) * 1.5 * otHour;
                     DBMS_OUTPUT.PUT_LINE(chr(10) || 'Add RM' || increment || ' due to overtime for ' || otHour || ' hour.' || chr(10));
-    
+                
                 ELSIF otMinute >= 30 AND otHour = 0 THEN
                     increment := (employee_rec.BasicSalary / 6 / 8);
                     DBMS_OUTPUT.PUT_LINE(chr(10) || 'Add RM' || increment || ' due to overtime for ' || otMinute || ' minutes.' || chr(10));
                 END IF;
-    
+                
                 UPDATE Employee
                 SET Salary = latestSal + increment
                 WHERE EmployeeID = employee_rec.EmployeeID;
@@ -88,8 +90,8 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE ('The year value must start from 2018!');
 END;
 /
-EXEC prc_add_overtime_salary(2, 2018)
-
+EXEC prc_add_overtime_salary(3, 2018)
+-- Feb, March
 
 
 -- COLUMN Check_Out_Time FORMAT A14
