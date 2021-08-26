@@ -5,7 +5,7 @@
 -- on month. This query is helpful in operational level which allow staff to monitor the 
 -- appointment by sorting the month.
 
-SET LINESIZE 150
+SET LINESIZE 180
 SET PAGESIZE 140
 CLEAR COLUMNS
 CLEAR BREAKS
