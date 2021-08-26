@@ -5,14 +5,14 @@ CREATE OR REPLACE PROCEDURE prc_claim_voucher
   NO_RECORD EXCEPTION;
 
 CURSOR TRANS_CURSOR IS
-       SELECT t.customerNumber, c.customerName, t.transactionNumber, t.date_paid
+       SELECT t.customerID, c.customerName, t.transactionsID, t.date_paid
        FROM transactions t, customers c
-       WHERE t.transactionNumber = in_transactionNumber AND c.customerNumber = t.customerNumber;
+       WHERE t.transactionsID = in_transactionNumber AND c.customerID = t.customerID;
 	
 CURSOR transDetail_cursor IS
        SELECT d.productCode, d.quantity, p.msrp
        from transaction_details d, products p
-       where transactioNnumber = in_transactionNumber AND d.productCode = p.productCode;
+       where transactionsID = in_transactionNumber AND d.productCode = p.productCode;
 
  ordertotal number(11,2);  
  divTotal number(11,2);
@@ -58,7 +58,7 @@ BEGIN
 				DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------------------');
 				DBMS_OUTPUT.PUT_LINE('	                  Voucher Failed to Redeem');
 				DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------------------');
-				DBMS_OUTPUT.PUT_LINE('Customer No   : ' || LPAD(trans_rec.customerNumber,15) || RPAD(' ',16, ' ') || 'Transaction Date : ' || trans_rec.date_paid);
+				DBMS_OUTPUT.PUT_LINE('Customer No   : ' || LPAD(trans_rec.customerID,15) || RPAD(' ',16, ' ') || 'Transaction Date : ' || trans_rec.date_paid);
 				DBMS_OUTPUT.PUT_LINE('Customer Name : ' || LPAD(trans_rec.customerName,15));	
 				dbms_output.put_line(chr(10));
 				DBMS_OUTPUT.PUT_LINE('Total amount of this transaction is '||TRIM(TO_CHAR(ordertotal,'999G999G999D99')));
@@ -67,7 +67,7 @@ BEGIN
 				DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------------------');
 				DBMS_OUTPUT.PUT_LINE('	                  Voucher Redeemed Successfully');
 				DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------------------');
-				DBMS_OUTPUT.PUT_LINE('Customer No   : ' || LPAD(trans_rec.customerNumber,15) || RPAD(' ',16, ' ') || 'Transaction Date : ' || trans_rec.date_paid);
+				DBMS_OUTPUT.PUT_LINE('Customer No   : ' || LPAD(trans_rec.customerID,15) || RPAD(' ',16, ' ') || 'Transaction Date : ' || trans_rec.date_paid);
 				DBMS_OUTPUT.PUT_LINE('Customer Name : ' || LPAD(trans_rec.customerName,15));	
 				dbms_output.put_line(chr(10));
 				DBMS_OUTPUT.PUT_LINE('Total amount of this transaction(' || in_transactionNumber || ') is '||TRIM(TO_CHAR(ordertotal,'999G999G999D99')));
