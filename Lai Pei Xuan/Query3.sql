@@ -1,4 +1,4 @@
--- Profit of Each Products (Strategy)
+-- Profit of Each Products(Strategy)
 CREATE OR REPLACE VIEW Cal_Profit_View AS
 SELECT ProductCode, (MSRP - BuyPrice) AS "Profit"
 FROM Product 

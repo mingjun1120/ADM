@@ -1,4 +1,4 @@
---Procedure Low Quantity In Stock
+--Procedure Low Quantity In Stock(1)
 SET SERVEROUTPUT ON
 
 SET LINESIZE 400
