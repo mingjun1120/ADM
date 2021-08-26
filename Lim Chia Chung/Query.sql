@@ -48,7 +48,7 @@ start D:\Text\ADM\Query1.sql
 
 ----------------------------------------- Query 2 -----------------------------------------------
 
--- Analysis Of The Number of Appointment(Tactical)
+-- Analysis Of The Number of Appointment (Tactical)
 -- Purpose: The purpose of this query is to discover which month achieves the highest appointment
 -- made by customer. This can be useful for tactical management where this allowed management
 -- level to identify the peak and nadir of the number of appointment, whereby management can
