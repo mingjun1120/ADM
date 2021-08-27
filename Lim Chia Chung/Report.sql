@@ -168,8 +168,11 @@ EXEC PRC_HIGHEST_APPOINTMENT_CUSTOMERS;
 
 ---------------------------------------- Report 3 ---------------------------------------------
 
--- On Demand Report of
--- Purpose: The purpose of this report is to 
+-- On Demand Report of Appointment Revenue Per Day
+-- Purpose: The purpose of this report is to emphasize the revenue earned during the given date. 
+-- This is advantageous in terms of on demand report which indicate the highest and lowest revenue 
+-- earned during the given period with the accumulation of total revenue. Furthermore, this report 
+-- allows the manager to analyze the revenue of appointment
 
 SET LINESIZE 120
 SET PAGESIZE 600
