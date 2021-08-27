@@ -1,7 +1,7 @@
 CREATE OR REPLACE PROCEDURE prc_CustTotalSpentSummary IS
 
 CURSOR CUST_CURSOR IS
-SELECT customerNumber, customerName, date_of_birth, "TOTAL_SPENT"
+SELECT customerID, customerName, date_of_birth, "TOTAL_SPENT"
 FROM TOTAL_SPENT_VIEW
 WHERE rownum <= 10;
 
@@ -21,7 +21,7 @@ BEGIN
 	
 	FOR cust_rec IN CUST_CURSOR LOOP
 	
-		DBMS_OUTPUT.PUT_LINE(RPAD(cust_rec.customerNumber, 10, ' ')||
+		DBMS_OUTPUT.PUT_LINE(RPAD(cust_rec.customerID, 10, ' ')||
 		RPAD(cust_rec.customerName, 17, ' ')||
 
 		LPAD(cust_rec.date_of_birth, 15, ' ') ||

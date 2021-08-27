@@ -1,6 +1,6 @@
 -- Trigger 1
 CREATE OR REPLACE TRIGGER trg_ValidateReturnQty
-AFTER UPDATE OF quantity ON transaction_details
+AFTER UPDATE OF quantity ON transactionsDetails
 FOR EACH ROW
 
 DECLARE
@@ -14,7 +14,7 @@ BEGIN
 	IF(v_returnQuantity>=0) THEN
 		DBMS_OUTPUT.PUT_LINE('The quantity of ' || :old.productCode || ' from ' || v_quantity 
 			|| ' has been updated to ' || v_returnQuantity || ' ' 
-			|| 'in ' || 'transaction(' || :old.transactionNumber || ')' );
+			|| 'in ' || 'transaction(' || :old.transactionsID || ')' );
 	
 	ELSE
 		RAISE_APPLICATION_ERROR(-20000, 'The return quantity should not more than the quantity bought.');
@@ -24,7 +24,7 @@ END;
 
 -- Trigger 2
 create or replace trigger trg_upd_prodqty_sold
-after insert on transaction_details
+after insert on transactionsDetails
 for each row
 
 declare
