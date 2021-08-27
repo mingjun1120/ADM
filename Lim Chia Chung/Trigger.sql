@@ -5,7 +5,6 @@
 -- operating time which is between 10am to 4pm. The appointment will no be updated if the time
 -- is out of operating hours.
 
--- DROP TRIGGER TRG_VALIDATE_OPERATING_HR;
 CREATE OR REPLACE TRIGGER TRG_VALIDATE_OPERATING_HR_DAY
 BEFORE INSERT OR UPDATE OF AppointmentDate, StartTime, EndTime ON Appointment
 FOR EACH ROW
@@ -45,7 +44,6 @@ start D:\Text\ADM\Trigger1.sql
 -- Purpose: The purpose of this trigger is to ensure that the appointment inserted and updated 
 -- has sufficient information or to prevent human error from user.
 
--- DROP TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY;
 CREATE OR REPLACE TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY
 BEFORE INSERT OR UPDATE ON Appointment
 FOR EACH ROW
