@@ -22,7 +22,6 @@ DECLARE
    v_JobType Job.JobPosition%TYPE;
    v_got_error BOOLEAN := FALSE;
    v_allowSalary Employee.Salary%TYPE;
-   e_salary_too_high EXCEPTION;
    
 BEGIN
     
@@ -54,23 +53,23 @@ BEGIN
     
     IF v_got_error = TRUE THEN
         
-        RAISE_APPLICATION_ERROR(-20101, 'Salary too high!');
-        RAISE e_salary_too_high;
+        RAISE_APPLICATION_ERROR(-20101, 'Salary too high! Please promote this employee to a higher seniority level to increase his/her salary. Thank You!');
         
     ELSE
         DBMS_OUTPUT.PUT_LINE('Salary updated! The new salary is RM ' || :new.Salary || '.');
         DBMS_OUTPUT.PUT_LINE('=============================================');
     END IF;
-    
-EXCEPTION
-    WHEN e_salary_too_high THEN
-        DBMS_OUTPUT.PUT_LINE(chr(10) || '===================================================================================================');
-        DBMS_OUTPUT.PUT_LINE ('This employee "' || :old.EmployeeID || '" new salary exceeds the allowable range of his position (RM' || v_allowSalary || ').'
-            || chr(10) ||'Please promote this employee to a higher seniority level to increase his/her salary. Thank You!' 
-            || chr(10) ||'This employee "' || :old.EmployeeID || '" current salary will remain in RM ' || :old.Salary);
-        DBMS_OUTPUT.PUT_LINE('===================================================================================================');
 END;
 /
 UPDATE Employee
 SET Salary = 10000
 WHERE EmployeeID = 'E001';
+
+
+-- EXCEPTION
+--     WHEN e_salary_too_high THEN
+--         DBMS_OUTPUT.PUT_LINE(chr(10) || '===================================================================================================');
+--         DBMS_OUTPUT.PUT_LINE ('This employee "' || :old.EmployeeID || '" new salary exceeds the allowable range of his position (RM' || v_allowSalary || ').'
+--             || chr(10) ||'Please promote this employee to a higher seniority level to increase his/her salary. Thank You!' 
+--             || chr(10) ||'This employee "' || :old.EmployeeID || '" current salary will remain in RM ' || :old.Salary);
+--         DBMS_OUTPUT.PUT_LINE('===================================================================================================');
