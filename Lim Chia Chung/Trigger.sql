@@ -36,6 +36,9 @@ END;
 
 -- INSERT INTO Appointment VALUES ('A10081', 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('23-08-2021', 'DD-MM-YYYY'), '09:00', '12:00', 2);
 
+-- Trigger (No Changes Made)
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('13:00', 'HH24:MI'));
+
 ---------------------------------------- Trigger 2 ---------------------------------------------
 
 -- Validate the Availability of Appointment
@@ -88,5 +91,8 @@ BEGIN
    CLOSE PET_CURSOR;
 END;
 /
+
+-- Trigger (Invalid Service)
+EXEC PRC_CREATE_APPOINTMENT('C1038', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER020','PET1011', 'E001');
 
 start D:\Text\ADM\Trigger.sql
