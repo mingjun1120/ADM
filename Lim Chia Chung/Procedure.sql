@@ -4,6 +4,14 @@
 -- Purpose: Purpose: The purpose of this procedure is used to update the appointment time. Once
 -- the start time has been set, the end time will also be updated based on the duration.
 
+SET LINESIZE 120
+SET PAGESIZE 600
+CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
+
 ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 
@@ -72,17 +80,15 @@ END;
 /
 
 SET SERVEROUTPUT ON
-EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10079', TO_DATE('20-08-2021', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'));
-EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_TIMESTAMP('20:00', 'HH24:MI'));
-EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10081', TO_TIMESTAMP('09:00', 'HH24:MI'));
 
-SET LINESIZE 120
-SET PAGESIZE 140
-CLEAR COLUMNS
-CLEAR BREAKS
-CLEAR COMPUTES
-CLEAR BUFFER
-TTITLE OFF
+-- Success
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10079', TO_DATE('30-07-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'));
+
+-- Error (No Changes Made)
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('13:00', 'HH24:MI'));
+
+-- Error (No Appointment Found)
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10081', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('09:00', 'HH24:MI'));
 
 COLUMN AppointmentDate FORMAT A16;
 COLUMN AppointmentID   FORMAT A15;
@@ -103,6 +109,14 @@ start D:\Text\ADM\Procedure1.sql
 -- by customer. The user is required to pass in the parameter for validation purposes. For
 -- example, when there are an employee are working on the same day and same time the appointment
 -- is not allowed to be made.
+
+SET LINESIZE 120
+SET PAGESIZE 140
+CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
 
 ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
@@ -153,26 +167,12 @@ BEGIN
    LOOP
       IF appointment_rec.EmployeeID = in_empID THEN
          IF appointment_rec.StartTime = in_startTime THEN
-            -- DBMS_OUTPUT.PUT_LINE('This is same time');
             RAISE APPOINTMENT_CONFLICT;
-         -- ELSIF TO_TIMESTAMP(in_startTime, 'HH24:MI') > TO_TIMESTAMP(appointment_rec.StartTime, 'HH24:MI') AND
-         --       TO_TIMESTAMP(in_startTime, 'HH24:MI') < TO_TIMESTAMP(appointment_rec.EndTime, 'HH24:MI') THEN
          ELSIF (in_startTime > appointment_rec.StartTime AND
                in_startTime < appointment_rec.EndTime) OR 
                (v_endTime > appointment_rec.StartTime AND
                v_endTime < appointment_rec.EndTime) THEN
-            -- DBMS_OUTPUT.PUT_LINE('Appointment cannot be made');
-            -- DBMS_OUTPUT.PUT_LINE('??????????????????????????');
-            -- DBMS_OUTPUT.PUT_LINE('This is between time');
-            RAISE APPOINTMENT_CONFLICT;
-         -- ELSE
-         --    DBMS_OUTPUT.PUT_LINE('In Start Time: ' || in_startTime);
-         --    DBMS_OUTPUT.PUT_LINE('Appointment ID: ' || appointment_rec.AppointmentID);
-         --    DBMS_OUTPUT.PUT_LINE('Date: ' || appointment_rec.AppointmentDate);
-         --    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || appointment_rec.EmployeeID);
-         --    DBMS_OUTPUT.PUT_LINE('Start Time: ' || appointment_rec.StartTime);
-         --    DBMS_OUTPUT.PUT_LINE('End Time: ' || appointment_rec.EndTime);
-         --    DBMS_OUTPUT.PUT_LINE('====================================');      
+            RAISE APPOINTMENT_CONFLICT;   
          END IF;
       END IF;
       FETCH APP_CURSOR INTO appointment_rec;
@@ -231,22 +231,16 @@ END;
 SET SERVEROUTPUT ON
 -- Existing customer
 EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET1009', 'E001');
+
+-- Error (Conflict)
 EXEC PRC_CREATE_APPOINTMENT('C1004', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER002','PET1002', 'E001');
 EXEC PRC_CREATE_APPOINTMENT('C1006', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER003','PET1003', 'E002');
 
--- New customer
+-- Error (New Customer)
 EXEC PRC_CREATE_APPOINTMENT('C'||CUSTOMER_SEQ.NEXTVAL, TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET'||PET_SEQ.NEXTVAL, 'E001');
 
--- Existing customer with new pet or other pet
+-- Error (Existing customer with new pet or other pet)
 EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET'||PET_SEQ.NEXTVAL, 'E001');
-
-SET LINESIZE 120
-SET PAGESIZE 140
-CLEAR COLUMNS
-CLEAR BREAKS
-CLEAR COMPUTES
-CLEAR BUFFER
-TTITLE OFF
 
 COLUMN AppointmentDate FORMAT A16;
 COLUMN AppointmentID   FORMAT A15;
