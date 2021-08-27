@@ -5,6 +5,8 @@ create or replace procedure prc_update_transaction (in_transactionsID IN VARCHAR
  	v_newQty NUMBER(3);	
 	NO_RECORD EXCEPTION;
 	-- EXCEED_DAYS EXCEPTION;
+	invalid_qty_exception EXCEPTION;
+	PRAGMA EXCEPTION_INIT(invalid_qty_exception, -20201);	
 	exceed_qty_exception EXCEPTION;
 	PRAGMA EXCEPTION_INIT(exceed_qty_exception, -20200);
 	
@@ -49,8 +51,8 @@ BEGIN
 		-- 	CLOSE TRANS_CURSOR;
 		-- 	RAISE EXCEED_DAYS;
 		-- ELSE
-		-- exec prc_update_transaction('T10016', 'P1047', 5)	
-		-- select * from product where productCode = 'P1002';
+		-- exec prc_update_transaction('T10016', 'P1047', 2)	
+		-- select * from product where productCode = 'P1047';
 			v_newQty := quantity_rec.QuantityInStock - in_quantity; 
 			UPDATE product  
 			SET quantityinstock = v_newQty
@@ -85,6 +87,10 @@ BEGIN
 		WHEN exceed_qty_exception THEN	
 			DBMS_OUTPUT.PUT_LINE('================================================================================');
 			DBMS_OUTPUT.PUT_LINE('Invalid return quantity input. The return quantity should not more than the bought quantity!');
+			DBMS_OUTPUT.PUT_LINE('================================================================================');
+		WHEN invalid_qty_exception THEN	
+			DBMS_OUTPUT.PUT_LINE('================================================================================');
+			DBMS_OUTPUT.PUT_LINE('Invalid quantity input. The quantity not be negative or more than 999!');
 			DBMS_OUTPUT.PUT_LINE('================================================================================');
 END;
 /
