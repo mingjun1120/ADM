@@ -10,7 +10,7 @@ CREATE TABLE Product
  MSRP                NUMBER(7,2)  NOT NULL,
 PRIMARY KEY(ProductCode),
 CONSTRAINT chk_prod_code CHECK (SUBSTR(ProductCode, 1, 1) = 'P'),
-CONSTRAINT CHK_Quantity CHECK (quantityInStock > 0),
+-- CONSTRAINT CHK_Quantity CHECK (quantityInStock > 0),
 CONSTRAINT CHK_buyPrice CHECK (buyPrice > 0),
 CONSTRAINT CHK_MSRP CHECK (MSRP > 0)
 );

@@ -28,7 +28,7 @@ FROM customer c, transactions t, transactionsDetails d, product p
 WHERE t.TransactionsID = '&v_transNo' AND c.CustomerID = t.CustomerID AND t.TransactionsID = d.TransactionsID AND d.productCode = p.productCode
 GROUP BY t.transactionsID,t.date_paid,c.CustomerID,c.customerName,p.productCode,p.productName,d.quantity,d.priceEach
 ORDER BY t.transactionsID;
-
+-- t.TransactionsID = '&v_transNo'
 
 -- Query 3 Total Spent with service and product
 COLUMN "CustomerID" FORMAT A10;
@@ -42,11 +42,11 @@ COLUMN "DATE_PAID" FORMAT A15;
 COLUMN "TOTAL_AMOUNT" FORMAT 99999.99;
 BREAK ON CustomerName SKIP 1;
 COMPUTE SUM LABEL 'TOTAL' OF TOTAL_AMOUNT ON CustomerName;
-SELECT t.date_paid "Date Paid", c.CustomerID, c.customerName,p.productCode, p.productName, d.priceEach,d.quantity,s.serviceName,s.serviceCharge "SERVICE CHARGE", TDV.TOTAL_AMOUNT + s.serviceCharge AS "TOTAL_AMOUNT_SPENT"
+SELECT t.transactionsID,t.date_paid "Date Paid", c.CustomerID, c.customerName,p.productCode, p.productName, d.priceEach,d.quantity,d.priceEach* d.quantity "SubTotal",s.serviceName,s.serviceCharge "SERVICE CHARGE", 1.1 * s.serviceCharge "SERVICE CHARGE AFTER SST", TDV.TOTAL_AMOUNT + (1.1*s.serviceCharge) AS "TOTAL_AMOUNT_SPENT"
 FROM customer c, transactions t, transactionsDetails d, product p, Appointment a, Services S, TRANS_DAY_VIEW TDV
 WHERE t.TransactionsID = '&v_transNo' AND TDV.TransactionsID = t.TransactionsID AND  c.CustomerID = t.CustomerID AND c.CustomerID = a.CustomerID AND a.AppointmentDate = t.date_paid
       AND t.TransactionsID = d.TransactionsID AND d.productCode = p.productCode AND a.ServiceID = s.ServiceID
       AND t.date_paid = a.AppointmentDate
-GROUP BY t.date_paid, c.CustomerID,c.customerName,p.productCode, p.productName, d.priceEach,d.quantity,s.serviceName,s.serviceCharge,TDV.TOTAL_AMOUNT
+GROUP BY t.transactionsID,t.date_paid, c.CustomerID,c.customerName,p.productCode, p.productName, d.priceEach,d.quantity,s.serviceName,s.serviceCharge,TDV.TOTAL_AMOUNT
 ORDER BY t.TransactionsID DESC;
 
