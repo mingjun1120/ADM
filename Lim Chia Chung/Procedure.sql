@@ -1,7 +1,7 @@
 ---------------------------------------- Procedure 1 ---------------------------------------------
 
 -- Update The Appointment Date And Time
--- Purpose: Purpose: The purpose of this procedure is used to update the appointment time. Once
+-- Purpose: The purpose of this procedure is used to update the appointment time. Once
 -- the start time has been set, the end time will also be updated based on the duration.
 
 SET LINESIZE 120
@@ -43,15 +43,14 @@ BEGIN
       RAISE NO_APPOINTMENT;
    ELSE
       v_EndTime := in_startTime + appointment_rec.Duration / 24;
-      DBMS_OUTPUT.PUT_LINE(v_EndTime);
 
       UPDATE Appointment
       SET    AppointmentDate = in_appointmentDate, StartTime = in_startTime, EndTime = v_EndTime
       WHERE  AppointmentID = in_appointmentID;
 
-      DBMS_OUTPUT.PUT_LINE('=======================================');
-      DBMS_OUTPUT.PUT_LINE('Appointment Records Sucessfully Updated');
-      DBMS_OUTPUT.PUT_LINE('=======================================');
+      DBMS_OUTPUT.PUT_LINE('========================================');
+      DBMS_OUTPUT.PUT_LINE('Appointment Records Successfully Updated');
+      DBMS_OUTPUT.PUT_LINE('========================================');
       DBMS_OUTPUT.PUT_LINE(RPAD('Appointment ID', 15) || ': ' || RPAD(appointment_rec.AppointmentID, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('Date', 15) || ': ' || RPAD(in_appointmentDate, 10));
       DBMS_OUTPUT.PUT_LINE(RPAD('Start Time', 15) || ': ' || RPAD(in_startTime, 10));
@@ -84,11 +83,17 @@ SET SERVEROUTPUT ON
 -- Success
 EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10079', TO_DATE('30-07-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('12:00', 'HH24:MI'));
 
--- Error (No Changes Made)
+-- Trigger (No Changes Made) 
 EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('13:00', 'HH24:MI'));
 
 -- Error (No Appointment Found)
 EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10081', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('09:00', 'HH24:MI'));
+
+-- Error (Not Operating Hour)
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('09:00', 'HH24:MI'));
+
+-- Error (Not Operating Day)
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_DATE('22-08-2021', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'));
 
 COLUMN AppointmentDate FORMAT A16;
 COLUMN AppointmentID   FORMAT A15;
@@ -105,7 +110,7 @@ start D:\Text\ADM\Procedure1.sql
 ---------------------------------------- Procedure 2 ---------------------------------------------
 
 -- Create Appointment
--- Purpose: Purpose: The purpose of this procedure is to allow user to make appointment requested
+-- Purpose: The purpose of this procedure is to allow user to make appointment requested
 -- by customer. The user is required to pass in the parameter for validation purposes. For
 -- example, when there are an employee are working on the same day and same time the appointment
 -- is not allowed to be made.
@@ -185,12 +190,14 @@ BEGIN
    DBMS_OUTPUT.PUT_LINE('Appointment Is Sucessfully Created');
    DBMS_OUTPUT.PUT_LINE('==================================');
    DBMS_OUTPUT.PUT_LINE(RPAD('Appointment ID', 15) || ': ' || RPAD('A'||APPOINTMENT_SEQ.CURRVAL, 10));
+   DBMS_OUTPUT.PUT_LINE(RPAD('Customer ID', 15) || ': ' || RPAD(in_customerID, 10));
+   DBMS_OUTPUT.PUT_LINE(RPAD('Pet ID', 15) || ': ' || RPAD(in_petID, 10));
+   DBMS_OUTPUT.PUT_LINE(RPAD('Service ID', 15) || ': ' || RPAD(in_serviceID, 10));
+   DBMS_OUTPUT.PUT_LINE(RPAD('Employee ID', 15) || ': ' || RPAD(in_empID, 10));
    DBMS_OUTPUT.PUT_LINE(RPAD('Date', 15) || ': ' || RPAD(in_appointmentDate, 10));
    DBMS_OUTPUT.PUT_LINE(RPAD('Start Time', 15) || ': ' || RPAD(in_startTime, 10));
    DBMS_OUTPUT.PUT_LINE(RPAD('End Time', 15) || ': ' || RPAD(v_endTime, 10));
    DBMS_OUTPUT.PUT_LINE(RPAD('Duration', 15) || ': ' || v_duration || ' hour(s)');
-   DBMS_OUTPUT.PUT_LINE(RPAD('Employee ID', 15) || ': ' || RPAD(in_empID, 10));
-   DBMS_OUTPUT.PUT_LINE(RPAD('Pet ID', 15) || ': ' || RPAD(in_petID, 10));
 
    CLOSE APP_CURSOR;
 
@@ -229,12 +236,15 @@ END;
 /
 
 SET SERVEROUTPUT ON
--- Existing customer
-EXEC PRC_CREATE_APPOINTMENT('C1001', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET1009', 'E001');
+
+-- Success (Existing Customer)
+EXEC PRC_CREATE_APPOINTMENT('C1038', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET1011', 'E001');
+
+-- Success (Diffirent employee handled in same time)
+EXEC PRC_CREATE_APPOINTMENT('C1006', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER003','PET1003', 'E002');
 
 -- Error (Conflict)
 EXEC PRC_CREATE_APPOINTMENT('C1004', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER002','PET1002', 'E001');
-EXEC PRC_CREATE_APPOINTMENT('C1006', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('14:00', 'HH24:MI'), 'SER003','PET1003', 'E002');
 
 -- Error (New Customer)
 EXEC PRC_CREATE_APPOINTMENT('C'||CUSTOMER_SEQ.NEXTVAL, TO_DATE('17-03-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER002','PET'||PET_SEQ.NEXTVAL, 'E001');
