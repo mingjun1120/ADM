@@ -34,9 +34,7 @@ BEGIN
 END;
 /
 
-INSERT INTO Appointment VALUES ('A10081', 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('23-08-2021', 'DD-MM-YYYY'), '09:00', '12:00', 2);
-
-start D:\Text\ADM\Trigger1.sql
+-- INSERT INTO Appointment VALUES ('A10081', 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('23-08-2021', 'DD-MM-YYYY'), '09:00', '12:00', 2);
 
 ---------------------------------------- Trigger 2 ---------------------------------------------
 
@@ -91,4 +89,4 @@ BEGIN
 END;
 /
 
-start D:\Text\ADM\Trigger2.sql
+start D:\Text\ADM\Trigger.sql

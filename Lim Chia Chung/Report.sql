@@ -96,6 +96,8 @@ END;
 SET SERVEROUTPUT ON
 EXEC PRC_SERVICE_PERFORMANCE_REPORT;
 
+start D:\Text\ADM\Report1.sql
+
 ---------------------------------------- Report 2 ---------------------------------------------
 
 -- Summary Report of Top 10 Customers With The Highest Appointments
@@ -165,6 +167,8 @@ END;
 
 SET SERVEROUTPUT ON
 EXEC PRC_HIGHEST_APPOINTMENT_CUSTOMERS;
+
+start D:\Text\ADM\Report2.sql
 
 ---------------------------------------- Report 3 ---------------------------------------------
 
@@ -272,3 +276,5 @@ EXEC PRC_APPOINTMENT_REVENUE_PER_DAY(TO_DATE('15-03-2018', 'DD-MM-YYYY'), TO_DAT
 -- Error
 EXEC PRC_APPOINTMENT_REVENUE_PER_DAY(TO_DATE('15-04-2018', 'DD-MM-YYYY'), TO_DATE('15-03-2018', 'DD-MM-YYYY'));
 EXEC PRC_APPOINTMENT_REVENUE_PER_DAY(TO_DATE('31-03-2018', 'DD-MM-YYYY'), TO_DATE('15-03-2018', 'DD-MM-YYYY'));
+
+start D:\Text\ADM\Report3.sql
