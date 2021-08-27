@@ -1,4 +1,4 @@
--- Purchase Transaction Details
+-- Purchase Transaction Details(Tactical)
 CREATE OR REPLACE VIEW Cal_Total_Amt_View AS
 SELECT PT.PurchaseTransID, SUM(PTD.Quantity * P.BuyPrice) AS "Total Amount"
 FROM Product P, Supplier S, PurchaseTrans PT, PurchaseTransDetails PTD

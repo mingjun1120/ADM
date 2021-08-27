@@ -118,5 +118,6 @@ INSERT INTO Customer VALUES ('C1098', 'Gare Rice', 'M', '011-9192021', 'gare@gma
 INSERT INTO Customer VALUES ('C1099', 'Hunter Stark', 'M', '013-9818221', 'hunter@gmail.com', TO_DATE('21-07-2003', 'DD-MM-YYYY'), 'C-14/30 Amara Residensi, Jalan Raintree Utama', 68100, 'Batu Caves', 'Selangor');
 INSERT INTO Customer VALUES ('C1100', 'Thurstan Brolin', 'M', '019-9305622', 'thurstan@gmail.com', TO_DATE('21-07-2001', 'DD-MM-YYYY'), 'A-10/12 Amara Residensi, Jalan Raintree Utama', 68100, 'Batu Caves', 'Selangor');
 INSERT INTO Customer VALUES ('C1101', 'Lorrayne Alexander', 'F', '011-5900172', 'lorrayne@gmail.com', TO_DATE('25-05-2000', 'DD-MM-YYYY'), 'C-2-8, Jalan Vista Mutiara 1, Tsi Business Park', 52000, 'Kepong Baru', 'Kuala Lumpur');
+
 -- 101 records
 SELECT COUNT(*) FROM Customer;

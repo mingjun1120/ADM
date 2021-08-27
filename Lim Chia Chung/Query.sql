@@ -30,9 +30,9 @@ COLUMN ServiceID       FORMAT A10      HEADING 'Service ID';
 COLUMN ServiceName     FORMAT A15      HEADING 'Service Name';
 COLUMN ServiceCharge   FORMAT '990.90' HEADING 'Charge (RM)';
 
-TTITLE CENTER '============================================================' SKIP 1 -
-CENTER 'Customer Appointment Details Based On Month' SKIP 1 -
-CENTER '============================================================' SKIP 2 -
+TTITLE LEFT '                              ============================================================' SKIP 1 -
+LEFT '                                      Customer Appointment Details Based On Month' SKIP 1 -
+LEFT '                              ============================================================' SKIP 2 -
 
 SELECT   A.AppointmentDate, A.AppointmentID, A.CustomerID, C.CustomerName, C.ContactNo,
          A.PetID, P.PetName, A.ServiceID, S.ServiceName, S.ServiceCharge
@@ -64,9 +64,9 @@ TTITLE OFF
 
 COLUMN 'Appointment Month' FORMAT A15;
 
-TTITLE LEFT '=====================================' SKIP 1 -
-LEFT 'Analysis Of The Number of Appointment' SKIP 1 -
-LEFT '=====================================' SKIP 2 -
+TTITLE LEFT '       =====================================' SKIP 1 -
+LEFT '       Analysis Of The Number of Appointment' SKIP 1 -
+LEFT '       =====================================' SKIP 2 -
 
 BREAK ON "Appointment Year"
 SELECT   EXTRACT(YEAR FROM AppointmentDate) AS "Appointment Year",
@@ -98,9 +98,9 @@ COLUMN ServiceID     FORMAT A10 HEADING 'Service ID';
 COLUMN ServiceName   FORMAT A15 HEADING 'Service Name';
 COLUMN ServiceCharge FORMAT '990.90' HEADING 'Price Per Time (RM)';
 
-TTITLE LEFT '==========================' SKIP 1 -
-LEFT 'Service Popularity Summary' SKIP 1 -
-LEFT '==========================' SKIP 2 -
+TTITLE LEFT '                  ==========================' SKIP 1 -
+LEFT '                  Service Popularity Summary' SKIP 1 -
+LEFT '                  ==========================' SKIP 2 -
 
 SELECT   A.ServiceID, S.ServiceName, S.ServiceCharge, COUNT(A.AppointmentID) AS "Total Appointment"
 FROM     Appointment A

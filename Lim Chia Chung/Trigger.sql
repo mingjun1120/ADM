@@ -5,7 +5,6 @@
 -- operating time which is between 10am to 4pm. The appointment will no be updated if the time
 -- is out of operating hours.
 
--- DROP TRIGGER TRG_VALIDATE_OPERATING_HR;
 CREATE OR REPLACE TRIGGER TRG_VALIDATE_OPERATING_HR_DAY
 BEFORE INSERT OR UPDATE OF AppointmentDate, StartTime, EndTime ON Appointment
 FOR EACH ROW
@@ -35,9 +34,10 @@ BEGIN
 END;
 /
 
-INSERT INTO Appointment VALUES ('A10081', 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('23-08-2021', 'DD-MM-YYYY'), '09:00', '12:00', 2);
+-- INSERT INTO Appointment VALUES ('A10081', 'C1010', 'SER001', 'PET004', 'E001', TO_DATE('23-08-2021', 'DD-MM-YYYY'), '09:00', '12:00', 2);
 
-start D:\Text\ADM\Trigger1.sql
+-- Trigger (No Changes Made)
+EXEC PRC_UPDATE_APPOINTMENT_DATE_TIME('A10080', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('13:00', 'HH24:MI'));
 
 ---------------------------------------- Trigger 2 ---------------------------------------------
 
@@ -45,7 +45,6 @@ start D:\Text\ADM\Trigger1.sql
 -- Purpose: The purpose of this trigger is to ensure that the appointment inserted and updated 
 -- has sufficient information or to prevent human error from user.
 
--- DROP TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY;
 CREATE OR REPLACE TRIGGER TRG_VALIDATE_APPOINTMENT_AVAILABILITY
 BEFORE INSERT OR UPDATE ON Appointment
 FOR EACH ROW
@@ -93,4 +92,7 @@ BEGIN
 END;
 /
 
-start D:\Text\ADM\Trigger2.sql
+-- Trigger (Invalid Service)
+EXEC PRC_CREATE_APPOINTMENT('C1038', TO_DATE('30-06-2018', 'DD-MM-YYYY'), TO_TIMESTAMP('15:00', 'HH24:MI'), 'SER020','PET1011', 'E001');
+
+start D:\Text\ADM\Trigger.sql

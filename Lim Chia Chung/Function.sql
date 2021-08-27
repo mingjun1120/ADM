@@ -15,8 +15,6 @@ BEGIN
 END;
 /
 
--- TO_CHAR(TO_DATE( EXTRACT(MONTH FROM PURCHASEDATE), 'MM'), 'MONTH') AS "MONTH NAME"
-
 ---------------------------------------- Function 1 ---------------------------------------------
 
 -- Convert Month To Name
@@ -33,3 +31,5 @@ BEGIN
    RETURN dayName; 
 END;
 /
+
+start D:\Text\ADM\Function.sql
