@@ -1,6 +1,6 @@
 CREATE OR REPLACE PROCEDURE prc_prodCategProfit (in_productType IN VARCHAR)IS
-
---Variable
+-- exec prc_prodCategProfit('Dry Food')
+--Variable 
 v_total_pt_profit NUMBER(7,2);
 NO_PRODUCTTYPE EXCEPTION;
 
@@ -42,6 +42,7 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE('Total net profit for ' || in_productType || ' : ' ||
 		TRIM(TO_CHAR(v_total_pt_profit, '999G999G999D99')));	
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 73, '='));
+
 	END IF;
 	EXCEPTION
 		WHEN NO_PRODUCTTYPE THEN	
