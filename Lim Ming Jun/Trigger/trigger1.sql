@@ -1,3 +1,8 @@
+/*
+   References:
+   https://stackoverflow.com/questions/3015431/oracle-age-calculation-from-date-of-birth-and-today
+*/
+
 -------------------------------------------- Trigger 1: Check Employee Age ----------------------------------------------
 CLEAR COLUMNS
 CLEAR BREAKS
