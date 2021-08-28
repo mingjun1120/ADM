@@ -1,19 +1,19 @@
 CREATE OR REPLACE PROCEDURE prc_CustTotalSpentSummary IS
-
+-- exec prc_CustTotalSpentSummary;
 CURSOR CUST_CURSOR IS
-SELECT customerID, customerName, date_of_birth, "TOTAL_SPENT"
-FROM TOTAL_SPENT_VIEW
+SELECT customerID, customerName,city,"TOTAL_SPENT"
+FROM TOTAL_CUST_SPENT_PROD_VIEW
 WHERE rownum <= 10;
 
 
-v_total_acc_spent NUMBER(6,2);
+v_total_acc_spent NUMBER(7,2);
 
 BEGIN
-	DBMS_OUTPUT.PUT_LINE('Top 10 customers based on total spent');
+	DBMS_OUTPUT.PUT_LINE('Top 10 customers based on total transactions spent (RM)');
 	
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 78, '='));
-	DBMS_OUTPUT.PUT_LINE(RPAD('Cust No', 10, ' ') || RPAD('Name', 15,
-	' ') || LPAD('DOB', 15, ' ') || LPAD('Total Spent', 23, ' '));
+	DBMS_OUTPUT.PUT_LINE(RPAD('Cust No', 10, ' ') || RPAD('Name', 20,
+	' ') || RPAD('  city', 15, ' ') || RPAD('    Total Transactions Spent (RM)', 35, ' ') );
 
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 78, '='));
 	
@@ -23,28 +23,20 @@ BEGIN
 	
 		DBMS_OUTPUT.PUT_LINE(RPAD(cust_rec.customerID, 10, ' ')||
 		RPAD(cust_rec.customerName, 17, ' ')||
-
-		LPAD(cust_rec.date_of_birth, 15, ' ') ||
-
+		-- LPAD(cust_rec.email, 15, ' ') ||
+		-- LPAD(cust_rec.contactNO, 15, ' ') ||
+		-- LPAD(cust_rec.dob, 'dd-mm-yyyy', ' ') ||
+		'     ' ||
+		RPAD(cust_rec.city, 15, ' ') ||
+		'      ' ||
 		LPAD(cust_rec."TOTAL_SPENT", 20, ' '));
 		
 		v_total_acc_spent := v_total_acc_spent + cust_rec."TOTAL_SPENT";
 		
 	END LOOP;
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 78, '='));	
-	DBMS_OUTPUT.PUT_LINE('Total Spent : ' ||
-	TRIM(TO_CHAR(v_total_acc_spent, '999G999G999D99')));
+	DBMS_OUTPUT.PUT_LINE('Total Top 10 Customer Transactions Spent : RM ' ||
+	TRIM(TO_CHAR(v_total_acc_spent, '999G999D99')));
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 78, '='));
 END; 
-/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+/	
