@@ -1,22 +1,22 @@
---exec RPT_PRODUCT_TURNOVER(2018,'Dry Food')
+--exec RPT_PRODUCT_TURNOVER(2018,'Grooming')
 CREATE OR REPLACE PROCEDURE RPT_PRODUCT_TURNOVER(IN_year IN NUMBER,
 IN_productType IN VARCHAR2) IS
 E_NO_RECORD_FOUND EXCEPTION;
 E_TYPE_NOT_FOUND EXCEPTION;
 PRAGMA EXCEPTION_INIT(E_NO_RECORD_FOUND, -20209);
 PRAGMA EXCEPTION_INIT(E_TYPE_NOT_FOUND, -20211);
-v_initialQty NUMBER(5) := 0;
+v_initialQty NUMBER(7) := 0;
 
-v_finalQty NUMBER(5) := 0;
-v_costOfGoods NUMBER(10,2) := 0;
-v_averageStock NUMBER(7,2) := 0;
-v_turnoverRatio NUMBER(5,2) := 0;
-v_totalSold NUMBER(5) := 0;
-v_totalCOG NUMBER(10,2) := 0;
-v_totalTOR NUMBER(5,2) := 0;
-v_indicator CHAR(7);
-v_productCount NUMBER(3) := 0;
-v_averageTOR NUMBER(5,2) := 0;
+v_finalQty NUMBER(7) := 0;
+v_costOfGoods NUMBER(12,2) := 0;
+v_averageStock NUMBER(9,2) := 0;
+v_turnoverRatio NUMBER(7,2) := 0;
+v_totalSold NUMBER(7) := 0;
+v_totalCOG NUMBER(12,2) := 0;
+v_totalTOR NUMBER(7,2) := 0;
+v_indicator CHAR(9);
+v_productCount NUMBER(5) := 0;
+v_averageTOR NUMBER(7,2) := 0;
 CURSOR PRODUCT_CURSOR IS
 SELECT P.productCode productCode, P.productName ProductName, P.msrp
 msrp, P.quantityinstock quantityinstock, P.productType productType, SUM(D.Quantity) AS TotalSold
@@ -111,12 +111,10 @@ BEGIN
 	END IF;
 	EXCEPTION
 		WHEN E_NO_RECORD_FOUND THEN
-		DBMS_OUTPUT.PUT_LINE('-----------------------------------------------
-		------');
+		DBMS_OUTPUT.PUT_LINE('---------------------------------------------------');
 		DBMS_OUTPUT.PUT_LINE('Failed to print report for ' || IN_productType ||
 		' products for ' || IN_year || '.');
-		DBMS_OUTPUT.PUT_LINE('-----------------------------------------------
-		------');
+		DBMS_OUTPUT.PUT_LINE('---------------------------------------------------');
 		DBMS_OUTPUT.PUT_LINE(SQLERRM);
 		WHEN E_TYPE_NOT_FOUND THEN
 		DBMS_OUTPUT.PUT_LINE('--------------------------------');

@@ -1,5 +1,5 @@
-CREATE OR REPLACE PROCEDURE prc_CustTotalSpentSummary (in_fromDate IN DATE, in_toDate IN DATE) IS
 -- exec prc_CustTotalSpentSummary('01-jan-2018','08-jan-2018');
+CREATE OR REPLACE PROCEDURE prc_CustTotalSpentSummary (in_fromDate IN DATE, in_toDate IN DATE) IS
 
 CURSOR CUST_CURSOR IS
 SELECT T.customerID, T.customerName,T.city,T."TOTAL_SPENT",T."TOTAL_SPENT"/TT.Total*100 AS "Contribution"
@@ -38,7 +38,7 @@ BEGIN
 		
 	DBMS_OUTPUT.PUT_LINE('Top 10 customers based on total transactions spent (RM) and Transaction total made per day between two date');
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));	
-	DBMS_OUTPUT.PUT_LINE('Top 10 customers based on total transactions spent (RM)');
+	DBMS_OUTPUT.PUT_LINE('-                       Top 10 customers based on total transactions spent (RM)');
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));
 	DBMS_OUTPUT.PUT_LINE(RPAD('Cust No', 10, ' ') || RPAD('Name', 20,
 	' ') || RPAD('  city', 15, ' ') || RPAD('    Total Transactions Spent (RM)', 35, ' ') 
@@ -69,7 +69,7 @@ BEGIN
 	DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));
 
 		DBMS_OUTPUT.PUT_LINE(chr(10));
-		DBMS_OUTPUT.PUT_LINE('Transaction total made per day ' || 'from ' || in_fromDate || ' to ' || in_toDate);
+		DBMS_OUTPUT.PUT_LINE('-                       Transaction total made per day ' || 'from ' || in_fromDate || ' to ' || in_toDate);
 		
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));
 		DBMS_OUTPUT.PUT_LINE(RPAD('Date', 10, ' ') || LPAD('Transaction total', 20,
