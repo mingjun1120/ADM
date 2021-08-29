@@ -1,5 +1,5 @@
-CREATE OR REPLACE PROCEDURE prc_prodCategProfit (in_productType IN VARCHAR)IS
 -- exec prc_prodCategProfit('Dry Food')
+CREATE OR REPLACE PROCEDURE prc_prodCategProfit (in_productType IN VARCHAR)IS
 --Variable 
 v_total_pt_profit NUMBER(7,2);
 NO_PRODUCTTYPE EXCEPTION;

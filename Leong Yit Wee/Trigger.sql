@@ -53,7 +53,7 @@ v_Quantity123 number(5);
 begin
 	v_Quantity123 := :new.quantity;
     IF(v_Quantity123>=0) then 
-        DBMS_OUTPUT.PUT_LINE('The Transaction Details is inserted successfully!!!');
+        DBMS_OUTPUT.PUT_LINE('The Transaction Details is Updated Successfully!!!');
     else 
 		RAISE_APPLICATION_ERROR(-20201, 'Invalid quantity input. The quantity not be negative or more than 999 !!!'); 
     end if;
