@@ -1,4 +1,4 @@
--- exec prc_update_transaction('T10001','P1002',2)
+-- exec prc_update_transaction('T10001','P1002',1)
 create or replace procedure prc_update_transaction (in_transactionsID IN VARCHAR, in_productCode IN VARCHAR, in_quantity in NUMBER) is
 	
 	--Variables
@@ -46,7 +46,7 @@ BEGIN
 		RAISE NO_RECORD;
 	
 	ELSE
-		-- IF((SYSDATE - trans_rec.date_paid)>7) THEN
+		-- IF((add_months( trunc(sysdate), -12*3 ) - trans_rec.date_paid)>7) THEN
 		-- 	CLOSE PROD_CURSOR;
 		-- 	CLOSE TRANS_CURSOR;
 		-- 	RAISE EXCEED_DAYS;
@@ -65,7 +65,7 @@ BEGIN
 			DBMS_OUTPUT.PUT_LINE(RPAD('Transaction No',20) || ':' || ''|| RPAD(trans_rec.transactionsID,10)||LPAD('UPDATED ON',30)|| ' ' || RPAD(SYSDATE,30));
 			DBMS_OUTPUT.PUT_LINE(chr(10));
 			DBMS_OUTPUT.PUT_LINE(RPAD('Product Code',20) || ':' || ''|| RPAD(prod_rec.productCode,10));
-			DBMS_OUTPUT.PUT_LINE(RPAD('Quantity',20) || ':' || ''|| LPAD(v_newQty,7));
+			DBMS_OUTPUT.PUT_LINE(RPAD('Quantity',20) || ':' || ''|| RPAD(v_newQty,7));
 			DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------------------');
 			
 			CLOSE PROD_CURSOR;

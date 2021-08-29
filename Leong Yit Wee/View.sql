@@ -26,10 +26,10 @@ ORDER BY t.TransactionsID DESC;
 
 -- View 4
 CREATE OR REPLACE VIEW TRANS_DAY_VIEW AS
-SELECT t.date_paid, SUM(d.priceEach * d.quantity) AS "TOTAL_AMOUNT"
+SELECT t.TransactionsID,t.date_paid, SUM(d.priceEach * d.quantity) AS "TOTAL_AMOUNT"
 FROM transactions t, transactionsDetails d
 WHERE t.TransactionsID = d.TransactionsID
-GROUP BY t.date_paid
+GROUP BY t.TransactionsID,t.date_paid
 ORDER BY t.date_paid;
 
 -- View 5
@@ -40,3 +40,9 @@ WHERE c.customerID = t.customerID AND t.transactionsID = d.transactionsID
 GROUP BY c.customerID,c.customerName, c.city,c.email,c.contactNO,c.dob
 ORDER BY "TOTAL_SPENT" DESC;
 
+-- View 6 
+create OR REPLACE VIEW TOTAL_TOTAL_CUST_SPENT_PROD_VIEW AS
+select SUM("TOTAL_SPENT") AS Total
+FROM TOTAL_CUST_SPENT_PROD_VIEW 
+WHERE rownum <= 10
+order by "TOTAL_SPENT" DESC;
