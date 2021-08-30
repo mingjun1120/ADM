@@ -165,7 +165,9 @@ EXCEPTION
     WHEN e_invalid_input_year THEN
         DBMS_OUTPUT.PUT_LINE ('The year value must start from 2018!');
     WHEN data_no_found THEN
-        DBMS_OUTPUT.PUT_LINE ('No data found! Please enter correct year (start from 2018)!');
+        DBMS_OUTPUT.PUT_LINE ('No data found according to your input! Please enter correct year (start from 2018)!');
 END;
 /
+EXEC prc_employee_late_absence_report(2017)
+EXEC prc_employee_late_absence_report(2019)
 EXEC prc_employee_late_absence_report(2018)
