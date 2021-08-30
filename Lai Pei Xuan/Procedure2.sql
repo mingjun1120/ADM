@@ -50,7 +50,7 @@ ELSE
             IF v_qty < 1 
                THEN RAISE Invalid_Qty;
             ELSE 
-                INSERT INTO PurchaseTrans VALUES (v_purchasetrans_id, v_supplierid, SYSDATE);
+                INSERT INTO PurchaseTrans VALUES (v_purchasetrans_id, v_supplierid, SYSDATE - NUMTOYMINTERVAL(3, 'year'));
                 INSERT INTO PurchaseTransDetails VALUES (v_purchasetrans_id, v_product_code, v_qty);
                 UPDATE PRODUCT
                 SET QuantityInStock = v_quantity + v_qty
