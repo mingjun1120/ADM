@@ -79,7 +79,7 @@ BEGIN
     END LOOP;
     
     IF NOT is_found_rec THEN
-        DBMS_OUTPUT.PUT_LINE('No data was found according your entered details!');
+        DBMS_OUTPUT.PUT_LINE('No data was found according to your entered details!');
     END IF;
     
 EXCEPTION

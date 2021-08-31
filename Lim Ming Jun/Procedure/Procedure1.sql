@@ -13,7 +13,7 @@ TTITLE OFF
 CLEAR SCREEN
 SET linesize 90
 SET pagesize 100
-
+SET serveroutput on
 ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 CREATE OR REPLACE PROCEDURE prc_deduct_salary(input_month IN NUMBER, input_year IN NUMBER) AS
     
@@ -93,7 +93,7 @@ BEGIN
     END LOOP;
     
     IF NOT is_found_rec THEN
-        DBMS_OUTPUT.PUT_LINE('No data was found according your entered details!');
+        DBMS_OUTPUT.PUT_LINE('No data was found according to your entered details!');
     END IF;
     
 EXCEPTION
