@@ -10,7 +10,7 @@ SET linesize 80
 SET pagesize 100
 
 TTITLE CENTER '==========================================================' SKIP 1 -
-CENTER 'EMPLOYEE OVERTIME SITUATION' SKIP 1-
+CENTER 'EMPLOYEE OVERTIME ANALYSIS' SKIP 1-
 CENTER '==========================================================' SKIP 2
 
 BREAK ON MONTH ON report
