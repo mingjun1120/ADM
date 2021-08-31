@@ -1,30 +1,27 @@
--- Validate MSRP
-CREATE OR REPLACE TRIGGER TRG_VALIDATE_MSRP
-  AFTER UPDATE OF MSRP
-  ON PRODUCT
+CREATE OR REPLACE TRIGGER TRG_INSERT_TRANS
+  BEFORE INSERT
+  ON PURCHASETRANSDETAILS
   FOR EACH ROW
 
 DECLARE
-v_buy_price NUMBER(7,2);
-v_msrp NUMBER(7,2);
+v_supplierid VARCHAR2(6);
+v_supplier_name VARCHAR2(50);
+v_purchasetransid VARCHAR2(5);
 
 BEGIN
-v_buy_price := :new.BuyPrice;
-v_msrp := :new.MSRP;
 
-IF (v_msrp < v_buy_price) THEN
-    RAISE_APPLICATION_ERROR(-20010,'MSRP Should Not Higher Than Buy Price');
-END IF;
+SELECT ProductVendor INTO v_supplier_name
+FROM Product
+WHERE ProductCode = :new.ProductCode;
 
-DBMS_OUTPUT.PUT_LINE ('Product Code ' || :old.productcode || '  initial of MSRP RM ' || :old.msrp || ' is adjusted to RM ' || :new.MSRP);
+SELECT SupplierID INTO v_supplierid
+FROM Supplier
+WHERE SupplierName = v_supplier_name;
 
-EXCEPTION
-WHEN NO_DATA_FOUND THEN
-  DBMS_OUTPUT.PUT_LINE ('Product Does Not Exist');
+INSERT INTO PurchaseTrans VALUES (:new.PurchaseTransID, v_supplierid, SYSDATE - NUMTOYMINTERVAL(3, 'year'));
+
+DBMS_OUTPUT.PUT_LINE ('Purchase Transaction ID: ' || :new.PurchaseTransID);
+DBMS_OUTPUT.PUT_LINE ('Supplier ID: ' || v_supplierid);
 
 END;
 /
-
-UPDATE PRODUCT
-SET MSRP = 1.00
-WHERE ProductCode = 'P1004';
