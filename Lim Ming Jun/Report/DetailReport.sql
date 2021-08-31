@@ -4,6 +4,17 @@
   https://stackoverflow.com/questions/14702050/valid-date-checks-in-oracle
 */
 
+CLEAR COLUMNS
+CLEAR BREAKS
+CLEAR COMPUTES
+CLEAR BUFFER
+TTITLE OFF
+CLEAR SCREEN
+
+SET linesize 300
+SET pagesize 1000
+
+
 CREATE OR REPLACE FUNCTION TEST_DATE(Date_Input VARCHAR2) RETURN VARCHAR2 IS
     V_DATE DATE;
 BEGIN
@@ -89,21 +100,21 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('+-' || RPAD('--------------------', 15) || '+-' || RPAD('--------------------', 12) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 15) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('-------------------', 19) || '+');
     
     v_grandTotalTransAmt := v_grandTotalTransAmt + v_totalTransAmt;
-    DBMS_OUTPUT.PUT_LINE('| ' || LPAD('GRAND TOTAL ' || ':', 104) || '  ' || LPAD(TO_CHAR(v_grandTotalTransAmt, 'fm9999999.90'), 13) || '       ');
+    DBMS_OUTPUT.PUT_LINE('. ' || LPAD('GRAND TOTAL ' || ':', 104) || '  ' || LPAD(TO_CHAR(v_grandTotalTransAmt, 'fm9999999.90'), 13) || '       ');
     DBMS_OUTPUT.PUT_LINE('.' || LPAD('TOTAL NUMBER OF TRANSACTIONS HANDLED ' || ':', 105) || '  ' || LPAD(v_totalTransaction, 12));
 
 EXCEPTION
     WHEN INVALID_DATE_FORMAT THEN
-        DBMS_OUTPUT.PUT_LINE('Invalid input for the date! Start date and end date format are DD-MM-YYYY! (E.g. 01-01-2018)');
+        DBMS_OUTPUT.PUT_LINE(chr(10) || 'Invalid input for the date! Start date and end date format are DD-MM-YYYY! (E.g. 01-01-2018)');
     
     WHEN e_invalid_input_year THEN
-        DBMS_OUTPUT.PUT_LINE ('The year value must start from 2018!');
+        DBMS_OUTPUT.PUT_LINE (chr(10) || 'The year value must start from 2018!');
      
     WHEN DATA_NO_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('No transactions were found within this timeframe!');
+        DBMS_OUTPUT.PUT_LINE(chr(10) || 'No transactions were found within this timeframe!');
 
     WHEN invalid_endDate_bigger_startDate THEN
-        DBMS_OUTPUT.PUT_LINE('End date must later than the start date!');
+        DBMS_OUTPUT.PUT_LINE(chr(10) || 'End date must later than the start date!');
 END;
 /
 EXEC prc_employee_trans_handled_report('dfava', '09-01-2017')

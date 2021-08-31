@@ -38,7 +38,7 @@ BEGIN
     IF input_year < 2018 THEN
       RAISE e_invalid_input_year;
     END IF;
-
+    
     FOR employee_rec IN employee_cursor LOOP
         is_found_rec := TRUE;
         
@@ -109,11 +109,11 @@ EXEC prc_deduct_salary(3, 2018)
 -- -- Testing
 -- ALTER SESSION SET NLS_TIMESTAMP_FORMAT='HH24:MI';
 -- DECLARE
---   STARTTIME TIMESTAMP := '11:00';
+--   STARTTIME TIMESTAMP := '19:34';
 --   ENDTIME TIMESTAMP := '9:00';
   
 -- BEGIN
---   IF STARTTIME > '10:59' THEN
+--   IF STARTTIME > '19:00' THEN
 --     DBMS_OUTPUT.PUT_LINE(STARTTIME || ' is bigger');
 --   ELSE
 --     DBMS_OUTPUT.PUT_LINE(STARTTIME || ' is smaller');
