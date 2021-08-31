@@ -10,7 +10,7 @@ COLUMN ProductName Heading 'Product Name' FORMAT A60
 COLUMN SupplierID Heading 'Supplier ID' FORMAT A11
 COLUMN SupplierName Heading 'Supplier Name' FORMAT A30
 COLUMN ProductType Heading 'Product Type' FORMAT A20
-COLUMN QuantityInStock Heading 'Quantity In Stock' FORMAT '9999'
+COLUMN QuantityInStock Heading 'Quantity In Stock' FORMAT '999'
 
 BREAK ON ProductType SKIP 1
 
