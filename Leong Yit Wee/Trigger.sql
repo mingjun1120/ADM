@@ -23,25 +23,6 @@ BEGIN
 END;
 / 
 
--- CREATE OR REPLACE TRIGGER trg_deleteProductQty
--- AFTER delete ON transactions
--- FOR EACH ROW
-
--- DECLARE
--- v_quantity number(5);
-
--- BEGIN  
--- 	v_quantity := :old.quantityinstock;
-	
--- 	IF(v_Quantity > 0) THEN
--- 		DBMS_OUTPUT.PUT_LINE('The quantity of ' || :old.productCode || ' is still have  ' || v_quantity 
--- 			|| ' . Please make sure quantity is zero before delete !!! ' || ' ' || ' ' );
-	
--- 	ELSE
--- 		DBMS_OUTPUT.PUT_LINE('This Product is deleted successfully!!!');
--- 	END IF;
--- END;
--- / 
 -- Trigger 2
 create or replace trigger trg_update_vldqty
 AFTER update OF quantity on transactionsDetails
@@ -59,7 +40,6 @@ begin
     end if;
 end;
 /
---INSERT INTO TransactionsDetails VALUES ('T10211', 'P1014', 4, 13.00);
---INSERT INTO TransactionsDetails VALUES ('T10211', 'P1034', 2, 13.00);
+
 --UPDATE transactionsDetails  set quantity = -99 where productCode = 'P1001';
 --select * from transactionsDetails where productcode = 'P1001';
