@@ -13,7 +13,7 @@ CLEAR SCREEN
 
 SET linesize 300
 SET pagesize 1000
-
+SET serveroutput on
 
 CREATE OR REPLACE FUNCTION TEST_DATE(Date_Input VARCHAR2) RETURN VARCHAR2 IS
     V_DATE DATE;
@@ -88,7 +88,7 @@ BEGIN
                              RPAD(empTrans_rec.TransactionsID, 15) || '| ' ||
                              RPAD(empTrans_rec.CustomerID, 12) || '| ' ||
                              RPAD(empTrans_rec.CustomerName, 20) || '| ' ||
-                             LPAD(empTrans_rec.TOTAL_AMOUNT, 19) || ' |'
+                             LPAD(empTrans_rec.TOTAL_AMOUNT, 18) || ' |'
                             );
         v_chkMonth := TO_CHAR(EXTRACT(MONTH FROM empTrans_rec.Date_Paid));
         v_totalTransaction := v_totalTransaction + 1;
