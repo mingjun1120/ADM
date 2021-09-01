@@ -1,4 +1,6 @@
 -- exec prc_claim_product_voucher('T10001') exec prc_claim_product_voucher('T10034')
+-- Product Discount Voucher Redeemed by Customer
+
 CREATE OR REPLACE PROCEDURE prc_claim_product_voucher
 	(in_transactionsID IN VARCHAR) is
 --Variables	

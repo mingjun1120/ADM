@@ -1,4 +1,6 @@
 -- exec prc_CustTotalSpentSummary('01-jan-2018','08-jan-2018');
+-- Summary report of Top 10 Customers with Highest Total Spent at All Time and Sales per day based on 2 specific dates.
+
 CREATE OR REPLACE PROCEDURE prc_CustTotalSpentSummary (in_fromDate IN DATE, in_toDate IN DATE) IS
 
 CURSOR CUST_CURSOR IS

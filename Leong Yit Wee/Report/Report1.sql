@@ -1,4 +1,6 @@
 -- exec prc_prodCategProfit('Dry Food')
+-- Detail report of Profit Gain by Product Category
+
 CREATE OR REPLACE PROCEDURE prc_prodCategProfit (in_productType IN VARCHAR)IS
 --Variable 
 v_total_pt_profit NUMBER(7,2);
