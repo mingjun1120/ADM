@@ -147,7 +147,7 @@ BEGIN
                              LPAD(l_map(allWorker_rec.EmployeeID).emp_late_times, 12) || '| ' ||
                              LPAD(l_map(allWorker_rec.EmployeeID).emp_ontime_rates, 16) || '| ' ||
                              LPAD(l_map(allWorker_rec.EmployeeID).emp_absent_times, 12) || '| ' ||
-                             LPAD(l_map(allWorker_rec.EmployeeID).emp_present_rates, 16) || '| '
+                             LPAD(l_map(allWorker_rec.EmployeeID).emp_present_rates, 16) || ' |'
                             );
         currentJob := l_map(allWorker_rec.EmployeeID).emp_job;          
     END LOOP;
@@ -159,7 +159,7 @@ BEGIN
                          LPAD(sumTotalLate, 12) || '| ' || 
                          LPAD(ROUND(((sumTotalWorkingDays - sumTotalLate)/sumTotalWorkingDays)*100, 2), 16) || '| ' ||
                          LPAD(sumTotalAbsent, 12) || '| ' ||
-                         LPAD(ROUND(((sumTotalWorkingDays - sumTotalAbsent)/sumTotalWorkingDays)*100, 2), 16) || '|'
+                         LPAD(ROUND(((sumTotalWorkingDays - sumTotalAbsent)/sumTotalWorkingDays)*100, 2), 16) || ' |'
                         );
     DBMS_OUTPUT.PUT_LINE('+' || RPAD('--------------------', 15) || '--' || RPAD('--------------------', 11) || '--' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 18) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+');
 EXCEPTION

@@ -169,7 +169,7 @@ BEGIN
                 v_totalYearOTEarned := v_totalYearOTEarned + v_totalOTEarned;
                 v_totalYearFinalSal := v_totalYearFinalSal + v_totalFinalSal;
                 DBMS_OUTPUT.PUT_LINE('+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 12) || '+-' || RPAD('--------------------', 15) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('-----------------', 13) || '+-' || RPAD('----------------------', 22) || '+-' || RPAD('---------------------------', 13) || '+');
-                DBMS_OUTPUT.PUT_LINE('| ' || LPAD(RTRIM(v_chkMonthTXT, ' ') || ' TOTAL' || ':', 73) || '| ' || LPAD(TO_CHAR(v_totalBasic, 'fm9999999.90'), 13) || '| ' || LPAD(TO_CHAR(v_totalOTEarned, 'fm9999999.90'), 22) || '| ' || LPAD(TO_CHAR(v_totalFinalSal, 'fm9999999.90'), 13) || ' |');
+                DBMS_OUTPUT.PUT_LINE('| ' || LPAD(RTRIM(v_chkMonthTXT, ' ') || ' TOTAL' || ':', 73) || '| ' || LPAD(TO_CHAR(v_totalBasic, 'fm9999999.90'), 13) || '| ' || LPAD(TO_CHAR(v_totalOTEarned, 'fm9999999.90'), 22) || '| ' || LPAD(TO_CHAR(v_totalFinalSal, 'fm9999999.90'), 13) || '|');
                 DBMS_OUTPUT.PUT_LINE('+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 12) || '+-' || RPAD('--------------------', 15) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('-----------------', 13) || '+-' || RPAD('----------------------', 22) || '+-' || RPAD('---------------------------', 13) || '+');
             END IF;
         END IF;
@@ -180,7 +180,7 @@ BEGIN
                              LPAD(l_map(v_empID_month).emp_total_ot_days, 20) || '| ' ||
                              LPAD(TO_CHAR(l_map(v_empID_month).emp_basic_sal, 'fm9999999.90'), 13) || '| ' ||
                              LPAD(TO_CHAR(l_map(v_empID_month).emp_total_ot_wages, 'fm9999999.90'), 22) || '| ' ||
-                             LPAD(TO_CHAR(l_map(v_empID_month).emp_final_sal, 'fm9999999.90'), 13) || ' |'
+                             LPAD(TO_CHAR(l_map(v_empID_month).emp_final_sal, 'fm9999999.90'), 13) || '|'
                             );
         v_chkMonth := TO_NUMBER(empOT_each_mem_mon_rec.NOW_MONTH);
         v_chkMonthTXT := empOT_each_mem_mon_rec.TXT_MONTH;
@@ -189,7 +189,7 @@ BEGIN
         v_totalFinalSal := v_totalFinalSal + l_map(v_empID_month).emp_final_sal;
     END LOOP;
     DBMS_OUTPUT.PUT_LINE('+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 12) || '+-' || RPAD('--------------------', 15) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('-----------------', 13) || '+-' || RPAD('----------------------', 22) || '+-' || RPAD('---------------------------', 13) || '+');
-    DBMS_OUTPUT.PUT_LINE('| ' || LPAD(RTRIM(v_chkMonthTXT, ' ') || ' TOTAL' || ':', 73) || '| ' || LPAD(TO_CHAR(v_totalBasic, 'fm9999999.90'), 13) || '| ' || LPAD(TO_CHAR(v_totalOTEarned, 'fm9999999.90'), 22) || '| ' || LPAD(TO_CHAR(v_totalFinalSal, 'fm9999999.90'), 13) || ' |');
+    DBMS_OUTPUT.PUT_LINE('| ' || LPAD(RTRIM(v_chkMonthTXT, ' ') || ' TOTAL' || ':', 73) || '| ' || LPAD(TO_CHAR(v_totalBasic, 'fm9999999.90'), 13) || '| ' || LPAD(TO_CHAR(v_totalOTEarned, 'fm9999999.90'), 22) || '| ' || LPAD(TO_CHAR(v_totalFinalSal, 'fm9999999.90'), 13) || '|');
     DBMS_OUTPUT.PUT_LINE('+-' || RPAD('--------------------', 20) || '--' || RPAD('--------------------', 12) || '--' || RPAD('--------------------', 15) || '--' || RPAD('--------------------', 20) || '+-' || RPAD('-----------------', 13) || '+-' || RPAD('----------------------', 22) || '+-' || RPAD('---------------------------', 13) || '+');
     
     DBMS_OUTPUT.PUT_LINE('. ' || LPAD('=', 59) || '=====================================================================');
