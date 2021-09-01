@@ -23,10 +23,9 @@ CREATE OR REPLACE PROCEDURE prc_add_overtime_salary(input_month IN NUMBER, input
     latestSal Employee.Salary%TYPE;
 
     CURSOR employee_cursor IS
-        SELECT E.EmployeeID, E.EmployeeName, E.Salary AS Salary, J.BasicSalary, A.Remarks, A.Check_Out_Time, A.AttendanceDate 
+        SELECT E.EmployeeID, E.EmployeeName, E.Salary AS Salary, J.BasicSalary, A.Remarks, A.Check_In_Time, A.Check_Out_Time, A.AttendanceDate 
         FROM Employee E, Attendance A, Job J
-        WHERE E.EmployeeID = A.EmployeeID AND E.JobID = J.JobID AND EXTRACT(MONTH FROM A.AttendanceDate) = input_month 
-              AND EXTRACT(YEAR FROM A.AttendanceDate) = input_year
+        WHERE E.EmployeeID = A.EmployeeID AND E.JobID = J.JobID AND EXTRACT(MONTH FROM A.AttendanceDate) = input_month AND EXTRACT(YEAR FROM A.AttendanceDate) = input_year
         ORDER BY E.EmployeeID;
 BEGIN
     IF input_month NOT BETWEEN 1 AND 12 THEN
@@ -52,11 +51,11 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('Check-Out Time      : ' || CONCAT(employee_rec.Check_Out_Time, CASE WHEN EXTRACT(hour FROM employee_rec.Check_Out_Time) BETWEEN 0 AND 12 THEN ' AM' ELSE ' PM' END));
             DBMS_OUTPUT.PUT_LINE('Attendance Date     : ' || employee_rec.AttendanceDate);
             DBMS_OUTPUT.PUT_LINE('Initial Salary (RM) : ' || latestSal);
+
+            IF TO_CHAR(employee_rec.Check_Out_Time, 'HH24:MI') > '19:00' THEN
     
-            IF employee_rec.Check_Out_Time > '19:00' THEN
-    
-                otHour := EXTRACT(HOUR FROM (employee_rec.Check_Out_Time - '19:00'));
-                otMinute := EXTRACT(MINUTE FROM (employee_rec.Check_Out_Time - '19:00'));
+                otHour := EXTRACT(HOUR FROM employee_rec.Check_Out_Time) - 19;
+                otMinute := EXTRACT(MINUTE FROM employee_rec.Check_Out_Time);
                     
                 IF otHour >= 1 THEN
                     increment := (employee_rec.BasicSalary / 6 / 8) * 1.5 * otHour;
@@ -80,7 +79,7 @@ BEGIN
     END LOOP;
     
     IF NOT is_found_rec THEN
-        DBMS_OUTPUT.PUT_LINE('No data was found according your entered details!');
+        DBMS_OUTPUT.PUT_LINE('No data was found according to your entered details!');
     END IF;
     
 EXCEPTION

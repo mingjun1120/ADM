@@ -48,13 +48,10 @@ ELSE
           THEN RAISE Invalid_ProductCode;
      ELSE 
             IF v_qty < 1 
-               THEN RAISE Invalid_Qty;
+               THEN RAISE Invalid_ProductCode;
             ELSE 
-                INSERT INTO PurchaseTrans VALUES (v_purchasetrans_id, v_supplierid, SYSDATE);
+                -- INSERT INTO PurchaseTrans VALUES (v_purchasetrans_id, v_supplierid, SYSDATE - NUMTOYMINTERVAL(3, 'year'));
                 INSERT INTO PurchaseTransDetails VALUES (v_purchasetrans_id, v_product_code, v_qty);
-                UPDATE PRODUCT
-                SET QuantityInStock = v_quantity + v_qty
-                WHERE ProductCode = v_product_code;
                 v_total := v_total + (v_buy_price * v_qty);
              END IF;
        END IF; 
@@ -73,18 +70,17 @@ END IF;
 DBMS_OUTPUT.PUT_LINE('------------------------------------------------------------------------------------------------------------------------------------');
 DBMS_OUTPUT.PUT_LINE('Total Price Purchase: ' || TRIM(TO_CHAR(v_total,'9999999999.99')));
 CLOSE PRODUCT_CURSOR;
--- CLOSE PURCHASETRANS_CURSOR;
 
 EXCEPTION
     WHEN PurchaseTransId_Duplicate THEN 
-               DBMS_OUTPUT.PUT_LINE('Purchase Transaction ID duplicate error raise');
-               DBMS_OUTPUT.PUT_LINE('Purchase Transaction ID had been in the existed in the past record');
+         DBMS_OUTPUT.PUT_LINE('Purchase Transaction ID duplicate error raise');
+         DBMS_OUTPUT.PUT_LINE('Purchase Transaction ID had been in the existed in the past record');
      WHEN Invalid_ProductCode THEN
-               DBMS_OUTPUT.PUT_LINE('Invalid Product Code error raise');
-               DBMS_OUTPUT.PUT_LINE('Product Code entered does not existed in the product table');
+          DBMS_OUTPUT.PUT_LINE('Invalid Product Code error raise');
+          DBMS_OUTPUT.PUT_LINE('Product Code entered does not existed in the product table');
      WHEN Invalid_Qty THEN 
-               DBMS_OUTPUT.PUT_LINE('Invalid Quantity error raise');
-               DBMS_OUTPUT.PUT_LINE('Quantity entered cannot less than 1');
+          DBMS_OUTPUT.PUT_LINE('Invalid Quantity error raise');
+          DBMS_OUTPUT.PUT_LINE('Quantity entered cannot less than 1');
 
 
 END;

@@ -21,8 +21,9 @@ ORDER BY P.ProductCode;
 Product_Rec PRODUCT_CURSOR%ROWTYPE;
 
 BEGIN
-DBMS_OUTPUT.PUT_LINE('                   Products Running Low On Stock');
-DBMS_OUTPUT.PUT_LINE('                --------------------------------------------------');
+DBMS_OUTPUT.PUT_LINE(RPAD('*', 60, ' ') || 'Products Running Low On Stock');
+DBMS_OUTPUT.PUT_LINE(RPAD('*', 50, ' ') || '--------------------------------------------------');
+DBMS_OUTPUT.PUT_LINE(chr(10));
 DBMS_OUTPUT.PUT_LINE(RPAD('Product Code', 12) || ' ' || RPAD('Product Name', 60) || ' '|| RPAD('Product Type', 20) || ' ' || LPAD('Supplier ID', 11) || ' ' || RPAD('Supplier Name', 30) || ' ' || LPAD('Quantity In Stock', 20));
 DBMS_OUTPUT.PUT_LINE(RPAD('------------', 12) || ' ' || RPAD('-------------------------------------------------', 60) || ' '|| RPAD('-----------------', 20) || ' ' || LPAD('---------------------', 11) || ' ' || RPAD('-------------------------', 30) || ' ' || LPAD('------------------------------------------', 20));
 

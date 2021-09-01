@@ -12,8 +12,8 @@ CLEAR BUFFER
 TTITLE OFF
 CLEAR SCREEN
 
-SET linesize 260
-SET pagesize 100
+SET linesize 300
+SET pagesize 1000
 
 CREATE OR REPLACE PROCEDURE prc_employee_late_absence_report(year_input NUMBER) AS
    
@@ -125,7 +125,7 @@ BEGIN
     
     DBMS_OUTPUT.PUT_LINE('+' || RPAD('--------------------', 15) || '+-' || RPAD('--------------------', 11) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 18) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+');
     DBMS_OUTPUT.PUT_LINE('|' || RPAD('JOB TYPE', 15) || '| ' || RPAD('EMPLOYEE ID', 11) || '| ' || RPAD('EMPLOYEE NAME', 20) || '| ' || RPAD('TOTAL WORKING DAYS', 18) || '| ' || RPAD('LATE TIMES', 12) || '| ' || RPAD('ON-TIME RATE (%)', 16) || '| ' || RPAD('ABSENT TIMES', 12) || '| ' || RPAD('PRESENT RATE (%)', 16) || '|');
-    DBMS_OUTPUT.PUT_LINE('+' || RPAD('---------------------', 15) || '+-' || RPAD('--------------------', 11) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 18) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+');
+    DBMS_OUTPUT.PUT_LINE('+' || RPAD('--------------------', 15) || '+-' || RPAD('--------------------', 11) || '+-' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 18) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+');
     
     FOR allWorker_rec IN allWorker_cursor LOOP
 
@@ -163,9 +163,11 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('+' || RPAD('--------------------', 15) || '--' || RPAD('--------------------', 11) || '--' || RPAD('--------------------', 20) || '+-' || RPAD('--------------------', 18) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+-' || RPAD('-----------------', 12) || '+-' || RPAD('-----------------', 16) || '+');
 EXCEPTION
     WHEN e_invalid_input_year THEN
-        DBMS_OUTPUT.PUT_LINE ('The year value must start from 2018!');
+        DBMS_OUTPUT.PUT_LINE (chr(10) || 'The year value must start from 2018!');
     WHEN data_no_found THEN
-        DBMS_OUTPUT.PUT_LINE ('No data found! Please enter correct year (start from 2018)!');
+        DBMS_OUTPUT.PUT_LINE (chr(10) || 'No data found according to your input! Please enter correct year (start from 2018)!');
 END;
 /
+EXEC prc_employee_late_absence_report(2017)
+EXEC prc_employee_late_absence_report(2019)
 EXEC prc_employee_late_absence_report(2018)
