@@ -12,7 +12,7 @@ TTITLE OFF
 CLEAR SCREEN
 SET linesize 180
 SET pagesize 100
-
+ALTER SESSION SET NLS_DATE_FORMAT='DD-MM-YYYY';
 CREATE OR REPLACE TRIGGER trg_check_emp_age
 BEFORE INSERT ON Employee
 FOR EACH ROW
@@ -32,4 +32,4 @@ BEGIN
     END IF;
 END;
 /
-INSERT INTO Employee VALUES ('E111', 'J111', 'Tan Xiao Min', 'M', '016-3333567', TO_DATE('18-02-2001', 'DD-MM-YYYY'), TO_DATE('01-03-2018', 'DD-MM-YYYY'), 1800.00, 'tanxm@gmail.com', '33, Jalan Bukit Mewah, 5/7, Bukit Mewah, 59000, Kuala Lumpur');
+INSERT INTO Employee VALUES ('E012', 'J001', 'Tan Xiao Min', 'M', '016-3333567', TO_DATE('18-02-2001', 'DD-MM-YYYY'), TO_DATE('01-03-2018', 'DD-MM-YYYY'), 1800.00, 'tanxm@gmail.com', '33, Jalan Bukit Mewah, 5/7, Bukit Mewah, 59000, Kuala Lumpur');

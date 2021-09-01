@@ -27,15 +27,15 @@ BEGIN
     
     IF (:new.JobID = 'J001') THEN
     
-        IF (:new.Salary > 3600) THEN
+        IF (:new.Salary >= 3700) THEN
             v_got_error := TRUE;
             v_JobType := 'Pet Groomer';
-            v_allowSalary := 3600;
+            v_allowSalary := 3700;
         END IF;
     
     ELSIF (:new.JobID = 'J002') THEN
     
-        IF (:new.Salary > 2600) THEN
+        IF (:new.Salary >= 2600) THEN
             v_got_error := TRUE;
             v_JobType := 'Stock-keeper';
             v_allowSalary := 2600;
@@ -43,10 +43,10 @@ BEGIN
     
     ELSIF (:new.JobID = 'J003') THEN
     
-        IF (:new.Salary > 3000) THEN
+        IF (:new.Salary >= 3100) THEN
             v_got_error := TRUE;
             v_JobType := 'Retailer';
-            v_allowSalary := 3000;
+            v_allowSalary := 3100;
         END IF;
     
     END IF;
@@ -61,9 +61,7 @@ BEGIN
     END IF;
 END;
 /
-UPDATE Employee
-SET Salary = 10000
-WHERE EmployeeID = 'E001';
+UPDATE Employee SET Salary = 4000 WHERE EmployeeID = 'E001';
 
 
 -- EXCEPTION
