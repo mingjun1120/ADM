@@ -1,11 +1,4 @@
 -- Profit of Each Products (Strategy)
-CREATE OR REPLACE VIEW Cal_Profit_View AS
-SELECT ProductCode, (MSRP - BuyPrice) AS "Profit"
-FROM Product 
-ORDER BY ProductCode;
-
-SELECT * FROM Cal_Profit_View;
-
 SET LINESIZE 400
 SET PAGESIZE 100
 
