@@ -42,3 +42,4 @@ FROM EMPLOYEE E, JOB J, Transactions T
 WHERE T.EmployeeID = E.EmployeeID AND J.JobID = E.JobID AND EXTRACT(MONTH FROM T.Date_Paid) = '&input_month'
 GROUP BY TO_CHAR(TO_DATE(EXTRACT(MONTH FROM T.Date_Paid), 'MM'), 'MONTH'), J.JobPosition, E.EmployeeID, E.EmployeeName, T.Date_Paid
 ORDER BY TO_DATE(MONTH, 'MM'), T.Date_Paid;
+

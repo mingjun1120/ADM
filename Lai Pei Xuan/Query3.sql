@@ -1,4 +1,5 @@
 -- Profit of Each Products (Strategy)
+
 SET LINESIZE 400
 SET PAGESIZE 100
 

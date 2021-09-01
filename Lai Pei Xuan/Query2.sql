@@ -1,4 +1,5 @@
 -- Purchase Transaction Details(Tactical)
+
 SET LINESIZE 400
 SET PAGESIZE 100
  

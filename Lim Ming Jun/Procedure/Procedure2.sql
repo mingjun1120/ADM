@@ -92,7 +92,6 @@ END;
 EXEC prc_add_overtime_salary(3, 2018)
 -- Feb, March
 
-
 -- COLUMN Check_Out_Time FORMAT A14
 -- SELECT E.EmployeeID, E.EmployeeName, E.Salary, J.BasicSalary, A.Check_Out_Time, COUNT(EmployeeName) AS TOTAL_OT_DAYS
 -- FROM Employee E, Attendance A, Job J

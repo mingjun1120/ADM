@@ -82,3 +82,4 @@ SELECT ALLLateWorkers.JobPosition,
 FROM ALLLateWorkers
 LEFT JOIN AbsentWorkers ON ALLLateWorkers.EmployeeID = AbsentWorkers.EmployeeID
 ORDER BY ALLLateWorkers.JobPosition ASC, PRESENT_RATE DESC;
+
