@@ -1,5 +1,6 @@
---exec RPT_PRODUCT_TURNOVER(2018,'Grooming')
 -- On Demand Report of Product Turnover Rate
+
+--exec RPT_PRODUCT_TURNOVER(2018,'Grooming')
 
 CREATE OR REPLACE PROCEDURE RPT_PRODUCT_TURNOVER(IN_year IN NUMBER,
 IN_productType IN VARCHAR2) IS

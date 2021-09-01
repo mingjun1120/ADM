@@ -1,3 +1,5 @@
+-- View 1
+
 CREATE OR REPLACE VIEW Cal_Total_Amt_View AS
 SELECT PT.PurchaseTransID, PT.Date_Paid, SUM(PTD.Quantity * P.BuyPrice) AS "Total Amount"
 FROM Product P, Supplier S, PurchaseTrans PT, PurchaseTransDetails PTD

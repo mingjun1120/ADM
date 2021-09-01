@@ -1,3 +1,5 @@
+-- Function 2
+
 CREATE OR REPLACE FUNCTION FIND_OT_WAGES(empJobID VARCHAR2, empID VARCHAR2, entered_month NUMBER, entered_year NUMBER) RETURN NUMBER IS
     
     CURSOR employee_cursor IS

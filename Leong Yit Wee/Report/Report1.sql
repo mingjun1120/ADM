@@ -1,5 +1,6 @@
--- exec prc_prodCategProfit('Dry Food')
 -- Detail report of Profit Gain by Product Category
+
+-- exec prc_prodCategProfit('Dry Food')
 
 CREATE OR REPLACE PROCEDURE prc_prodCategProfit (in_productType IN VARCHAR)IS
 --Variable 

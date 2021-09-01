@@ -1,4 +1,5 @@
 -- Query 1 Check transaction based on transaction date
+
 SET LINESIZE 120
 SET PAGESIZE 140
 CLEAR COLUMNS
@@ -26,6 +27,7 @@ WHERE t.CustomerID = c.CustomerID AND Date_Paid ='&get_transDate'
 ORDER BY t.TransactionsID;
 
 -- Query 2 Total spent of transaction
+
 SET LINESIZE 200
 SET PAGESIZE 80
 CLEAR COLUMNS
@@ -58,6 +60,7 @@ ORDER BY t.transactionsID;
 
 
 -- Query 3 Total Spent with service and product
+
 SET LINESIZE 800
 SET PAGESIZE 400
 CLEAR COLUMNS

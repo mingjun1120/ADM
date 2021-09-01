@@ -1,4 +1,5 @@
 -- List Products Quantity In Stock (Operational)
+
 SET LINESIZE 400
 SET PAGESIZE 100
 

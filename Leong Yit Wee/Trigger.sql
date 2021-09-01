@@ -1,5 +1,7 @@
 -- Trigger 1 check qtyinstock when update stock after transaction
+
 -- exec prc_update_transaction('T10016', 'P1047', 6)
+
 CREATE OR REPLACE TRIGGER trg_ValidateReturnQty
 AFTER UPDATE OF quantityinstock ON product
 FOR EACH ROW

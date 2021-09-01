@@ -4,6 +4,8 @@
   https://stackoverflow.com/questions/14702050/valid-date-checks-in-oracle
 */
 
+-------------------------------------------------------------------- Detailed Report ---------------------------------------------------------
+
 CLEAR COLUMNS
 CLEAR BREAKS
 CLEAR COMPUTES
@@ -117,6 +119,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE(chr(10) || 'End date must later than the start date!');
 END;
 /
+
 EXEC prc_employee_trans_handled_report('dfava', '09-01-2017')
 EXEC prc_employee_trans_handled_report('09-01-2015', '09-01-2018')
 EXEC prc_employee_trans_handled_report('01-12-2018', '09-12-2018')

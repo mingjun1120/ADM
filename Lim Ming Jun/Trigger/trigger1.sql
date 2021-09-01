@@ -4,6 +4,7 @@
 */
 
 -------------------------------------------- Trigger 1: Check Employee Age ----------------------------------------------
+
 CLEAR COLUMNS
 CLEAR BREAKS
 CLEAR COMPUTES

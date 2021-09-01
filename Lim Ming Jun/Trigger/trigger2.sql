@@ -5,6 +5,7 @@ References:
 */
 
 -------------------------------------------- Trigger 2: Validate Employee Salary Limit ----------------------------------------------
+
 CLEAR COLUMNS
 CLEAR BREAKS
 CLEAR COMPUTES

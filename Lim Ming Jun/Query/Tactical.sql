@@ -8,6 +8,7 @@ References:
 
 
 ------------------------------------------ TACTICAL: Select those employees who check-in late of each month ----------------------------------------
+
 CLEAR COLUMNS
 CLEAR BREAKS
 CLEAR COMPUTES
