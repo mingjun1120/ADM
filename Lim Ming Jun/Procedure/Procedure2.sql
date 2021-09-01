@@ -56,7 +56,7 @@ BEGIN
     
                 otHour := EXTRACT(HOUR FROM employee_rec.Check_Out_Time) - 19;
                 otMinute := EXTRACT(MINUTE FROM employee_rec.Check_Out_Time);
-                    
+                
                 IF otHour >= 1 THEN
                     increment := (employee_rec.BasicSalary / 6 / 8) * 1.5 * otHour;
                     DBMS_OUTPUT.PUT_LINE(chr(10) || 'Add RM' || increment || ' due to overtime for ' || otHour || ' hour.' || chr(10));
