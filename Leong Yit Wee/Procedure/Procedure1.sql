@@ -1,11 +1,11 @@
 -- Update the Return of the Quantity of Product Bought
 
--- exec prc_update_transaction('T10016', 'P1047', 2)	
+-- exec prc_update_transaction('T10016', 'P1047', 2)
 -- select * from product where productCode = 'P1047';
 create or replace procedure prc_update_transaction (in_transactionsID IN VARCHAR, in_productCode IN VARCHAR, in_quantity in NUMBER) is
 	
 	--Variables
- 	v_newQty NUMBER(3);	
+ 	v_newQty NUMBER;	
 	NO_RECORD EXCEPTION;
 	-- EXCEED_DAYS EXCEPTION;
 	invalid_qty_exception EXCEPTION;
@@ -66,7 +66,7 @@ BEGIN
 			DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------------------');
 			DBMS_OUTPUT.PUT_LINE('|	                 Transaction Records Updated Successfully                     |');
 			DBMS_OUTPUT.PUT_LINE('================================================================================');
-			DBMS_OUTPUT.PUT_LINE(RPAD('Transaction No',20) || ':' || ''|| RPAD(trans_rec.transactionsID,10)||LPAD('UPDATED ON',30)|| ' ' || RPAD(SYSDATE,30));
+			DBMS_OUTPUT.PUT_LINE(RPAD('Transaction No',20) || ':' || ''|| RPAD(trans_rec.transactionsID,10)||LPAD('UPDATED ON',30)|| ' ' || RPAD(SYSDATE- NUMTOYMINTERVAL(3, 'year'), 30));
 			DBMS_OUTPUT.PUT_LINE(chr(10));
 			DBMS_OUTPUT.PUT_LINE(RPAD('Product Code',20) || ':' || ''|| RPAD(prod_rec.productCode,10));
 			DBMS_OUTPUT.PUT_LINE(RPAD('Quantity',20) || ':' || ''|| RPAD(v_newQty,7));
