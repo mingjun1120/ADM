@@ -42,9 +42,9 @@ COLUMN "CustomerName" FORMAT A15 Heading "Customer Name";
 COLUMN "ProductCode" FORMAT A15 Heading "Product Code";
 COLUMN "ProductName" FORMAT A15 Heading "Product Name";
 COLUMN "Quantity" FORMAT 999 Heading "Quantity";
-COLUMN "PriceEach" FORMAT 999.99 Heading "Price Each";
+COLUMN "PriceEach" FORMAT 999.99 Heading "Price Each (RM)";
 COLUMN "DATE_PAID" FORMAT A15 Heading  "Date Paid";
-COLUMN "TOTAL_AMOUNT" FORMAT 99999.99 Heading "TOTAL_AMOUNT";
+COLUMN "TOTAL_AMOUNT" FORMAT 99999.99 Heading "TOTAL_AMOUNT (RM)";
 
 TTITLE LEFT '                                          ======================================================' SKIP 1 -
 LEFT '                                          Transaction details and subtotal within a transaction ' SKIP 1 -
@@ -76,13 +76,13 @@ COLUMN "CustomerName" FORMAT A15 Heading "Customer Name";
 COLUMN "ProductCode" FORMAT A15 Heading "Product Code";
 COLUMN "ProductName" FORMAT A15 Heading "Product Name";
 COLUMN "Quantity" FORMAT 999 Heading "Quantity";
-COLUMN "PriceEach" FORMAT 999.99 Heading "Price Each";
+COLUMN "PriceEach" FORMAT 999.99 Heading "Price Each (RM)";
 COLUMN "DATE_PAID" FORMAT A15 Heading  "Date Paid";
-COLUMN "TOTAL_AMOUNT_SPENT" FORMAT 99999.99 Heading "TOTAL_AMOUNT_SPENT";
+COLUMN "TOTAL_AMOUNT_SPENT" FORMAT 99999.99 Heading "TOTAL_AMOUNT_SPENT (RM)";
 
-TTITLE LEFT '                                                                    ==============================================================' SKIP 1 -
-LEFT '                                                                    Total Spent Of Customer Within Transaction (Product + Service)' SKIP 1 -
-LEFT '                                                                    ==============================================================' SKIP 2 -
+TTITLE LEFT '                                                                    ==================================================================' SKIP 1 -
+LEFT '                                                                    Total Spent Of Customer (RM) Within Transaction (Product + Service)' SKIP 1 -
+LEFT '                                                                    ==================================================================' SKIP 2 -
 
 BREAK ON CustomerName SKIP 1;
 COMPUTE SUM LABEL 'TOTAL' OF TOTAL_AMOUNT ON CustomerName;

@@ -65,7 +65,7 @@ BEGIN
 				DBMS_OUTPUT.PUT_LINE('Customer Name : ' || LPAD(trans_rec.customerName,15));	
 				dbms_output.put_line(chr(10));
 				DBMS_OUTPUT.PUT_LINE('========================================================================================');
-				DBMS_OUTPUT.PUT_LINE('|Total amount of this transaction is '||TRIM(TO_CHAR(ordertotal,'999G999G999D99'))||RPAD('                                             |',47));
+				DBMS_OUTPUT.PUT_LINE('|Total amount of this transaction is RM '||TRIM(TO_CHAR(ordertotal,'999G999G999D99'))||RPAD('                                          |',51));
 				DBMS_OUTPUT.PUT_LINE('|You are not eligible to redeem the voucher due to insufficient transaction amount made'||RPAD('|',33));
 				DBMS_OUTPUT.PUT_LINE('========================================================================================');
 			ELSE
@@ -76,7 +76,7 @@ BEGIN
 				DBMS_OUTPUT.PUT_LINE('Customer Name : ' || LPAD(trans_rec.customerName,15));	
 				dbms_output.put_line(chr(10));
 				DBMS_OUTPUT.PUT_LINE('========================================================================================');
-				DBMS_OUTPUT.PUT_LINE('|Total amount of this transaction(' || in_transactionsID || ') is '||TRIM(TO_CHAR(ordertotal,'999G999G999D99')) || RPAD('                                  |',40));
+				DBMS_OUTPUT.PUT_LINE('|Total amount of this transaction(' || in_transactionsID || ') is RM '||TRIM(TO_CHAR(ordertotal,'999G999G999D99')) || RPAD('                               |',44));
 				DBMS_OUTPUT.PUT_LINE('|Congratulations, ' || voucher || ' ' || 'voucher(s) earned' || RPAD('                                                 |',50));
 				DBMS_OUTPUT.PUT_LINE('========================================================================================');
 			END IF;
