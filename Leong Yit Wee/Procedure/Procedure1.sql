@@ -1,6 +1,5 @@
 -- Update the Return of the Quantity of Product Bought
 
--- exec prc_update_transaction('T10001asd','P1002',1)
 -- exec prc_update_transaction('T10016', 'P1047', 2)	
 -- select * from product where productCode = 'P1047';
 create or replace procedure prc_update_transaction (in_transactionsID IN VARCHAR, in_productCode IN VARCHAR, in_quantity in NUMBER) is
@@ -76,7 +75,7 @@ BEGIN
 			CLOSE PROD_CURSOR;
 			CLOSE QUANTITY_CURSOR;
 			CLOSE TRANS_CURSOR;
-		END IF;
+		-- END IF;
 		
 	END IF;
 	
