@@ -66,7 +66,7 @@ BEGIN
 		RPAD(UPPER(IN_productType), 20, ' '));
 		DBMS_OUTPUT.PUT_LINE(LPAD('-', 184, '-'));
 		DBMS_OUTPUT.PUT_LINE(RPAD('Product Code', 13, ' ') || RPAD('Product Name                                                     ', 49, ' ') || RPAD('Unit Price', 15, ' ') || RPAD('Initial Qty', 15, ' ') || RPAD('Final Qty', 13, ' ') ||
-		RPAD('Total Sold', 15, ' ') || RPAD('Cost of Goods', 17, ' ') ||
+		RPAD('Total Sold', 15, ' ') || RPAD('Cost of Goods(RM)', 17, ' ') ||
 		RPAD('Average Stock', 20, ' ') || RPAD('Turnover Ratio (times/year)', 27, ' '));
 		DBMS_OUTPUT.PUT_LINE(LPAD('-', 184, '-'));
 		v_totalSold := 0;

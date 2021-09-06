@@ -75,7 +75,7 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE('-                       Transaction total made per day ' || 'from ' || in_fromDate || ' to ' || in_toDate);
 		
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));
-		DBMS_OUTPUT.PUT_LINE(RPAD('Date', 10, ' ') || LPAD('Transaction total', 20,
+		DBMS_OUTPUT.PUT_LINE(RPAD('Date', 10, ' ') || LPAD('Transaction total (RM)', 22,
 		' ') || LPAD('        Contribution (%)           ', 29,' ') || LPAD('Growth (%) ', 17,' '));
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));
 		v_total_acc_trans:=0;
@@ -89,7 +89,7 @@ BEGIN
 			
 		END LOOP;
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));	
-		DBMS_OUTPUT.PUT_LINE('Accumulate transaction total : ' ||
+		DBMS_OUTPUT.PUT_LINE('Accumulate transaction total : RM' ||
 		TRIM(TO_CHAR(v_total_acc_trans, '999G999G999D99')));	
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 107, '='));
 	END IF;

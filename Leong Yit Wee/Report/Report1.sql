@@ -27,8 +27,8 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE('Net profit of each product based on the productType');
 		
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 73, '='));
-		DBMS_OUTPUT.PUT_LINE(RPAD('Product Code', 15, ' ') || LPAD('Profit', 15,
-		' ') || LPAD('Quantity Sold', 20,' ') || LPAD('Net Profit', 21,' '));
+		DBMS_OUTPUT.PUT_LINE(RPAD('Product Code', 15, ' ') || LPAD('Profit (RM)', 15,
+		' ') || LPAD('Quantity Sold', 20,' ') || LPAD('Net Profit (RM)', 21,' '));
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 73, '='));
 		v_total_pt_profit:=0;
 		
@@ -42,7 +42,7 @@ BEGIN
 			
 		END LOOP;
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 73, '='));	
-		DBMS_OUTPUT.PUT_LINE('Total net profit for ' || in_productType || ' : ' ||
+		DBMS_OUTPUT.PUT_LINE('Total net profit for ' || in_productType || ' : RM ' ||
 		TRIM(TO_CHAR(v_total_pt_profit, '999G999G999D99')));	
 		DBMS_OUTPUT.PUT_LINE(LPAD('=', 73, '='));
 
