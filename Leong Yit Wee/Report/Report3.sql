@@ -60,7 +60,7 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE(chr(10));
 
 		DBMS_OUTPUT.PUT_LINE(RPAD('"', 134, ' ') || 'Report generated on : '
-		|| TO_CHAR(CURRENT_DATE, 'DD-MM-YYYY HH:MI:SS') || ' by ' || USER);
+		|| TO_CHAR(CURRENT_DATE - NUMTOYMINTERVAL(3, 'year'), 'DD-MM-YYYY HH:MI:SS') || ' by ' || USER);
 		DBMS_OUTPUT.PUT_LINE(chr(10));
 		DBMS_OUTPUT.PUT_LINE(RPAD('Product Type ', 20, ' ') || ': ' ||
 		RPAD(UPPER(IN_productType), 20, ' '));
