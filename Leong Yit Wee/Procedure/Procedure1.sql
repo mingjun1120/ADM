@@ -1,6 +1,5 @@
 -- Update the Return of the Quantity of Product Bought
 
--- exec prc_update_transaction('T10001asd','P1002',1)
 -- exec prc_update_transaction('T10016', 'P1047', 2)	
 -- select * from product where productCode = 'P1047';
 create or replace procedure prc_update_transaction (in_transactionsID IN VARCHAR, in_productCode IN VARCHAR, in_quantity in NUMBER) is
@@ -8,7 +7,7 @@ create or replace procedure prc_update_transaction (in_transactionsID IN VARCHAR
 	--Variables
  	v_newQty NUMBER(3);	
 	NO_RECORD EXCEPTION;
-	EXCEED_DAYS EXCEPTION;
+	-- EXCEED_DAYS EXCEPTION;
 	invalid_qty_exception EXCEPTION;
 	PRAGMA EXCEPTION_INIT(invalid_qty_exception, -20201);	
 	exceed_qty_exception EXCEPTION;
@@ -50,11 +49,11 @@ BEGIN
 		RAISE NO_RECORD;
 	
 	ELSE
-		IF((add_months( trunc(sysdate), -12*3 ) - trans_rec.date_paid)>7) THEN
-			CLOSE PROD_CURSOR;
-			CLOSE TRANS_CURSOR;
-			RAISE EXCEED_DAYS;
-		ELSE
+		-- IF((add_months( trunc(sysdate), -12*3 ) - trans_rec.date_paid)>7) THEN
+		-- 	CLOSE PROD_CURSOR;
+		-- 	CLOSE TRANS_CURSOR;
+		-- 	RAISE EXCEED_DAYS;
+		-- ELSE
 
 			v_newQty := quantity_rec.QuantityInStock - in_quantity; 
 			UPDATE product  
@@ -76,7 +75,7 @@ BEGIN
 			CLOSE PROD_CURSOR;
 			CLOSE QUANTITY_CURSOR;
 			CLOSE TRANS_CURSOR;
-		END IF;
+		-- END IF;
 		
 	END IF;
 	
@@ -85,10 +84,10 @@ BEGIN
 			DBMS_OUTPUT.PUT_LINE('===========================');
 			DBMS_OUTPUT.PUT_LINE('NO SUCH TRANSACTION RECORD');
 			DBMS_OUTPUT.PUT_LINE('===========================');
-		WHEN EXCEED_DAYS THEN	
-			DBMS_OUTPUT.PUT_LINE('=================================');
-			DBMS_OUTPUT.PUT_LINE('Transaction Already EXCEED 7 DAYS');
-			DBMS_OUTPUT.PUT_LINE('=================================');
+		-- WHEN EXCEED_DAYS THEN	
+		-- 	DBMS_OUTPUT.PUT_LINE('=================================');
+		-- 	DBMS_OUTPUT.PUT_LINE('Transaction Already EXCEED 7 DAYS');
+		-- 	DBMS_OUTPUT.PUT_LINE('=================================');
 		WHEN exceed_qty_exception THEN	
 			DBMS_OUTPUT.PUT_LINE('============================================================================================');
 			DBMS_OUTPUT.PUT_LINE('Invalid return quantity input. The return quantity should not more than the bought quantity!');
