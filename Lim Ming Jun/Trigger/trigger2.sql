@@ -1,4 +1,3 @@
-
 /*
 References:
     https://stackoverflow.com/questions/28888848/how-to-subtract-years-from-sysdate
@@ -62,8 +61,8 @@ BEGIN
     END IF;
 END;
 /
-UPDATE Employee SET Salary = 4000 WHERE EmployeeID = 'E001';
 
+UPDATE Employee SET Salary = 4000 WHERE EmployeeID = 'E001';
 
 -- EXCEPTION
 --     WHEN e_salary_too_high THEN
