@@ -20,7 +20,6 @@ CREATE TABLE Employee
 );
 
 -- CONSTRAINT chk_YearExp CHECK (YearExp < 40 AND YearExp >= 0)
-
 -- Position: Pet Groomer
 INSERT INTO Employee VALUES ('E001', 'J001', 'Yap Kim Chun', 'M', '012-3232450', TO_DATE('08-02-1994', 'DD-MM-YYYY'), TO_DATE('01-01-2018', 'DD-MM-YYYY'), 2900.00, 'yapkc@gmail.com', '20, Jalan Pandan Indah, 4/16, Pandan Indah, 55100, Kuala Lumpur');
 INSERT INTO Employee VALUES ('E002', 'J001', 'Cheong Siong Hou', 'M', '012-4141450', TO_DATE('11-10-1996', 'DD-MM-YYYY'), TO_DATE('01-03-2018', 'DD-MM-YYYY'), 2900.00, 'cheongsh@gmail.com', '22, Jalan Pandan Mewah, 5/12, Pandan Mewah, 55100, Kuala Lumpur');
