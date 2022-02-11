@@ -1,4 +1,4 @@
--- Trigger 2
+---------------------------------------- Trigger 2 ---------------------------------------------
 
 CREATE OR REPLACE TRIGGER TRG_UPDATE_QTYINSTOCK
   AFTER INSERT

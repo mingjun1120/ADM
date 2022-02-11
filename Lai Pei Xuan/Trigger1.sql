@@ -1,4 +1,4 @@
--- Trigger 1
+---------------------------------------- Trigger 1 ---------------------------------------------
 
 CREATE OR REPLACE TRIGGER TRG_INSERT_TRANS
   BEFORE INSERT
