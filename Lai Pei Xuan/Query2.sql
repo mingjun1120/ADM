@@ -1,3 +1,5 @@
+----------------------------------------- Query 2 -----------------------------------------------
+
 -- Purchase Transaction Details(Tactical)
 
 SET LINESIZE 400

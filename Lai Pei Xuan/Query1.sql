@@ -1,3 +1,5 @@
+----------------------------------------- Query 1 -----------------------------------------------
+
 -- List Products Quantity In Stock (Operational)
 
 SET LINESIZE 400

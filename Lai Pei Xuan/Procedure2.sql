@@ -1,3 +1,5 @@
+---------------------------------------- Procedure 2 ---------------------------------------------
+
 -- Add Purchase Transaction 
 
 SET SERVEROUTPUT ON
