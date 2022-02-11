@@ -1,4 +1,4 @@
--- Function 1
+---------------------------------------- Function 1 ---------------------------------------------
 
 CREATE OR REPLACE FUNCTION TEST_DATE(Date_Input VARCHAR2) RETURN VARCHAR2 IS
     V_DATE DATE;
