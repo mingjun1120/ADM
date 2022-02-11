@@ -128,7 +128,6 @@ CREATE OR REPLACE PROCEDURE prc_employee_ot_report(year_input NUMBER) AS
         ORDER BY EXTRACT(MONTH FROM A.AttendanceDate), J.JobPosition ASC;
     
 BEGIN
-    
     IF year_input < 2018 THEN
        RAISE e_invalid_input_year;
     ELSIF year_input > EXTRACT(YEAR FROM (SYSDATE - NUMTOYMINTERVAL(3, 'year'))) THEN
@@ -203,4 +202,5 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE (chr(10) || 'No data found according to your input! Please enter correct year (start from 2018)!');
 END;
 /
+
 EXEC prc_employee_ot_report(2018)

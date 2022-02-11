@@ -41,7 +41,7 @@ FROM AllWorkers
 LEFT JOIN LateWorkers ON AllWorkers.EmployeeID = LateWorkers.EmployeeID
 ORDER BY AllWorkers.JobPosition ASC, AllWorkers.EmployeeID ASC;
 
--- -- ALLLateAbsentWorkers (Left Join ALLLateWorkers and Absent Workers)
+-- ALLLateAbsentWorkers (Left Join ALLLateWorkers and Absent Workers)
 -- CREATE OR REPLACE VIEW ALLLateAbsentWorkers AS
 -- SELECT ALLLateWorkers.JobPosition,
 --        ALLLateWorkers.EmployeeID,
@@ -82,4 +82,3 @@ SELECT ALLLateWorkers.JobPosition,
 FROM ALLLateWorkers
 LEFT JOIN AbsentWorkers ON ALLLateWorkers.EmployeeID = AbsentWorkers.EmployeeID
 ORDER BY ALLLateWorkers.JobPosition ASC, PRESENT_RATE DESC;
-
