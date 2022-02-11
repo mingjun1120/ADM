@@ -986,7 +986,6 @@ INSERT INTO Attendance VALUES (TO_DATE('30-06-2018', 'DD-MM-YYYY'), 'E006', '10:
 INSERT INTO Attendance VALUES (TO_DATE('30-06-2018', 'DD-MM-YYYY'), 'E007', '10:00', '19:00', 'Present');
 INSERT INTO Attendance VALUES (TO_DATE('30-06-2018', 'DD-MM-YYYY'), 'E008', '9:49', '19:00', 'Present');
 
-
 -- 889 records
 SELECT COUNT(*) FROM Attendance;
 

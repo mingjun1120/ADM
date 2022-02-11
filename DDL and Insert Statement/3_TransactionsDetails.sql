@@ -432,7 +432,6 @@ INSERT INTO TransactionsDetails VALUES ('T10211', 'P1036', 5, 28.20);
 INSERT INTO TransactionsDetails VALUES ('T10211', 'P1051', 2, 300.00);
 INSERT INTO TransactionsDetails VALUES ('T10211', 'P1034', 2, 13.00);
 INSERT INTO TransactionsDetails VALUES ('T10211', 'P1049', 3, 290.00);
------------------------------------------- end of record ---------------------------------------------------------
 
 -- 423 records
 SELECT COUNT(*) FROM TransactionsDetails;
