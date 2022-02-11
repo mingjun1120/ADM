@@ -1,3 +1,5 @@
+---------------------------------------- Report 1 ---------------------------------------------
+
 -- Detail report of Profit Gain by Product Category
 
 -- exec prc_prodCategProfit('Dry Food')

@@ -9,4 +9,3 @@ CREATE SEQUENCE CUSTOMER_SEQ
                 NOCYCLE;
 
 -- INSERT INTO Customer VALUES ('C'||CUSTOMER_SEQ.NEXTVAL, 'LCC', 'F', '011-2323232', 'lorrayne@gmail.com', TO_DATE('25-05-2000', 'DD-MM-YYYY'), 'C-2-8, Jalan Vista Mutiara 1, Tsi Business Park', 52000, 'Kepong Baru', 'Kuala Lumpur');
-

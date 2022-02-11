@@ -1,3 +1,5 @@
+---------------------------------------- Procedure 2 ---------------------------------------------
+
 -- Product Discount Voucher Redeemed by Customer
 
 -- exec prc_claim_product_voucher('T10001') exec prc_claim_product_voucher('T10034')

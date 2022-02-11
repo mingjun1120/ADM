@@ -1,3 +1,5 @@
+---------------------------------------- Procedure 1 ---------------------------------------------
+
 -- Update the Return of the Quantity of Product Bought
 
 -- exec prc_update_transaction('T10016', 'P1047', 2)

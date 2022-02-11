@@ -43,5 +43,5 @@ begin
 end;
 /
 
---UPDATE transactionsDetails  set quantity = -99 where productCode = 'P1001';
---select * from transactionsDetails where productcode = 'P1001';
+-- UPDATE transactionsDetails set quantity = -99 WHERE productCode = 'P1001';
+-- SELECT * FROM transactionsDetails WHERE productcode = 'P1001';

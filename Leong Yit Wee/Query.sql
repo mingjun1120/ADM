@@ -93,4 +93,3 @@ WHERE t.TransactionsID = '&v_transNo' AND TDV.TransactionsID = t.TransactionsID 
       AND t.date_paid = a.AppointmentDate
 GROUP BY t.transactionsID,t.date_paid, c.CustomerID,c.customerName,p.productCode, p.productName, d.priceEach,d.quantity,s.serviceName,s.serviceCharge,TDV.TOTAL_AMOUNT
 ORDER BY t.TransactionsID DESC;
-

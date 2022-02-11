@@ -1,3 +1,5 @@
+---------------------------------------- Report 2 ---------------------------------------------
+
 -- Summary report of Top 10 Customers with Highest Total Spent at All Time and Sales per day based on 2 specific dates.
 
 -- exec prc_CustTotalSpentSummary('01-jan-2018','08-jan-2018');
